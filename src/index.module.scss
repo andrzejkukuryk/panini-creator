@@ -1,10 +1,12 @@
+@import "../variables.module.scss";
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: $font-primary;
   line-height: 1.5;
   font-weight: 400;
   
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #000000;
+  background-color: #FFFFFF;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,9 +16,7 @@
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  margin: 0 auto;
   min-width: 320px;
   min-height: 100vh;
 }
