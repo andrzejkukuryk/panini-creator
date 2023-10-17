@@ -1,0 +1,11 @@
+@import "../../../variables.module.scss";
+
+.container {
+    width: 1200px;
+    height: 211px;
+    border: solid 0.5px #000000;
+    border-left: none;
+    border-right: none;
+    @include flexCentered;
+    flex-direction: column;
+}

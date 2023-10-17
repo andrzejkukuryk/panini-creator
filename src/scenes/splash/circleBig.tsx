@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./circleBig.module.scss";
 import classNames from "classnames";
+import { Reclangle } from "./rectangle";
 
 export type PositionCircleBigInfo = "L" | "ML" | "C" | "MR" | "R";
 
@@ -19,7 +20,7 @@ export function CircleBig({ position }: CircleBigProps) {
 
   return (
     <div className={containerClass}>
-      <div className={styles.circle}></div>
+      <div className={styles.circle}>{position === "C" && <Reclangle />}</div>
     </div>
   );
 }

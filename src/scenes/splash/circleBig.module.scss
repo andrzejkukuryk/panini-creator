@@ -1,8 +1,8 @@
-$h: 1091px;
+@import "../../../variables.module.scss";
 
 .container{
     width: 1091px;
-    height: $h;
+    height: 1091px;
     margin: 0 auto;
     padding: 0;
     position: absolute;
@@ -13,6 +13,8 @@ $h: 1091px;
         width: 100%;
         height: 100%;
         border-radius: 50%;
+        @include flexCentered;
+        overflow: hidden;
     }
 }
 
@@ -22,21 +24,17 @@ $h: 1091px;
 
 .middleLeft {
     left: -136px;
-    z-index: 2;
 }
 
 .center {
     left: 174px;
-    z-index: 3;
 }
 
 .middleRight {
     left: 485px;
-    z-index: 4;
 }
 
 .right {
     left: 1037px;
-    z-index: 5;
 }
 

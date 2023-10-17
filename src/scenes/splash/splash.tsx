@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./splash.module.scss";
-import { Title } from "./title";
 import { CircleBig, PositionCircleBigInfo } from "./circleBig";
 import { CircleSmall, PositionCircleSmallInfo } from "./circleSmall";
 
@@ -17,13 +16,11 @@ export function Splash() {
 
   return (
     <div className={styles.container}>
-      {/* <Title /> */}
-
       {circleBigPositions.map((position) => (
-        <CircleBig position={position} />
+        <CircleBig position={position} key={`pos_${position}`} />
       ))}
       {circleSmallPosition.map((position) => (
-        <CircleSmall position={position} />
+        <CircleSmall position={position} key={`pos_${position}`} />
       ))}
     </div>
   );

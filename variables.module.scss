@@ -1,2 +1,8 @@
 $font-primary: 'Instrument Serif', serif;
 $font-secondary: 'Oxygen Mono', monospace;
+
+@mixin flexCentered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
