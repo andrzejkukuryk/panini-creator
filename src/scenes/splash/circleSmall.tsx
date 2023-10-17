@@ -6,9 +6,10 @@ export type PositionCircleSmallInfo = "T" | "B";
 
 interface CircleSmallProps {
   position: PositionCircleSmallInfo;
+  startAnimation: boolean;
 }
 
-export function CircleSmall({ position }: CircleSmallProps) {
+export function CircleSmall({ position, startAnimation }: CircleSmallProps) {
   const containerClass = classNames([styles.container], {
     [styles.top]: position === "T",
     [styles.bottom]: position === "B",

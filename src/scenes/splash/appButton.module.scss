@@ -1,6 +1,6 @@
 @import "../../../variables.module.scss";
 
-.begin {
+.appButton {
     background: none;
     border: solid 0.5px;
     border-color: rgba(0, 0, 0, 0);
@@ -13,6 +13,6 @@
     transition: border-color .7s;
 }
 
-.begin:hover {
+.appButton:hover {
     border-color: rgba(0, 0, 0, 1);
 }
