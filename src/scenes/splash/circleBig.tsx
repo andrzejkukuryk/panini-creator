@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./circleBig.module.scss";
 import classNames from "classnames";
 
-export type PositionInfo = "L" | "ML" | "C" | "MR" | "R";
+export type PositionCircleBigInfo = "L" | "ML" | "C" | "MR" | "R";
 
 interface CircleBigProps {
-  position: PositionInfo;
+  position: PositionCircleBigInfo;
 }
 
 export function CircleBig({ position }: CircleBigProps) {
