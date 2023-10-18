@@ -22,6 +22,11 @@ export function CircleBig({
     [styles.center]: position === "C",
     [styles.middleRight]: position === "MR",
     [styles.right]: position === "R",
+    [styles.moveLeft]: position === "L" && startAnimation,
+    [styles.moveMiddleLeft]: position === "ML" && startAnimation,
+    [styles.moveCenter]: position === "C" && startAnimation,
+    [styles.moveMiddleRight]: position === "MR" && startAnimation,
+    [styles.moveRight]: position === "R" && startAnimation,
   });
 
   return (
