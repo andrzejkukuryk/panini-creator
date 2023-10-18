@@ -1,0 +1,40 @@
+@import "../../../variables.module.scss";
+
+.container{
+    width: 1091px;
+    height: 1091px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    top: -33px;
+
+    .circle {
+        border: 0.5px solid #000000;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        @include flexCentered;
+        overflow: hidden;
+    }
+}
+
+.left {
+    left: -686px;
+}
+
+.middleLeft {
+    left: -136px;
+}
+
+.center {
+    left: 174px;
+}
+
+.middleRight {
+    left: 485px;
+}
+
+.right {
+    left: 1037px;
+}
+

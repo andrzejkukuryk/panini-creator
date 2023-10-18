@@ -1,10 +1,11 @@
 import React from "react";
-import "./App.css";
+import "./app.module.scss";
+import { Splash } from "./scenes/splash/splash";
 
 function App() {
   return (
     <div>
-      <h1>Panini Creator</h1>
+      <Splash />
     </div>
   );
 }
