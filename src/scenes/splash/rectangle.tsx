@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./rectangle.module.scss";
 import classNames from "classnames";
 import { Text } from "./text";
-import { AppButton } from "./appButton";
+import { AppButton } from "../../components/appButton";
 
 interface RectangleProps {
   startAnimation: boolean;

@@ -13,6 +13,8 @@ export function CircleSmall({ position, startAnimation }: CircleSmallProps) {
   const containerClass = classNames([styles.container], {
     [styles.top]: position === "T",
     [styles.bottom]: position === "B",
+    [styles.moveUp]: position === "T" && startAnimation,
+    [styles.moveDown]: position === "B" && startAnimation,
   });
 
   return (
