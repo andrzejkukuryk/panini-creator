@@ -5,7 +5,7 @@ import { AppButton } from "../../components/appButton";
 
 export function Header() {
   return (
-    <div className={styles.container}>
+    <div className={styles.headerContainer}>
       <Title />
       <AppButton text="randomize panini" handledFunction={() => {}} />
     </div>

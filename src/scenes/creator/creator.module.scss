@@ -1,8 +1,11 @@
 @import "../../../variables.module.scss";
 
-.container {
+.creatorContainer {
     margin: 0 auto;
-    width: 1400px;
-    position: absolute;
-    top: 0
+    width: 1440px;
+    position: relative;
+    top: -1024px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

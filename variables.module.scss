@@ -8,3 +8,9 @@ $font-secondary: 'Oxygen Mono', monospace;
     justify-content: center;
     align-items: center;
 }
+
+@mixin ingredientContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

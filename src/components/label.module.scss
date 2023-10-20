@@ -1,0 +1,8 @@
+@import "../../variables.module.scss";
+
+.label {
+    font-family: $font-primary;
+    font-size: 18px;
+    line-height: 23.4px;
+    text-transform: capitalize;
+}
