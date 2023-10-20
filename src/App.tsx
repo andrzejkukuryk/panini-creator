@@ -1,11 +1,13 @@
 import React from "react";
-import "./app.module.scss";
+import styles from "./app.module.scss";
 import { Splash } from "./scenes/splash/splash";
+import { Creator } from "./scenes/creator/creator";
 
 function App() {
   return (
-    <div>
+    <div className={styles.appContainer}>
       <Splash />
+      <Creator />
     </div>
   );
 }

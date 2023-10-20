@@ -1,5 +1,7 @@
 @import "../../../variables.module.scss";
 
+$animationTime: 4s;
+
 .container{
     width: 1091px;
     height: 1091px;
@@ -7,6 +9,9 @@
     padding: 0;
     position: absolute;
     top: -33px;
+    opacity: 1;
+    transition: top $animationTime, left $animationTime, width $animationTime, height $animationTime, opacity $animationTime;
+    transition-timing-function: cubic-bezier(0.42,0,0.58,1);
 
     .circle {
         border: 0.5px solid #000000;
@@ -15,6 +20,7 @@
         border-radius: 50%;
         @include flexCentered;
         overflow: hidden;
+        transition: border-color $animationTime;
     }
 }
 
@@ -38,3 +44,30 @@
     left: 1037px;
 }
 
+.moveLeft {
+    left: -1091px;
+    opacity: 0;
+}
+
+.moveMiddleLeft {
+    left: -1091px;
+    opacity: 0;
+}
+
+.moveCenter {
+    width: 1865px;
+    height: 1865px;
+    top: -420px;
+    left: -213px;
+    opacity: 0;
+}
+
+.moveMiddleRight {
+    left: 1440px;
+    opacity: 0;
+}
+
+.moveRight {
+    left: 1440px;
+    opacity: 0;
+}

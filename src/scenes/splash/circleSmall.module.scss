@@ -1,3 +1,11 @@
+$animationTime: 4s;
+@mixin newDimentions {
+    width: 355px;
+    height: 355px;
+    left: 542px;
+    opacity: 0;
+}
+
 .container{
     width: 632px;
     height: 632px;
@@ -5,6 +13,9 @@
     padding: 0;
     position: absolute;
     left: 405px;
+    opacity: 1;
+    transition: top $animationTime, left $animationTime, width $animationTime, height $animationTime, opacity $animationTime;
+    transition-timing-function: cubic-bezier(0.42,0,0.58,1);
 
     .circle {
         border: 0.5px solid #000000;
@@ -20,4 +31,14 @@
 
 .bottom {
     top: 588px;
+}
+
+.moveUp {
+    @include newDimentions;
+    top: -357px;
+}
+
+.moveDown {
+    @include newDimentions;
+    top: 1025px;
 }
