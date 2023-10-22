@@ -1,0 +1,31 @@
+@import "../../variables.module.scss";
+
+.carouselContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .frame {
+        width: $carousel-item-width;
+        overflow-x: hidden;
+    }
+
+    .innerContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-left: -2*$carousel-item-width;
+        padding-left: $carousel-item-width;
+        transition: padding-left .4s;
+    }
+
+    .slideRight {
+        padding-left: 2*$carousel-item-width;
+    }
+
+    .slideLeft {
+        padding-left: 0;
+    }
+}
+

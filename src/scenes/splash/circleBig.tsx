@@ -29,6 +29,7 @@ export function CircleBig({
     [styles.moveRight]: position === "R" && startAnimation,
   });
 
+
   return (
     <div className={containerClass}>
       <div className={styles.circle}>
