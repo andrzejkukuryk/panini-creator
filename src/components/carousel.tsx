@@ -14,11 +14,14 @@ export function Carousel({ items }: CarouselProps) {
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
+  //TODO items counter
+
   const nextItem = () => {
     const temporaryItems = [...currentItems];
     const firstItem = temporaryItems.shift();
     if (firstItem) {
       temporaryItems.push(firstItem);
+      setSlideLeft(false);
     }
     setCurrentItems(temporaryItems);
   };
@@ -38,6 +41,11 @@ export function Carousel({ items }: CarouselProps) {
     setTimeout(prevItem, 400);
   };
 
+  const moveCarouselLeft = () => {
+    setSlideLeft(true);
+    setTimeout(nextItem, 400);
+  };
+
   const carouselClass = classNames([styles.innerContainer], {
     [styles.slideRight]: slideRight,
     [styles.slideLeft]: slideLeft,
@@ -45,7 +53,7 @@ export function Carousel({ items }: CarouselProps) {
 
   return (
     <div className={styles.carouselContainer}>
-      <CarouselButton ftn={prevItem} icon={arrowLeft} />
+      <CarouselButton ftn={moveCarouselLeft} icon={arrowLeft} />
       <div className={styles.frame}>
         <div className={carouselClass}>{currentItems}</div>
       </div>

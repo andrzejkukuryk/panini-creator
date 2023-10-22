@@ -17,15 +17,17 @@
         flex-wrap: nowrap;
         margin-left: -2*$carousel-item-width;
         padding-left: $carousel-item-width;
-        transition: padding-left .4s;
+        
     }
 
     .slideRight {
         padding-left: 2*$carousel-item-width;
+        transition: padding-left .4s;
     }
 
     .slideLeft {
         padding-left: 0;
+        transition: padding-left .4s;
     }
 }
 
