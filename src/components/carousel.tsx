@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./carousel.module.scss";
 import { CarouselButton } from "./carouselButton";
 import arrowLeft from "../assets/arrowLeft.png";
@@ -11,10 +11,25 @@ interface CarouselProps {
 
 export function Carousel({ items }: CarouselProps) {
   const [currentItems, setCurrentItems] = useState(items);
+  const [selectedOption, setSelectedOption] = useState("");
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
-  //TODO items counter
+  const countItems = () => {
+    if (items.length < 3) {
+      const temporaryItems = [...items, ...items];
+      //TODO unique key
+      setCurrentItems(temporaryItems);
+    }
+  };
+
+  useEffect(() => countItems(), [items]);
+
+  const checkOption = () => {
+    setSelectedOption(currentItems[1].props.info.text.toLowerCase());
+  };
+
+  useEffect(() => checkOption(), [currentItems]);
 
   const nextItem = () => {
     const temporaryItems = [...currentItems];

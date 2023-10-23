@@ -9,7 +9,6 @@ import {
   CarouselItem,
   CarouselItemInfo,
 } from "../../../components/carouselItem";
-import { text } from "stream/consumers";
 
 const icons = [wheat, grain];
 
@@ -19,13 +18,14 @@ export function Bread() {
     icon: icons[index],
   }));
 
-  const items = breadInfo.map((bread) => <CarouselItem info={bread} />);
+  const items = breadInfo.map((bread) => (
+    <CarouselItem info={bread} key={`breadKey${bread.text}`} />
+  ));
 
   return (
     <div className={styles.breadContainer}>
       <Label text="bread" />
       <Carousel items={items} />
-      {/* <CarouselItem info={{ text: "wheat" }} /> */}
     </div>
   );
 }

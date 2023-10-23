@@ -3,6 +3,7 @@ import styles from "./base.module.scss";
 import { SectionTitle } from "../../../components/sectionTitle";
 import { Line } from "../../../components/line";
 import { Bread } from "./bread";
+import { Cheese } from "./cheese";
 
 export function Base() {
   return (
@@ -10,6 +11,8 @@ export function Base() {
       <SectionTitle text="configure base" />
       <Line />
       <Bread />
+      <Line />
+      <Cheese />
       <Line />
     </section>
   );
