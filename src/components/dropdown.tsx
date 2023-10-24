@@ -19,8 +19,6 @@ export function Dropdown({ options }: DropdownProps) {
     }
   };
 
-  useEffect(() => console.log(selectedOption), [selectedOption]);
-
   const dropdownStyle = {
     control: (styles) => ({
       ...styles,
@@ -28,16 +26,19 @@ export function Dropdown({ options }: DropdownProps) {
       borderWidth: "1px",
       borderColor: "#000000",
       borderRadius: 0,
+      flexShrink: 0,
     }),
   };
   return (
     <div className={styles.dropdownContainer}>
-      <Select
-        options={options}
-        onChange={handleChange}
-        defaultValue={options[0]}
-        styles={dropdownStyle}
-      />
+      <div style={{ width: "100%", height: "100%" }}>
+        <Select
+          options={options}
+          onChange={handleChange}
+          defaultValue={options[0]}
+          styles={dropdownStyle}
+        />
+      </div>
     </div>
   );
 }
