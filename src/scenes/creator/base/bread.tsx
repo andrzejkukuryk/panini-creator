@@ -18,8 +18,9 @@ export function Bread() {
     icon: icons[index],
   }));
 
-  const items = breadInfo.map((bread) => (
-    <CarouselItem info={bread} key={`breadKey${bread.text}`} />
+  // carousel needs at least 3 items for animation
+  const items = [...breadInfo, ...breadInfo].map((bread, index) => (
+    <CarouselItem info={bread} key={`breadKey${index}`} />
   ));
 
   return (

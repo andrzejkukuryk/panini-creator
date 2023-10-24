@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./dropdown.module.scss";
 import Select from "react-select";
 
 export interface DropdownInfo {
-  value: string;
+  value: number;
   label: string;
 }
 
 interface DropdownProps {
   options: DropdownInfo[];
+  value: number;
+  index: number;
+  valueSetter: (index: number, value: number) => void;
 }
 
-export function Dropdown({ options }: DropdownProps) {
-  const [selectedOption, setSelectedOption] = useState("");
+export function Dropdown({
+  options,
+  value,
+  index,
+  valueSetter,
+}: DropdownProps) {
   const handleChange = (selectedOption) => {
-    if (selectedOption.value) {
-      setSelectedOption(selectedOption.value);
+    if (selectedOption.value !== "undefinded") {
+      valueSetter(index, selectedOption.value);
     }
   };
 
@@ -35,7 +42,7 @@ export function Dropdown({ options }: DropdownProps) {
         <Select
           options={options}
           onChange={handleChange}
-          defaultValue={options[0]}
+          defaultValue={options[value]}
           styles={dropdownStyle}
         />
       </div>

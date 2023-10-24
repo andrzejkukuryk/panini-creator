@@ -19,3 +19,7 @@ $carousel-item-width: 230px;
     width: 100%;
     height: 75px;
 }
+
+@mixin appBorder {
+    border: solid 0.5px #000000;
+}

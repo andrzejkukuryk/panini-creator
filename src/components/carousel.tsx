@@ -15,15 +15,6 @@ export function Carousel({ items }: CarouselProps) {
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
-  const countItems = () => {
-    if (items.length < 3) {
-      const temporaryItems = [...items, ...items];
-      //TODO unique key
-      setCurrentItems(temporaryItems);
-    }
-  };
-
-  useEffect(() => countItems(), [items]);
 
   const checkOption = () => {
     setSelectedOption(currentItems[1].props.info.text.toLowerCase());
