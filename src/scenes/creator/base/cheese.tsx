@@ -9,6 +9,7 @@ import { AddSubButton } from "../../../components/addSubButton";
 export function Cheese() {
   const [addCheese, setAddCheese] = useState(true);
   const [cheeses, setCheeses] = useState<number[]>([0]);
+  const [selectedCheeses, setSelectedCheeses] = useState<string[]>([]);
   const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
     value: index,
     label: variant,
@@ -25,11 +26,8 @@ export function Cheese() {
   };
 
   const subCheese = (num: number) => {
-    console.log(num);
     const temporaryCheeses = [...cheeses];
-    console.log("temporary before: ", temporaryCheeses);
     temporaryCheeses.splice(num, 1);
-    console.log("temporary after: ", temporaryCheeses);
     setCheeses(temporaryCheeses);
   };
 
@@ -47,25 +45,43 @@ export function Cheese() {
     setCheeses(temporaryCheeses);
   };
 
-  useEffect(() => console.log("cheeses: ", cheeses), [cheeses]);
+  const createSelectedCheeses = () => {
+    if (addCheese) {
+      const temporarySelectedCheeses = cheeses.map(
+        (item) => cheeseVariants[item]
+      );
+      setSelectedCheeses(temporarySelectedCheeses);
+    } else {
+      setSelectedCheeses([]);
+    }
+  };
+
+  useEffect(() => createSelectedCheeses(), [cheeses, addCheese]);
+  console.log(selectedCheeses);
 
   return (
-    <div className={styles.cheeseContainer}>
-      <Label text="cheese" />
-      <Switch checked={addCheese} ftn={handleSwitch} />
-      <div className={styles.options}>
-        {cheeses.map((cheese, index) => (
-          <div className={styles.firstCheese}>
-            <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
-            <Dropdown
-              options={cheeseInfo}
-              value={cheese}
-              index={index}
-              valueSetter={choosenCheese}
-            />
-          </div>
-        ))}
-      </div>
+    <div className={styles.options}>
+      {cheeses.map((cheese, index) => (
+        <div className={styles.cheeseContainer}>
+          {index === 0 ? (
+            <Label text="cheese" />
+          ) : (
+            <div style={{ width: 90 }} />
+          )}
+          {index === 0 ? (
+            <Switch checked={addCheese} ftn={handleSwitch} />
+          ) : (
+            <div style={{ width: 28 }} />
+          )}
+          <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
+          <Dropdown
+            options={cheeseInfo}
+            value={cheese}
+            index={index}
+            valueSetter={choosenCheese}
+          />
+        </div>
+      ))}
     </div>
   );
 }

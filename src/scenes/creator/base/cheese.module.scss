@@ -1,22 +1,10 @@
 @import "../../../../variables.module.scss";
 
 .cheeseContainer {
-    @include ingredientContainer;
-
-    
+    @include ingredientContainer;  
 }
 
 .options {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    width: 100%;
 
-    .firstCheese {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 340px;
-        margin-top: 1px;
-    }
 }

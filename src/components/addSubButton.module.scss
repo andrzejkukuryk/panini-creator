@@ -2,7 +2,6 @@
 
 .addSubButton {
   @include appBorder;
-  // @include flexCentered;
   border-radius: 50%;
   width: 18px;
   height: 18px;
@@ -11,6 +10,9 @@
   font-size: 15px;
   color: #000000;
   background-color: #ffffff;
+  position: relative;
+  left: -20px;
+  top: 1px;
 }
 
 .addSubButton:hover {
