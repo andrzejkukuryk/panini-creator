@@ -1,10 +1,17 @@
 @import "../../../../variables.module.scss";
 
+.cheeseInnerContainer {
+  @include ingredientContainer;
+}
+
 .cheeseContainer {
-    @include ingredientContainer;  
+  width: 100%;
 }
 
-.options {
-    width: 100%;
-
+.labelMock {
+  width: 90px;
 }
+
+.switchMock {
+    width: 28px;
+  }

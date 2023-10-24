@@ -60,26 +60,32 @@ export function Cheese() {
   console.log(selectedCheeses);
 
   return (
-    <div className={styles.options}>
+    <div className={styles.cheeseContainer}>
       {cheeses.map((cheese, index) => (
-        <div className={styles.cheeseContainer}>
+        <div className={styles.cheeseInnerContainer}>
           {index === 0 ? (
             <Label text="cheese" />
           ) : (
-            <div style={{ width: 90 }} />
+            <div className={styles.labelMock} />
           )}
           {index === 0 ? (
             <Switch checked={addCheese} ftn={handleSwitch} />
           ) : (
-            <div style={{ width: 28 }} />
+            <div className={styles.switchMock} />
           )}
-          <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
-          <Dropdown
-            options={cheeseInfo}
-            value={cheese}
-            index={index}
-            valueSetter={choosenCheese}
-          />
+          {addCheese && (
+            <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
+          )}
+          {addCheese ? (
+            <Dropdown
+              options={cheeseInfo}
+              value={cheese}
+              index={index}
+              valueSetter={choosenCheese}
+            />
+          ) : (
+            <div style={{ width: 300 }} />
+          )}
         </div>
       ))}
     </div>
