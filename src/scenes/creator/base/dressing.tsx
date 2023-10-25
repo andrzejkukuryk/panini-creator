@@ -32,7 +32,7 @@ export function Dressing() {
 
   const addNextDressing = () => {
     const temporaryDressings = [...dressings];
-    temporaryDressings.push(0);
+    temporaryDressings.push(1);
     setDressings(temporaryDressings);
   };
 
@@ -68,7 +68,7 @@ export function Dressing() {
   };
 
   useEffect(() => createSelectedDressings(), [dressings, addDressing]);
-  console.log(selectedDressings, dressings);
+
 
   return (
     <div className={styles.dressingContainer}>

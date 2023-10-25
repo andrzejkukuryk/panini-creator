@@ -18,17 +18,25 @@ export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
-  const setDefaultSelectedOption = () => {
+  const checkValue = () => {
     if (value !== undefined && currentItems[1].props.info.index !== undefined) {
-      console.log("value: ", value, currentItems[1].props.info.index);
-
-      nextItem();
-
-      setSelectedOption(value);
-    } else setSelectedOption(1);
+      const temporaryItems = [...items];
+      const indexOfItem = temporaryItems
+        .map((item) => item.props.info.index)
+        .indexOf(value);
+      if (indexOfItem !== 1) {
+        const beginning = temporaryItems.splice(0, indexOfItem);
+        const itemOnFirstPlace = temporaryItems.concat(beginning);
+        const lastItem = itemOnFirstPlace.pop();
+        if (lastItem) {
+          itemOnFirstPlace.unshift(lastItem);
+          setCurrentItems(itemOnFirstPlace);
+        }
+      }
+    }
   };
 
-  useEffect(() => setDefaultSelectedOption(), []);
+  useEffect(() => checkValue(), [value]);
 
   const checkOption = () => {
     setSelectedOption(currentItems[1].props.info.index);
