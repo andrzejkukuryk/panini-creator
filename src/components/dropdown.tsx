@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./dropdown.module.scss";
 import Select from "react-select";
-import classNames from "classnames";
 
 export interface DropdownInfo {
   value: number;
@@ -44,7 +43,7 @@ export function Dropdown({
         <Select
           options={options}
           onChange={handleChange}
-          defaultValue={options[value]}
+          value={options[value]}
           styles={dropdownStyle}
         />
       </div>

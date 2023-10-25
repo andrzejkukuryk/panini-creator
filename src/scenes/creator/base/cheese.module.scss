@@ -29,13 +29,15 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 75px;
+  height: 76px;
   width: 120px;
+  
 }
 
 .dropdowns {
   width: 340px;
-  margin: 10px 0;
+  margin: 10px 0 10px 0;
+
   .buttonAndDropdown {
     display: flex;
     flex-direction: row;
