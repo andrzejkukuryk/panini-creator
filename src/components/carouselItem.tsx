@@ -3,6 +3,7 @@ import styles from "./carouselItem.module.scss";
 
 export interface CarouselItemInfo {
   text: string;
+  index?: number;
   icon?: string;
 }
 

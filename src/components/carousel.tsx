@@ -7,20 +7,41 @@ import classNames from "classnames";
 
 interface CarouselProps {
   items: JSX.Element[];
+  index?: number;
+  value?: number;
+  valueSetter?: (index: number, value: number) => void;
 }
 
-export function Carousel({ items }: CarouselProps) {
+export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
   const [currentItems, setCurrentItems] = useState(items);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState(1);
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
+  const setDefaultSelectedOption = () => {
+    if (value !== undefined && currentItems[1].props.info.index !== undefined) {
+      console.log("value: ", value, currentItems[1].props.info.index);
+
+      nextItem();
+
+      setSelectedOption(value);
+    } else setSelectedOption(1);
+  };
+
+  useEffect(() => setDefaultSelectedOption(), []);
 
   const checkOption = () => {
-    setSelectedOption(currentItems[1].props.info.text.toLowerCase());
+    setSelectedOption(currentItems[1].props.info.index);
+  };
+
+  const tryToUseValueSetter = () => {
+    if (valueSetter !== undefined && index !== undefined) {
+      valueSetter(index, selectedOption);
+    }
   };
 
   useEffect(() => checkOption(), [currentItems]);
+  useEffect(() => tryToUseValueSetter(), [selectedOption]);
 
   const nextItem = () => {
     const temporaryItems = [...currentItems];

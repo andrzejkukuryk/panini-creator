@@ -5,6 +5,7 @@ import { Line } from "../../../components/line";
 import { Bread } from "./bread";
 import { Cheese } from "./cheese";
 import { Meat } from "./meat";
+import { Dressing } from "./dressing";
 
 export function Base() {
   return (
@@ -16,6 +17,8 @@ export function Base() {
       <Cheese />
       <Line />
       <Meat />
+      <Line />
+      <Dressing />
       <Line />
     </section>
   );

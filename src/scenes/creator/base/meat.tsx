@@ -55,7 +55,6 @@ export function Meat() {
   };
 
   useEffect(() => createSelectedMeats(), [meats, addMeat]);
-  console.log(selectedMeats, meats);
 
   return (
     <div className={styles.meatContainer}>

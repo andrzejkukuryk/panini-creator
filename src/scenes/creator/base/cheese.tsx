@@ -57,7 +57,6 @@ export function Cheese() {
   };
 
   useEffect(() => createSelectedCheeses(), [cheeses, addCheese]);
-  console.log(selectedCheeses, cheeses);
 
   return (
     <div className={styles.newCheeseContainer}>
