@@ -68,7 +68,10 @@ export function Cheese() {
       {addCheese && (
         <div className={styles.dropdowns}>
           {cheeses.map((cheese, index) => (
-            <div className={styles.buttonAndDropdown}>
+            <div
+              className={styles.buttonAndDropdown}
+              key={`keyCheese${cheese}`}
+            >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
               <Dropdown
                 options={cheeseInfo}
