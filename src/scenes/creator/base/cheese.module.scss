@@ -1,17 +1,46 @@
 @import "../../../../variables.module.scss";
 
-.cheeseInnerContainer {
-  @include ingredientContainer;
-}
+// .cheeseInnerContainer {
+//   @include ingredientContainer;
+// }
 
-.cheeseContainer {
+// .cheeseContainer {
+//   width: 100%;
+// }
+
+// .labelMock {
+//   width: 90px;
+// }
+
+// .switchMock {
+//   width: 28px;
+// }
+
+.newCheeseContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
 }
 
-.labelMock {
-  width: 90px;
+.labelAndSwitch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  width: 120px;
 }
 
-.switchMock {
-    width: 28px;
+.dropdowns {
+  width: 340px;
+  margin: 10px 0;
+  .buttonAndDropdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
   }
+}
