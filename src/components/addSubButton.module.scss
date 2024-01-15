@@ -1,0 +1,26 @@
+@import "../../variables.module.scss";
+
+.addSubButton {
+  @include appBorder;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  color: #000000;
+  background-color: #ffffff;
+  margin-top: 2px;
+}
+
+.addSubButton:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.centered {
+    @include flexCentered;
+    position: relative;
+    top: -2px
+}
+

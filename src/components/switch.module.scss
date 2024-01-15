@@ -1,0 +1,49 @@
+@import "../../variables.module.scss";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.toggle {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.toggleSwitch {
+  display: inline-block;
+  background: #fff;
+  @include appBorder;
+  border-radius: 30px;
+  width: 28px;
+  height: 18px;
+  position: relative;
+  vertical-align: middle;
+}
+.toggleSwitch:before,
+.toggleSwitch:after {
+  content: "";
+}
+.toggleSwitch:before {
+  display: block;
+  background-color: #fff;
+  @include appBorder;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: left 0.25s;
+}
+
+.toggleCheckbox:checked + .toggleSwitch:before {
+  left: 12px;
+  background-color: #000000;
+}
+
+.toggleCheckbox {
+  position: absolute;
+  visibility: hidden;
+}

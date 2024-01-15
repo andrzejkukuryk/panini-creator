@@ -1,0 +1,28 @@
+@import "../../../../variables.module.scss";
+
+
+
+.newCheeseContainer {
+  @include flexRowSpace;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.labelAndSwitch {
+  @include flexRowSpace;
+  align-items: center;
+  height: 76px;
+  width: 120px;
+  
+}
+
+.dropdowns {
+  width: 340px;
+  margin: 10px 0 10px 0;
+
+  .buttonAndDropdown {
+    @include flexRowSpace;
+    align-items: center;
+    height: 56px;
+  }
+}

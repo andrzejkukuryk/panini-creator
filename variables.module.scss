@@ -1,10 +1,31 @@
 $creator-width: 630px;
 
-$font-primary: 'Instrument Serif', serif;
-$font-secondary: 'Oxygen Mono', monospace;
+$font-primary: "Instrument Serif", serif;
+$font-secondary: "Oxygen Mono", monospace;
+
+$carousel-item-width: 230px;
 
 @mixin flexCentered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexRowSpace {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@mixin ingredientContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 75px;
+}
+
+@mixin appBorder {
+  border: solid 0.5px #000000;
 }

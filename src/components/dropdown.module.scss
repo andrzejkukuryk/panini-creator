@@ -1,0 +1,16 @@
+@import "../../variables.module.scss";
+
+.dropdownContainer {
+  width: 250px;
+  height: 35px;
+  font-family: $font-secondary;
+  font-size: 12px;
+  line-height: 15.74px;
+  text-align: center;
+  @include flexCentered;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
+}
