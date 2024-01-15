@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import styles from "./cheese.module.scss";
 import { Label } from "../../../components/label";
 import { Dropdown, DropdownInfo } from "../../../components/dropdown";
-import { cheeseVariants } from "../../../data/cheese";
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
+import { useSelector } from "react-redux";
+import { cheeseVariantsSelector } from "../../../store/selectors";
 
 export function Cheese() {
   const [addCheese, setAddCheese] = useState(true);
   const [cheeses, setCheeses] = useState<number[]>([0]);
   const [selectedCheeses, setSelectedCheeses] = useState<string[]>([]);
+
+  const cheeseVariants = useSelector(cheeseVariantsSelector);
   const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
     value: index,
     label: variant,
