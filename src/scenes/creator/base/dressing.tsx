@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./dressing.module.scss";
 import { Label } from "../../../components/label";
-import { dressingVariants } from "../../../data/dressing";
+
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
 import { Carousel } from "../../../components/carousel";
@@ -9,11 +9,25 @@ import {
   CarouselItem,
   CarouselItemInfo,
 } from "../../../components/carouselItem";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  dressingVariantsSelector,
+  addDressingSelector,
+  dressingsSelector,
+} from "../../../store/selectors";
+import {
+  addNextDressing,
+  subDressing,
+  updateAddDressing,
+  updateDressings,
+} from "../../../store/dressingSlice";
 
 export function Dressing() {
-  const [addDressing, setAddDressing] = useState(true);
-  const [dressings, setDressings] = useState<number[]>([1]);
-  const [selectedDressings, setSelectedDressings] = useState<string[]>([]);
+  const dispatch = useDispatch();
+
+  const dressingVariants = useSelector(dressingVariantsSelector);
+  const addDressing = useSelector(addDressingSelector);
+  const dressings = useSelector(dressingsSelector);
 
   const dressingInfo: CarouselItemInfo[] = dressingVariants.map(
     (variant, index) => ({
@@ -27,48 +41,20 @@ export function Dressing() {
   ));
 
   const handleSwitch = () => {
-    setAddDressing(!addDressing);
-  };
-
-  const addNextDressing = () => {
-    const temporaryDressings = [...dressings];
-    temporaryDressings.push(1);
-    setDressings(temporaryDressings);
-  };
-
-  const subDressing = (num: number) => {
-    const temporaryDressings = [...dressings];
-    temporaryDressings.splice(num, 1);
-    setDressings(temporaryDressings);
+    dispatch(updateAddDressing());
   };
 
   const handleButton = (i: number) => {
     if (i !== 0) {
-      return subDressing(i);
+      return dispatch(subDressing(i));
     } else {
-      return addNextDressing();
+      return dispatch(addNextDressing());
     }
   };
 
-  const choosenDressing = (index: number, value: number) => {
-    let temporaryDressings = [...dressings];
-    temporaryDressings[index] = value;
-    setDressings(temporaryDressings);
+  const handleChange = (index: number, value: number) => {
+    dispatch(updateDressings({ index, value }));
   };
-
-  const createSelectedDressings = () => {
-    if (addDressing) {
-      const temporarySelectedDressings = dressings.map(
-        (item) => dressingVariants[item]
-      );
-      setSelectedDressings(temporarySelectedDressings);
-    } else {
-      setSelectedDressings([]);
-    }
-  };
-
-  useEffect(() => createSelectedDressings(), [dressings, addDressing]);
-
 
   return (
     <div className={styles.dressingContainer}>
@@ -84,17 +70,11 @@ export function Dressing() {
               key={`keyDressing${index}`}
             >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
-              {/* <Dropdown
-                options={dressingInfo}
-                value={dressing}
-                index={index}
-                valueSetter={choosenDressing}
-              /> */}
               <Carousel
                 items={items}
                 index={index}
                 value={dressing}
-                valueSetter={choosenDressing}
+                valueSetter={handleChange}
               />
             </div>
           ))}

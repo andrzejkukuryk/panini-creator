@@ -3,6 +3,7 @@ import ingredientsReducer from "./ingredientsSlice";
 import servingSlice from "./servingSlice";
 import cheeseSlice from "./cheeseSlice";
 import meatSlice from "./meatSlice";
+import dressingSlice from "./dressingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     serving: servingSlice,
     cheese: cheeseSlice,
     meat: meatSlice,
+    dressing: dressingSlice,
   },
 });
 
