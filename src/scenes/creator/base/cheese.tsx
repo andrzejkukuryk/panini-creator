@@ -15,12 +15,11 @@ import {
   subCheese,
   updateAddCheese,
   updateCheeses,
-} from "../../../store/ingredientsSlice";
+} from "../../../store/cheeseSlice";
 
 export function Cheese() {
   const dispatch = useDispatch();
 
-  // const [cheeses, setCheeses] = useState<number[]>([0]);
   const [selectedCheeses, setSelectedCheeses] = useState<string[]>([]);
 
   const cheeseVariants = useSelector(cheeseVariantsSelector);
@@ -35,18 +34,6 @@ export function Cheese() {
     dispatch(updateAddCheese());
   };
 
-  // const addNextCheese = () => {
-  //   const temporaryCheeses = [...cheeses];
-  //   temporaryCheeses.push(0);
-  //   setCheeses(temporaryCheeses);
-  // };
-
-  // const subCheese = (num: number) => {
-  //   const temporaryCheeses = [...cheeses];
-  //   temporaryCheeses.splice(num, 1);
-  //   setCheeses(temporaryCheeses);
-  // };
-
   const handleButton = (i: number) => {
     if (i !== 0) {
       return dispatch(subCheese(i));
@@ -54,12 +41,6 @@ export function Cheese() {
       return dispatch(addNextCheese());
     }
   };
-
-  // const choosenCheese = (index: number, value: number) => {
-  //   let temporaryCheeses = [...cheeses];
-  //   temporaryCheeses[index] = value;
-  //   setCheeses(temporaryCheeses);
-  // };
 
   const handleChange = (index: number, value: number) => {
     dispatch(updateCheeses({ index, value }));

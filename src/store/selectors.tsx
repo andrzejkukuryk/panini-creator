@@ -9,9 +9,9 @@ export const cheeseVariantsSelector = (state: RootState) => {
 };
 
 export const addCheeseSelector = (state: RootState) => {
-  return state.ingredients.order.addCheese;
+  return state.cheese.addCheese;
 };
 
 export const cheesesSelector = (state: RootState) => {
-  return state.ingredients.order.cheeses;
+  return state.cheese.cheeses;
 };
