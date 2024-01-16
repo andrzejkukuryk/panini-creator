@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./cheese.module.scss";
 import { Label } from "../../../components/label";
 import { Dropdown, DropdownInfo } from "../../../components/dropdown";
@@ -19,8 +19,6 @@ import {
 
 export function Cheese() {
   const dispatch = useDispatch();
-
-  const [selectedCheeses, setSelectedCheeses] = useState<string[]>([]);
 
   const cheeseVariants = useSelector(cheeseVariantsSelector);
   const addCheese = useSelector(addCheeseSelector);
@@ -45,19 +43,6 @@ export function Cheese() {
   const handleChange = (index: number, value: number) => {
     dispatch(updateCheeses({ index, value }));
   };
-
-  const createSelectedCheeses = () => {
-    if (addCheese) {
-      const temporarySelectedCheeses = cheeses.map(
-        (item) => cheeseVariants[item]
-      );
-      setSelectedCheeses(temporarySelectedCheeses);
-    } else {
-      setSelectedCheeses([]);
-    }
-  };
-
-  useEffect(() => createSelectedCheeses(), [cheeses, addCheese]);
 
   return (
     <div className={styles.newCheeseContainer}>

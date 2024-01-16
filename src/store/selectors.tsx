@@ -15,3 +15,15 @@ export const addCheeseSelector = (state: RootState) => {
 export const cheesesSelector = (state: RootState) => {
   return state.cheese.cheeses;
 };
+
+export const meatVariantsSelector = (state: RootState) => {
+  return state.ingredients.allIngredients.meatVariants;
+};
+
+export const addMeatSelector = (state: RootState) => {
+  return state.meat.addMeat;
+};
+
+export const meatsSelector = (state: RootState) => {
+  return state.meat.meats;
+};
