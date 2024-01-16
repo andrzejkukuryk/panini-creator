@@ -15,7 +15,8 @@ interface IngredientsState {
   servingVariant: string[];
   order: {
     bread: string;
-    cheeses: string[];
+    addCheese: boolean;
+    cheeses: number[];
     dressings: string[];
     eggs: string[];
     meats: string[];
@@ -53,7 +54,8 @@ const initialState: IngredientsState = {
   servingVariant: ["GRILLED", "WARM", "COLD"],
   order: {
     bread: "",
-    cheeses: [],
+    addCheese: true,
+    cheeses: [0],
     dressings: [],
     eggs: [],
     meats: [],
@@ -74,8 +76,20 @@ export const ingredientsSlice = createSlice({
     updateBread: (state, action: PayloadAction<string>) => {
       state.order.bread = action.payload;
     },
-    updateCheeses: (state, action: PayloadAction<string[]>) => {
-      state.order.cheeses = action.payload;
+    updateAddCheese: (state) => {
+      state.order.addCheese = !state.order.addCheese;
+    },
+    addNextCheese: (state) => {
+      state.order.cheeses.push(0);
+    },
+    subCheese: (state, action: PayloadAction<number>) => {
+      state.order.cheeses.splice(action.payload, 1);
+    },
+    updateCheeses: (
+      state,
+      action: PayloadAction<{ index: number; value: number }>
+    ) => {
+      state.order.cheeses[action.payload.index] = action.payload.value;
     },
     updateDressings: (state, action: PayloadAction<string[]>) => {
       state.order.dressings = action.payload;
@@ -112,6 +126,9 @@ export const ingredientsSlice = createSlice({
 
 export const {
   updateBread,
+  updateAddCheese,
+  addNextCheese,
+  subCheese,
   updateCheeses,
   updateDressings,
   updateEggs,

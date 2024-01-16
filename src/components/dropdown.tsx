@@ -20,6 +20,7 @@ export function Dropdown({
   index,
   valueSetter,
 }: DropdownProps) {
+  //@ts-ignore
   const handleChange = (selectedOption) => {
     if (selectedOption.value !== "undefinded") {
       valueSetter(index, selectedOption.value);
@@ -27,6 +28,7 @@ export function Dropdown({
   };
 
   const dropdownStyle = {
+    //@ts-ignore
     control: (styles) => ({
       ...styles,
       borderStyle: "solid",

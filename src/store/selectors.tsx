@@ -7,3 +7,11 @@ export const breadVariantsSelector = (state: RootState) => {
 export const cheeseVariantsSelector = (state: RootState) => {
   return state.ingredients.allIngredients.cheeseVariants;
 };
+
+export const addCheeseSelector = (state: RootState) => {
+  return state.ingredients.order.addCheese;
+};
+
+export const cheesesSelector = (state: RootState) => {
+  return state.ingredients.order.cheeses;
+};
