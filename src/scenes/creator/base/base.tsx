@@ -6,6 +6,8 @@ import { Bread } from "./bread";
 import { Cheese } from "./cheese";
 import { Meat } from "./meat";
 import { Dressing } from "./dressing";
+import { CheckboxFrame } from "../../../components/checkboxFrame";
+import { Checkbox } from "../../../components/checkbox";
 
 export function Base() {
   return (
@@ -20,6 +22,9 @@ export function Base() {
       <Line />
       <Dressing />
       <Line />
+      <CheckboxFrame label="test" checked={false} handleClick={() => {}} />
+      <CheckboxFrame label="test" checked={true} handleClick={() => {}} />
+      <Checkbox label="test" checked={false} handleClick={() => {}} />
     </section>
   );
 }

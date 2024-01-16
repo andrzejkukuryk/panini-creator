@@ -1,0 +1,19 @@
+@import "../../variables.module.scss";
+
+.label{
+    background-color: #FBFBFB;
+    padding: 11px 21px;
+    font-family: $font-secondary;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    
+    .input {
+        display: none
+    }
+}
+
+.checked {
+    padding: 10px 20px;
+    @include appBorder;
+}
