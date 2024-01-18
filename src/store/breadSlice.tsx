@@ -1,39 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface CheeseState {
-  addCheese: boolean;
-  cheeses: number[];
+interface BreadState {
+  bread: number;
 }
 
-const initialState: CheeseState = {
-  addCheese: true,
-  cheeses: [0],
+const initialState: BreadState = {
+  bread: 1,
 };
 
-export const cheeseSlice = createSlice({
-  name: "cheese",
+export const breadSlice = createSlice({
+  name: "bread",
   initialState: initialState,
   reducers: {
-    updateAddCheese: (state) => {
-      state.addCheese = !state.addCheese;
-    },
-    addNextCheese: (state) => {
-      state.cheeses.push(0);
-    },
-    subCheese: (state, action: PayloadAction<number>) => {
-      state.cheeses.splice(action.payload, 1);
-    },
-    updateCheeses: (
-      state,
-      action: PayloadAction<{ index: number; value: number }>
-    ) => {
-      state.cheeses[action.payload.index] = action.payload.value;
+    updateBread: (state, action: PayloadAction<number>) => {
+      state.bread = action.payload;
     },
   },
 });
 
-export const { updateAddCheese, addNextCheese, subCheese, updateCheeses } =
-  cheeseSlice.actions;
+export const { updateBread } = breadSlice.actions;
 
-export default cheeseSlice.reducer;
+export default breadSlice.reducer;
