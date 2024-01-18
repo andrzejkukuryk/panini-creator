@@ -1,62 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./cheese.module.scss";
 import { Label } from "../../../components/label";
 import { Dropdown, DropdownInfo } from "../../../components/dropdown";
-import { cheeseVariants } from "../../../data/cheese";
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  cheeseVariantsSelector,
+  addCheeseSelector,
+  cheesesSelector,
+} from "../../../store/selectors";
+import {
+  addNextCheese,
+  subCheese,
+  updateAddCheese,
+  updateCheeses,
+} from "../../../store/cheeseSlice";
 
 export function Cheese() {
-  const [addCheese, setAddCheese] = useState(true);
-  const [cheeses, setCheeses] = useState<number[]>([0]);
-  const [selectedCheeses, setSelectedCheeses] = useState<string[]>([]);
+  const dispatch = useDispatch();
+
+  const cheeseVariants = useSelector(cheeseVariantsSelector);
+  const addCheese = useSelector(addCheeseSelector);
+  const cheeses = useSelector(cheesesSelector);
   const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
     value: index,
     label: variant,
   }));
 
   const handleSwitch = () => {
-    setAddCheese(!addCheese);
-  };
-
-  const addNextCheese = () => {
-    const temporaryCheeses = [...cheeses];
-    temporaryCheeses.push(0);
-    setCheeses(temporaryCheeses);
-  };
-
-  const subCheese = (num: number) => {
-    const temporaryCheeses = [...cheeses];
-    temporaryCheeses.splice(num, 1);
-    setCheeses(temporaryCheeses);
+    dispatch(updateAddCheese());
   };
 
   const handleButton = (i: number) => {
     if (i !== 0) {
-      return subCheese(i);
+      return dispatch(subCheese(i));
     } else {
-      return addNextCheese();
+      return dispatch(addNextCheese());
     }
   };
 
-  const choosenCheese = (index: number, value: number) => {
-    let temporaryCheeses = [...cheeses];
-    temporaryCheeses[index] = value;
-    setCheeses(temporaryCheeses);
+  const handleChange = (index: number, value: number) => {
+    dispatch(updateCheeses({ index, value }));
   };
-
-  const createSelectedCheeses = () => {
-    if (addCheese) {
-      const temporarySelectedCheeses = cheeses.map(
-        (item) => cheeseVariants[item]
-      );
-      setSelectedCheeses(temporarySelectedCheeses);
-    } else {
-      setSelectedCheeses([]);
-    }
-  };
-
-  useEffect(() => createSelectedCheeses(), [cheeses, addCheese]);
 
   return (
     <div className={styles.newCheeseContainer}>
@@ -76,7 +62,7 @@ export function Cheese() {
                 options={cheeseInfo}
                 value={cheese}
                 index={index}
-                valueSetter={choosenCheese}
+                valueSetter={handleChange}
               />
             </div>
           ))}
