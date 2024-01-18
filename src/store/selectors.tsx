@@ -4,6 +4,10 @@ export const breadVariantsSelector = (state: RootState) => {
   return state.ingredients.allIngredients.breadVariants;
 };
 
+export const breadSelector = (state: RootState) => {
+  return state.bread.bread;
+};
+
 export const cheeseVariantsSelector = (state: RootState) => {
   return state.ingredients.allIngredients.cheeseVariants;
 };
