@@ -8,6 +8,7 @@ import { Meat } from "./meat";
 import { Dressing } from "./dressing";
 import { CheckboxFrame } from "../../../components/checkboxFrame";
 import { Checkbox } from "../../../components/checkbox";
+import { Radio } from "../../../components/radio";
 
 export function Base() {
   return (
@@ -25,6 +26,14 @@ export function Base() {
       <CheckboxFrame label="test" checked={false} handleClick={() => {}} />
       <CheckboxFrame label="test" checked={true} handleClick={() => {}} />
       <Checkbox label="test" checked={false} handleClick={() => {}} />
+      <Radio
+        label="hot"
+        value={0}
+        name="firstTest"
+        handleClick={() => {}}
+        checked
+      />
+      <Radio label="cold" value={1} name="firstTest" handleClick={() => {}} />
     </section>
   );
 }
