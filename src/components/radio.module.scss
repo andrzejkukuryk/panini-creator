@@ -1,0 +1,32 @@
+@import "../../variables.module.scss";
+
+.label{
+    @include flexRowSpace;
+    text-transform: uppercase;
+    font-family: $font-secondary;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    
+    .input {
+        display: none;
+    }
+
+    .checkmark {
+        display: inline-block;
+        @include appBorder;
+        border-radius: 8px;
+        height: 16px;
+        width: 16px;
+        margin: 0 8px 0 0;
+    }
+    .input:checked ~ .checkmark::after{
+        content: "";
+        display: block;
+        border-radius: 4px;
+        width: 8px;
+        height: 8px;
+        margin: 3px 0 0 3px;
+        background-color: #000;
+    }
+}
