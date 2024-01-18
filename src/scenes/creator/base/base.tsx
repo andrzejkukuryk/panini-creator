@@ -26,13 +26,7 @@ export function Base() {
       <CheckboxFrame label="test" checked={false} handleClick={() => {}} />
       <CheckboxFrame label="test" checked={true} handleClick={() => {}} />
       <Checkbox label="test" checked={false} handleClick={() => {}} />
-      <Radio
-        label="hot"
-        value={0}
-        name="firstTest"
-        handleClick={() => {}}
-        checked
-      />
+      <Radio label="hot" value={0} name="firstTest" handleClick={() => {}} />
       <Radio label="cold" value={1} name="firstTest" handleClick={() => {}} />
     </section>
   );

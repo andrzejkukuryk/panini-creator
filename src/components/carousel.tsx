@@ -7,8 +7,8 @@ import classNames from "classnames";
 
 interface CarouselProps {
   items: JSX.Element[];
-  index?: number;
-  value?: number;
+  index: number;
+  value: number;
   valueSetter?: (index: number, value: number) => void;
 }
 
@@ -19,19 +19,17 @@ export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
   const [slideLeft, setSlideLeft] = useState(false);
 
   const checkValue = () => {
-    if (value !== undefined && currentItems[1].props.info.index !== undefined) {
-      const temporaryItems = [...items];
-      const indexOfItem = temporaryItems
-        .map((item) => item.props.info.index)
-        .indexOf(value);
-      if (indexOfItem !== 1) {
-        const beginning = temporaryItems.splice(0, indexOfItem);
-        const itemOnFirstPlace = temporaryItems.concat(beginning);
-        const lastItem = itemOnFirstPlace.pop();
-        if (lastItem) {
-          itemOnFirstPlace.unshift(lastItem);
-          setCurrentItems(itemOnFirstPlace);
-        }
+    const temporaryItems = [...items];
+    const indexOfItem = temporaryItems
+      .map((item) => item.props.info.index)
+      .indexOf(value);
+    if (indexOfItem !== 1) {
+      const beginning = temporaryItems.splice(0, indexOfItem);
+      const itemOnFirstPlace = temporaryItems.concat(beginning);
+      const lastItem = itemOnFirstPlace.pop();
+      if (lastItem) {
+        itemOnFirstPlace.unshift(lastItem);
+        setCurrentItems(itemOnFirstPlace);
       }
     }
   };
