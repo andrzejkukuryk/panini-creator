@@ -9,7 +9,7 @@ interface CarouselProps {
   items: JSX.Element[];
   index: number;
   value: number;
-  valueSetter?: (index: number, value: number) => void;
+  valueSetter: (index: number, value: number) => void;
 }
 
 export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
@@ -40,14 +40,10 @@ export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
     setSelectedOption(currentItems[1].props.info.index);
   };
 
-  const tryToUseValueSetter = () => {
-    if (valueSetter !== undefined && index !== undefined) {
-      valueSetter(index, selectedOption);
-    }
-  };
-
   useEffect(() => checkOption(), [currentItems]);
-  useEffect(() => tryToUseValueSetter(), [selectedOption]);
+  useEffect(() => {
+    valueSetter(index, selectedOption);
+  }, [selectedOption]);
 
   const nextItem = () => {
     const temporaryItems = [...currentItems];
