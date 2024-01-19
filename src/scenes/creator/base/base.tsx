@@ -6,7 +6,7 @@ import { Bread } from "./bread";
 import { Cheese } from "./cheese";
 import { Meat } from "./meat";
 import { Dressing } from "./dressing";
-
+import { Vegetables } from "./vegetables";
 
 export function Base() {
   return (
@@ -20,6 +20,8 @@ export function Base() {
       <Meat />
       <Line />
       <Dressing />
+      <Line />
+      <Vegetables />
       <Line />
     </section>
   );

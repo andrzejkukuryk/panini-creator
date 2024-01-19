@@ -1,0 +1,17 @@
+@import "../../../../variables.module.scss";
+
+.vegetablesContainer {
+    @include ingredientContainer;
+    align-items: flex-start;
+    margin: 22px 0;
+
+    .multiselectContainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
+        max-width: 350px;
+        
+    }
+}

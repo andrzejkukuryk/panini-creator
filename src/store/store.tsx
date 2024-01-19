@@ -5,6 +5,7 @@ import cheeseSlice from "./cheeseSlice";
 import meatSlice from "./meatSlice";
 import dressingSlice from "./dressingSlice";
 import breadSlice from "./breadSlice";
+import vegetablesSlice from "./vegetablesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     cheese: cheeseSlice,
     meat: meatSlice,
     dressing: dressingSlice,
+    vegetables: vegetablesSlice,
   },
 });
 

@@ -43,3 +43,11 @@ export const addDressingSelector = (state: RootState) => {
 export const dressingsSelector = (state: RootState) => {
   return state.dressing.dressings;
 };
+
+export const vegetableVariantsSelector = (state: RootState) => {
+  return state.ingredients.allIngredients.vegetableVariant;
+};
+
+export const vegetablesSelector = (state: RootState) => {
+  return state.vegetables.vegetables;
+};
