@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./vegetables.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
 import {
   vegetableVariantsSelector,
   vegetablesSelector,
-  vegetableIsSelectedSelector,
 } from "../../../store/selectors";
-import { addVegetable, checkVegetable } from "../../../store/vegetablesSlice";
+import { addVegetable } from "../../../store/vegetablesSlice";
 import { CheckboxFrame } from "../../../components/checkboxFrame";
 
 export function Vegetables() {
@@ -15,15 +14,9 @@ export function Vegetables() {
   const vegetableVariants = useSelector(vegetableVariantsSelector);
   const vegetables = useSelector(vegetablesSelector);
 
-  const isSelected = (veg: number) => {
-    dispatch(checkVegetable(veg));
-    return useSelector(vegetableIsSelectedSelector);
-  };
   const handleClick = (veg: number) => {
     dispatch(addVegetable(veg));
   };
-
-  useEffect(() => console.log(vegetables), [vegetables]);
 
   return (
     <div className={styles.vegetablesContainer}>
@@ -32,8 +25,9 @@ export function Vegetables() {
         {vegetableVariants.map((vegetable, index) => (
           <CheckboxFrame
             label={vegetable.toLowerCase()}
-            checked={isSelected(index)}
+            checked={vegetables.includes(index)}
             handleClick={() => handleClick(index)}
+            key={`checkbox${vegetable}`}
           />
         ))}
       </div>

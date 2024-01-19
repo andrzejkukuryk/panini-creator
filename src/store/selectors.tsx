@@ -51,17 +51,3 @@ export const vegetableVariantsSelector = (state: RootState) => {
 export const vegetablesSelector = (state: RootState) => {
   return state.vegetables.vegetables;
 };
-
-export const vegetableIsSelectedSelector = (state: RootState) => {
-  if (state.vegetables.vegetableToCheck !== null) {
-    if (
-      state.vegetables.vegetables.includes(state.vegetables.vegetableToCheck)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-};
