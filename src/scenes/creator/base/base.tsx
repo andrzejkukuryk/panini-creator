@@ -22,6 +22,7 @@ export function Base() {
       <Dressing />
       <Line />
       <Vegetables />
+      <Line />
     </section>
   );
 }
