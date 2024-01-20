@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./dropdown.module.scss";
-import Select from "react-select";
+import Select, { GroupBase, SingleValue, StylesConfig } from "react-select";
 
 export interface DropdownInfo {
   value: number;
@@ -20,15 +20,17 @@ export function Dropdown({
   index,
   valueSetter,
 }: DropdownProps) {
-  //@ts-ignore
-  const handleChange = (selectedOption) => {
-    if (selectedOption.value !== "undefinded") {
+  const handleChange = (selectedOption: SingleValue<DropdownInfo>) => {
+    if (selectedOption !== null) {
       valueSetter(index, selectedOption.value);
     }
   };
 
-  const dropdownStyle = {
-    //@ts-ignore
+  const dropdownStyle: StylesConfig<
+    DropdownInfo,
+    false,
+    GroupBase<DropdownInfo>
+  > = {
     control: (styles) => ({
       ...styles,
       borderStyle: "solid",
