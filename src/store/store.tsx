@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import ingredientsReducer from "./ingredientsSlice";
 import servingSlice from "./servingSlice";
 import cheeseSlice from "./cheese/cheeseSlice";
-import meatSlice from "./meatSlice";
+import meatSlice from "./meat/meatSlice";
 import dressingSlice from "./dressing/dressingSlice";
 import breadSlice from "./bread/breadSlice";
 import vegetablesSlice from "./vegetablesSlice";
