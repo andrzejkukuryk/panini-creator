@@ -3,7 +3,7 @@ import ingredientsReducer from "./ingredientsSlice";
 import servingSlice from "./servingSlice";
 import cheeseSlice from "./cheese/cheeseSlice";
 import meatSlice from "./meatSlice";
-import dressingSlice from "./dressingSlice";
+import dressingSlice from "./dressing/dressingSlice";
 import breadSlice from "./bread/breadSlice";
 import vegetablesSlice from "./vegetablesSlice";
 
