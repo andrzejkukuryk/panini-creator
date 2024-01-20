@@ -9,8 +9,11 @@ import {
   CarouselItemInfo,
 } from "../../../components/carouselItem";
 import { useSelector, useDispatch } from "react-redux";
-import { breadSelector, breadVariantsSelector } from "../../../store/selectors";
-import { updateBread } from "../../../store/breadSlice";
+import {
+  breadSelector,
+  breadVariantsSelector,
+} from "../../../store/bread/selectors";
+import { updateBread } from "../../../store/bread/breadSlice";
 
 const icons = [wheat, grain];
 
