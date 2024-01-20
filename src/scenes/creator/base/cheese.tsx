@@ -9,13 +9,13 @@ import {
   cheeseVariantsSelector,
   addCheeseSelector,
   cheesesSelector,
-} from "../../../store/selectors";
+} from "../../../store/cheese/selectors";
 import {
   addNextCheese,
   subCheese,
   updateAddCheese,
   updateCheeses,
-} from "../../../store/cheeseSlice";
+} from "../../../store/cheese/cheeseSlice";
 
 export function Cheese() {
   const dispatch = useDispatch();
