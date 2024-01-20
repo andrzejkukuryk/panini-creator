@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   vegetableVariantsSelector,
   vegetablesSelector,
-} from "../../../store/selectors";
-import { addVegetable } from "../../../store/vegetablesSlice";
+} from "../../../store/vegetables/selectors";
+import { addVegetable } from "../../../store/vegetables/vegetablesSlice";
 import { CheckboxFrame } from "../../../components/checkboxFrame";
 
 export function Vegetables() {
