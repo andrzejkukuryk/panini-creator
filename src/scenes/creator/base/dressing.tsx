@@ -14,13 +14,13 @@ import {
   dressingVariantsSelector,
   addDressingSelector,
   dressingsSelector,
-} from "../../../store/selectors";
+} from "../../../store/dressing/selectors";
 import {
   addNextDressing,
   subDressing,
   updateAddDressing,
   updateDressings,
-} from "../../../store/dressingSlice";
+} from "../../../store/dressing/dressingSlice";
 
 export function Dressing() {
   const dispatch = useDispatch();

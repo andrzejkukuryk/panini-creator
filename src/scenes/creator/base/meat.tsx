@@ -9,13 +9,13 @@ import {
   meatVariantsSelector,
   addMeatSelector,
   meatsSelector,
-} from "../../../store/selectors";
+} from "../../../store/meat/selectors";
 import {
   addNextMeat,
   subMeat,
   updateAddMeat,
   updateMeats,
-} from "../../../store/meatSlice";
+} from "../../../store/meat/meatSlice";
 
 export function Meat() {
   const dispatch = useDispatch();

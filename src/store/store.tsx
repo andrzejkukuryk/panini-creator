@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ingredientsReducer from "./ingredientsSlice";
-import servingSlice from "./servingSlice";
-import cheeseSlice from "./cheeseSlice";
-import meatSlice from "./meatSlice";
-import dressingSlice from "./dressingSlice";
-import breadSlice from "./breadSlice";
-import vegetablesSlice from "./vegetablesSlice";
+import servingSlice from "./serving/servingSlice";
+import cheeseSlice from "./cheese/cheeseSlice";
+import meatSlice from "./meat/meatSlice";
+import dressingSlice from "./dressing/dressingSlice";
+import breadSlice from "./bread/breadSlice";
+import vegetablesSlice from "./vegetables/vegetablesSlice";
 
 export const store = configureStore({
   reducer: {
