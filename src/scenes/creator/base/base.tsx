@@ -20,7 +20,7 @@ export function Base() {
       <Meat />
       <Line />
       <Dressing />
-      <Line />
+      {/* <Line /> */}
       <Vegetables />
       <Line />
     </section>

@@ -4,43 +4,82 @@ import { CarouselButton } from "./carouselButton";
 import arrowLeft from "../assets/arrowLeft.png";
 import arrowRight from "../assets/arrowRight.png";
 import classNames from "classnames";
+import { CarouselItem } from "./carouselItem";
 
 interface CarouselProps {
-  items: JSX.Element[];
+  options: string[];
+  icons?: string[];
   index: number;
   value: number;
   valueSetter: (index: number, value: number) => void;
 }
 
-export function Carousel({ items, index, value, valueSetter }: CarouselProps) {
-  const [currentItems, setCurrentItems] = useState(items);
+export function Carousel({
+  options,
+  icons,
+  index,
+  value,
+  valueSetter,
+}: CarouselProps) {
+  const [currentItems, setCurrentItems] = useState<JSX.Element[]>([]);
   const [selectedOption, setSelectedOption] = useState(1);
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
-  const checkValue = () => {
-    const temporaryItems = [...items];
-    const indexOfItem = temporaryItems
-      .map((item) => item.props.info.index)
-      .indexOf(value);
-    if (indexOfItem !== 1) {
-      const beginning = temporaryItems.splice(0, indexOfItem);
-      const itemOnFirstPlace = temporaryItems.concat(beginning);
-      const lastItem = itemOnFirstPlace.pop();
-      if (lastItem) {
-        itemOnFirstPlace.unshift(lastItem);
-        setCurrentItems(itemOnFirstPlace);
+  const createCarouselItems = () => {
+    const temporaryOptions =
+      options.length > 2 ? options : [...options, ...options];
+
+    const checkIcons = (index: number) => {
+      if (icons) {
+        const temporaryIcons = icons.length > 2 ? icons : [...icons, ...icons];
+        return temporaryIcons[index];
+      } else {
+        return undefined;
       }
-    }
+    };
+
+    const items = temporaryOptions.map((option, index) => (
+      <CarouselItem
+        text={option}
+        icon={checkIcons(index)}
+        index={index}
+        key={`carouselItem${index}`}
+      />
+    ));
+
+    setCurrentItems(items);
   };
 
-  useEffect(() => checkValue(), [value]);
+  useEffect(() => {
+    createCarouselItems();
+  }, []);
 
-  const checkOption = () => {
-    setSelectedOption(currentItems[1].props.info.index);
-  };
+  useEffect(() => console.log(currentItems), [currentItems]);
 
-  useEffect(() => checkOption(), [currentItems]);
+  // const checkValue = () => {
+  //   const temporaryItems = [...items];
+  //   const indexOfItem = temporaryItems
+  //     .map((item) => item.props.info.index)
+  //     .indexOf(value);
+  //   if (indexOfItem !== 1) {
+  //     const beginning = temporaryItems.splice(0, indexOfItem);
+  //     const itemOnFirstPlace = temporaryItems.concat(beginning);
+  //     const lastItem = itemOnFirstPlace.pop();
+  //     if (lastItem) {
+  //       itemOnFirstPlace.unshift(lastItem);
+  //       setCurrentItems(itemOnFirstPlace);
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => checkValue(), [value]);
+
+  // const checkOption = () => {
+  //   setSelectedOption(currentItems[1].props.index);
+  // };
+
+  // useEffect(() => checkOption(), [currentItems]);
   useEffect(() => {
     valueSetter(index, selectedOption);
   }, [selectedOption]);
