@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./cheese.module.scss";
 import { Label } from "../../../components/label";
 import { Dropdown, DropdownInfo } from "../../../components/dropdown";
@@ -23,10 +23,10 @@ export function Cheese() {
   const cheeseVariants = useSelector(cheeseVariantsSelector);
   const addCheese = useSelector(addCheeseSelector);
   const cheeses = useSelector(cheesesSelector);
-  const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
-    value: index,
-    label: variant,
-  }));
+  // const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
+  //   value: index,
+  //   label: variant,
+  // }));
 
   const handleSwitch = () => {
     dispatch(updateAddCheese());
@@ -40,9 +40,11 @@ export function Cheese() {
     }
   };
 
-  const handleChange = (index: number, value: number) => {
+  const handleChange = (index: number, value: string) => {
     dispatch(updateCheeses({ index, value }));
   };
+
+  useEffect(() => console.log(cheeses), [cheeses]);
 
   return (
     <div className={styles.newCheeseContainer}>
@@ -59,7 +61,7 @@ export function Cheese() {
             >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
               <Dropdown
-                options={cheeseInfo}
+                options={cheeseVariants}
                 value={cheese}
                 index={index}
                 valueSetter={handleChange}

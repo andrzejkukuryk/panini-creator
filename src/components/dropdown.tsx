@@ -3,15 +3,15 @@ import styles from "./dropdown.module.scss";
 import Select, { GroupBase, SingleValue, StylesConfig } from "react-select";
 
 export interface DropdownInfo {
-  value: number;
+  value: string;
   label: string;
 }
 
 interface DropdownProps {
-  options: DropdownInfo[];
-  value: number;
+  options: string[];
+  value: string;
   index: number;
-  valueSetter: (index: number, value: number) => void;
+  valueSetter: (index: number, value: string) => void;
 }
 
 export function Dropdown({
@@ -20,6 +20,12 @@ export function Dropdown({
   index,
   valueSetter,
 }: DropdownProps) {
+  const dropdownOptions: DropdownInfo[] = options.map((option) => {
+    return { value: option, label: option };
+  });
+
+  const indexOfSelectedOption = options.indexOf(value);
+
   const handleChange = (selectedOption: SingleValue<DropdownInfo>) => {
     if (selectedOption !== null) {
       valueSetter(index, selectedOption.value);
@@ -45,9 +51,9 @@ export function Dropdown({
     <div className={styles.dropdownContainer}>
       <div style={{ width: "100%", height: "100%" }}>
         <Select
-          options={options}
+          options={dropdownOptions}
           onChange={handleChange}
-          value={options[value]}
+          value={dropdownOptions[indexOfSelectedOption]}
           styles={dropdownStyle}
         />
       </div>
