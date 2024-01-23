@@ -3,12 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface MeatState {
   addMeat: boolean;
-  meats: number[];
+  meats: string[];
 }
 
 const initialState: MeatState = {
   addMeat: true,
-  meats: [0],
+  meats: ["SALAMI"],
 };
 
 export const meatSlice = createSlice({
@@ -19,14 +19,14 @@ export const meatSlice = createSlice({
       state.addMeat = !state.addMeat;
     },
     addNextMeat: (state) => {
-      state.meats.push(0);
+      state.meats.push("SALAMI");
     },
     subMeat: (state, action: PayloadAction<number>) => {
       state.meats.splice(action.payload, 1);
     },
     updateMeats: (
       state,
-      action: PayloadAction<{ index: number; value: number }>
+      action: PayloadAction<{ index: number; value: string }>
     ) => {
       state.meats[action.payload.index] = action.payload.value;
     },

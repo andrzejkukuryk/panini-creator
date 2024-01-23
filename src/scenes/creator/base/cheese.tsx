@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./cheese.module.scss";
 import { Label } from "../../../components/label";
-import { Dropdown, DropdownInfo } from "../../../components/dropdown";
+import { Dropdown } from "../../../components/dropdown";
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,10 +23,6 @@ export function Cheese() {
   const cheeseVariants = useSelector(cheeseVariantsSelector);
   const addCheese = useSelector(addCheeseSelector);
   const cheeses = useSelector(cheesesSelector);
-  // const cheeseInfo: DropdownInfo[] = cheeseVariants.map((variant, index) => ({
-  //   value: index,
-  //   label: variant,
-  // }));
 
   const handleSwitch = () => {
     dispatch(updateAddCheese());
@@ -44,8 +40,6 @@ export function Cheese() {
     dispatch(updateCheeses({ index, value }));
   };
 
-  useEffect(() => console.log(cheeses), [cheeses]);
-
   return (
     <div className={styles.newCheeseContainer}>
       <div className={styles.labelAndSwitch}>
@@ -57,7 +51,7 @@ export function Cheese() {
           {cheeses.map((cheese, index) => (
             <div
               className={styles.buttonAndDropdown}
-              key={`keyCheese${cheese}`}
+              key={`keyCheese${cheese}${index}`}
             >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
               <Dropdown
