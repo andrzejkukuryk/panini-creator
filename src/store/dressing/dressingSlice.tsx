@@ -3,12 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface DressingState {
   addDressing: boolean;
-  dressings: number[];
+  dressings: string[];
 }
 
 const initialState: DressingState = {
   addDressing: true,
-  dressings: [1],
+  dressings: ["HONEY MUSTARD"],
 };
 
 export const dressingSlice = createSlice({
@@ -19,14 +19,14 @@ export const dressingSlice = createSlice({
       state.addDressing = !state.addDressing;
     },
     addNextDressing: (state) => {
-      state.dressings.push(0);
+      state.dressings.push("HONEY MUSTARD");
     },
     subDressing: (state, action: PayloadAction<number>) => {
       state.dressings.splice(action.payload, 1);
     },
     updateDressings: (
       state,
-      action: PayloadAction<{ index: number; value: number }>
+      action: PayloadAction<{ index: number; value: string }>
     ) => {
       state.dressings[action.payload.index] = action.payload.value;
     },

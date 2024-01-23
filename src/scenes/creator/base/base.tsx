@@ -19,8 +19,8 @@ export function Base() {
       <Line />
       <Meat />
       <Line />
-      {/* <Dressing /> */}
-      {/* <Line /> */}
+      <Dressing />
+      <Line />
       <Vegetables />
       <Line />
     </section>

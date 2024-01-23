@@ -10,8 +10,8 @@ interface CarouselProps {
   options: string[];
   icons?: string[];
   index: number;
-  value: number;
-  valueSetter: (index: number, value: number) => void;
+  value: string;
+  valueSetter: (index: number, value: string) => void;
 }
 
 export function Carousel({
@@ -22,7 +22,7 @@ export function Carousel({
   valueSetter,
 }: CarouselProps) {
   const [currentItems, setCurrentItems] = useState<JSX.Element[]>([]);
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedOption, setSelectedOption] = useState("FULL GRAIN");
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
@@ -47,39 +47,42 @@ export function Carousel({
         key={`carouselItem${index}`}
       />
     ));
+    return items;
+  };
 
-    setCurrentItems(items);
+  const setInitialCurrentItems = () => {
+    setCurrentItems(createCarouselItems());
   };
 
   useEffect(() => {
-    createCarouselItems();
+    setInitialCurrentItems();
   }, []);
 
-  useEffect(() => console.log(currentItems), [currentItems]);
+  const checkValue = () => {
+    const temporaryItems = [...createCarouselItems()];
+    const indexOfItem = temporaryItems
+      .map((item) => item.props.text)
+      .indexOf(value);
+    if (indexOfItem !== 1) {
+      const beginning = temporaryItems.splice(0, indexOfItem);
+      const itemOnFirstPlace = temporaryItems.concat(beginning);
+      const lastItem = itemOnFirstPlace.pop();
+      if (lastItem) {
+        itemOnFirstPlace.unshift(lastItem);
+        setCurrentItems(itemOnFirstPlace);
+      }
+    }
+  };
 
-  // const checkValue = () => {
-  //   const temporaryItems = [...items];
-  //   const indexOfItem = temporaryItems
-  //     .map((item) => item.props.info.index)
-  //     .indexOf(value);
-  //   if (indexOfItem !== 1) {
-  //     const beginning = temporaryItems.splice(0, indexOfItem);
-  //     const itemOnFirstPlace = temporaryItems.concat(beginning);
-  //     const lastItem = itemOnFirstPlace.pop();
-  //     if (lastItem) {
-  //       itemOnFirstPlace.unshift(lastItem);
-  //       setCurrentItems(itemOnFirstPlace);
-  //     }
-  //   }
-  // };
+  useEffect(() => checkValue(), [value]);
 
-  // useEffect(() => checkValue(), [value]);
+  const checkOption = () => {
+    if (currentItems[1]) {
+      setSelectedOption(currentItems[1].props.text);
+    }
+  };
 
-  // const checkOption = () => {
-  //   setSelectedOption(currentItems[1].props.index);
-  // };
-
-  // useEffect(() => checkOption(), [currentItems]);
+  useEffect(() => checkOption(), [currentItems]);
   useEffect(() => {
     valueSetter(index, selectedOption);
   }, [selectedOption]);

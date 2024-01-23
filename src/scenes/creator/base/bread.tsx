@@ -18,7 +18,7 @@ export function Bread() {
   const breadVariants = useSelector(breadVariantsSelector);
   const bread = useSelector(breadSelector);
 
-  const handleChange = (index: number, value: number) => {
+  const handleChange = (index: number, value: string) => {
     dispatch(updateBread(value));
   };
 
@@ -26,7 +26,6 @@ export function Bread() {
     <div className={styles.breadContainer}>
       <Label text="bread" />
       <Carousel
-        // items={items}
         options={breadVariants}
         icons={icons}
         index={0}
