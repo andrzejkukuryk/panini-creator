@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface VegetablesState {
-  vegetables: number[];
+  vegetables: string[];
 }
 
 const initialState: VegetablesState = {
@@ -12,7 +12,7 @@ export const vegetablesSlice = createSlice({
   name: "vegetables",
   initialState: initialState,
   reducers: {
-    addVegetable: (state, action: PayloadAction<number>) => {
+    addVegetable: (state, action: PayloadAction<string>) => {
       if (state.vegetables.includes(action.payload)) {
         state.vegetables = state.vegetables.filter(
           (vegetable) => vegetable !== action.payload
