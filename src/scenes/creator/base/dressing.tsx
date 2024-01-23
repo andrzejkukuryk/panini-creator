@@ -1,14 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./dressing.module.scss";
 import { Label } from "../../../components/label";
 
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
 import { Carousel } from "../../../components/carousel";
-import {
-  CarouselItem,
-  CarouselItemInfo,
-} from "../../../components/carouselItem";
 import { useSelector, useDispatch } from "react-redux";
 import {
   dressingVariantsSelector,
@@ -29,7 +25,6 @@ export function Dressing() {
   const addDressing = useSelector(addDressingSelector);
   const dressings = useSelector(dressingsSelector);
 
-
   const handleSwitch = () => {
     dispatch(updateAddDressing());
   };
@@ -42,7 +37,7 @@ export function Dressing() {
     }
   };
 
-  const handleChange = (index: number, value: number) => {
+  const handleChange = (index: number, value: string) => {
     dispatch(updateDressings({ index, value }));
   };
 

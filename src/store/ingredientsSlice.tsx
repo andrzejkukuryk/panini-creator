@@ -34,7 +34,7 @@ const initialState: IngredientsState = {
   allIngredients: {
     breadVariants: ["WHEAT", "FULL GRAIN"],
     cheeseVariants: ["EDAM", "MOZZARELLA", "STRACIATELLA", "GOUDA"],
-    dressingVariants: ["OLIVE OIL", "HONEY_MUSTARD", "RANCH", "MAYO"],
+    dressingVariants: ["OLIVE OIL", "HONEY MUSTARD", "RANCH", "MAYO"],
     eggVariants: ["FRIED EGG", "OMELET", "SCRAMBLED EGG", "POACHED EGG"],
     meatVariants: ["SALAMI", "HAM", "BACON", "CHICKEN"],
     spreadVariant: ["BUTTER", "HUMMUS", "GUACAMOLE"],

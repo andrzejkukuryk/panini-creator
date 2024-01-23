@@ -22,7 +22,7 @@ export function Carousel({
   valueSetter,
 }: CarouselProps) {
   const [currentItems, setCurrentItems] = useState<JSX.Element[]>([]);
-  const [selectedOption, setSelectedOption] = useState("FULL GRAIN");
+  const [selectedOption, setSelectedOption] = useState(value);
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
