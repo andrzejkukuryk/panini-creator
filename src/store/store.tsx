@@ -7,6 +7,7 @@ import dressingSlice from "./dressing/dressingSlice";
 import breadSlice from "./bread/breadSlice";
 import vegetablesSlice from "./vegetables/vegetablesSlice";
 import eggSlice from "./egg/eggSlice";
+import spreadsSlice from "./spreads/spreadsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     dressing: dressingSlice,
     vegetables: vegetablesSlice,
     egg: eggSlice,
+    spread: spreadsSlice,
   },
 });
 
