@@ -1,14 +1,13 @@
 @import "../../../../variables.module.scss";
 
-.servingContainer {
+.toppingContainer {
     @include ingredientContainer;
 
-    .radioContainer{
+    .checkboxContainer{
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column;
         align-items: flex-end;
-        gap: 29px;
+        gap: 16px;
         max-width: 350px;
-        
     }
 }
