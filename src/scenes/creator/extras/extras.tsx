@@ -4,6 +4,7 @@ import { SectionTitle } from "../../../components/sectionTitle";
 import { Line } from "../../../components/line";
 import { Egg } from "./egg";
 import { Spreads } from "./spreads";
+import { Serving } from "./serving";
 
 export function Extras() {
   return (
@@ -13,6 +14,8 @@ export function Extras() {
       <Egg />
       <Line />
       <Spreads />
+      <Line />
+      <Serving />
       <Line />
     </section>
   );

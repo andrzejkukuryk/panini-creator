@@ -3,16 +3,10 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface ServingState {
   serving: string;
-  name: string;
-  napkins: boolean;
-  cultery: boolean;
 }
 
 const initialState: ServingState = {
-  serving: "",
-  name: "",
-  napkins: false,
-  cultery: false,
+  serving: "WARM",
 };
 
 export const servingSlice = createSlice({
@@ -22,19 +16,9 @@ export const servingSlice = createSlice({
     updateServing: (state, action: PayloadAction<string>) => {
       state.serving = action.payload;
     },
-    updateName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
-    },
-    updateNapkins: (state, action: PayloadAction<boolean>) => {
-      state.napkins = action.payload;
-    },
-    updateCultery: (state, action: PayloadAction<boolean>) => {
-      state.cultery = action.payload;
-    },
   },
 });
 
-export const { updateServing, updateName, updateNapkins, updateCultery } =
-  servingSlice.actions;
+export const { updateServing } = servingSlice.actions;
 
 export default servingSlice.reducer;
