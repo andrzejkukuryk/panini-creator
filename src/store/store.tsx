@@ -7,6 +7,8 @@ import dressingSlice from "./dressing/dressingSlice";
 import breadSlice from "./bread/breadSlice";
 import vegetablesSlice from "./vegetables/vegetablesSlice";
 import nameSlice from "./name/nameSlice";
+import cutlerySlice from "./cutlery/cutlerySlice";
+import napkinsSlice from "./napkins/napkinsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +20,8 @@ export const store = configureStore({
     dressing: dressingSlice,
     vegetables: vegetablesSlice,
     name: nameSlice,
+    cutlery: cutlerySlice,
+    napkins: napkinsSlice,
   },
 });
 
