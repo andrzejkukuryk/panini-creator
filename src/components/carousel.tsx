@@ -43,7 +43,6 @@ export function Carousel({
       <CarouselItem
         text={option}
         icon={checkIcons(index)}
-        index={index}
         key={`carouselItem${index}`}
       />
     ));

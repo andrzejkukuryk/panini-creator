@@ -18,7 +18,7 @@ export function Bread() {
   const breadVariants = useSelector(breadVariantsSelector);
   const bread = useSelector(breadSelector);
 
-  const handleChange = (index: number, value: string) => {
+  const handleChange = (_index: number, value: string) => {
     dispatch(updateBread(value));
   };
 
