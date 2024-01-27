@@ -1,0 +1,13 @@
+@import "../../../../variables.module.scss";
+
+.toppingContainer {
+    @include ingredientContainer;
+
+    .checkboxContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+        max-width: 350px;
+    }
+}

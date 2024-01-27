@@ -4,7 +4,7 @@ import styles from "./radio.module.scss";
 interface RadioProps {
   name: string;
   label: string;
-  value: number;
+  value: string;
   checked?: boolean;
   handleClick: () => void;
 }
@@ -27,7 +27,7 @@ export function Radio({
         id={id}
         value={value}
         checked={checked}
-        onClick={handleClick}
+        onChange={handleClick}
       ></input>
       <div className={styles.checkmark}></div>
       {label}

@@ -15,7 +15,7 @@ export function Checkbox({ label, checked, handleClick }: CheckboxProps) {
         className={styles.input}
         type="checkbox"
         checked={checked}
-        onClick={handleClick}
+        onChange={handleClick}
       ></input>
       <div className={styles.checkmark}></div>
     </label>

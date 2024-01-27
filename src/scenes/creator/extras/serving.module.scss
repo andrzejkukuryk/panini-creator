@@ -1,0 +1,14 @@
+@import "../../../../variables.module.scss";
+
+.servingContainer {
+    @include ingredientContainer;
+
+    .radioContainer{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-end;
+        gap: 29px;
+        max-width: 350px;
+        
+    }
+}
