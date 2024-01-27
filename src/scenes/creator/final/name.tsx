@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./name.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +13,6 @@ export function Name() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateName(event.target.value));
   };
-
-  useEffect(() => console.log(paniniName), [paniniName]);
 
   return (
     <div className={styles.nameContainer}>
