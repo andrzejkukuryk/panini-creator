@@ -4,7 +4,7 @@ import { CarouselButton } from "./carouselButton";
 import arrowLeft from "../assets/arrowLeft.png";
 import arrowRight from "../assets/arrowRight.png";
 import classNames from "classnames";
-import { CarouselItem } from "./carouselItem";
+import { CarouselItem, CarouselItemInfo } from "./carouselItem";
 
 interface CarouselProps {
   options: string[];
@@ -21,12 +21,12 @@ export function Carousel({
   value,
   valueSetter,
 }: CarouselProps) {
-  const [currentItems, setCurrentItems] = useState<JSX.Element[]>([]);
+  const [currentOptions, setCurrentOptions] = useState<CarouselItemInfo[]>([]);
   const [selectedOption, setSelectedOption] = useState(value);
   const [slideRight, setSlideRight] = useState(false);
   const [slideLeft, setSlideLeft] = useState(false);
 
-  const createCarouselItems = () => {
+  const createInitialOptions = () => {
     const temporaryOptions =
       options.length > 2 ? options : [...options, ...options];
 
@@ -39,36 +39,41 @@ export function Carousel({
       }
     };
 
-    const items = temporaryOptions.map((option, index) => (
-      <CarouselItem
-        text={option}
-        icon={checkIcons(index)}
-        key={`carouselItem${index}`}
-      />
+    const inititialOptions: CarouselItemInfo[] = temporaryOptions.map(
+      (option, index) => {
+        const initialOption: CarouselItemInfo = {
+          text: option,
+          icon: checkIcons(index),
+        };
+        return initialOption;
+      }
+    );
+    setCurrentOptions(inititialOptions);
+  };
+
+  useEffect(() => {
+    createInitialOptions();
+  }, []);
+
+  const createCarouselItems = () => {
+    const items = currentOptions.map((option, index) => (
+      <CarouselItem option={option} key={`carouselItem${index}`} />
     ));
     return items;
   };
 
-  const setInitialCurrentItems = () => {
-    setCurrentItems(createCarouselItems());
-  };
-
-  useEffect(() => {
-    setInitialCurrentItems();
-  }, []);
-
   const checkValue = () => {
-    const temporaryItems = [...createCarouselItems()];
-    const indexOfItem = temporaryItems
-      .map((item) => item.props.text)
+    const temporaryOptions = [...currentOptions];
+    const indexOfOption = temporaryOptions
+      .map((item) => item.text)
       .indexOf(value);
-    if (indexOfItem !== 1) {
-      const beginning = temporaryItems.splice(0, indexOfItem);
-      const itemOnFirstPlace = temporaryItems.concat(beginning);
+    if (indexOfOption !== 1) {
+      const beginning = temporaryOptions.splice(0, indexOfOption);
+      const itemOnFirstPlace = temporaryOptions.concat(beginning);
       const lastItem = itemOnFirstPlace.pop();
       if (lastItem) {
         itemOnFirstPlace.unshift(lastItem);
-        setCurrentItems(itemOnFirstPlace);
+        setCurrentOptions(itemOnFirstPlace);
       }
     }
   };
@@ -76,34 +81,34 @@ export function Carousel({
   useEffect(() => checkValue(), [value]);
 
   const checkOption = () => {
-    if (currentItems[1]) {
-      setSelectedOption(currentItems[1].props.text);
+    if (currentOptions[1]) {
+      setSelectedOption(currentOptions[1].text);
     }
   };
 
-  useEffect(() => checkOption(), [currentItems]);
+  useEffect(() => checkOption(), [currentOptions]);
   useEffect(() => {
     valueSetter(index, selectedOption);
   }, [selectedOption]);
 
   const nextItem = () => {
-    const temporaryItems = [...currentItems];
-    const firstItem = temporaryItems.shift();
-    if (firstItem) {
-      temporaryItems.push(firstItem);
+    const temporaryOptions = [...currentOptions];
+    const firstOption = temporaryOptions.shift();
+    if (firstOption) {
+      temporaryOptions.push(firstOption);
       setSlideLeft(false);
     }
-    setCurrentItems(temporaryItems);
+    setCurrentOptions(temporaryOptions);
   };
 
   const prevItem = () => {
-    const temporaryItems = [...currentItems];
-    const lastItem = temporaryItems.pop();
-    if (lastItem) {
-      temporaryItems.unshift(lastItem);
+    const temporaryOptions = [...currentOptions];
+    const lastOption = temporaryOptions.pop();
+    if (lastOption) {
+      temporaryOptions.unshift(lastOption);
       setSlideRight(false);
     }
-    setCurrentItems(temporaryItems);
+    setCurrentOptions(temporaryOptions);
   };
 
   const moveCarouselRight = () => {
@@ -125,7 +130,7 @@ export function Carousel({
     <div className={styles.carouselContainer}>
       <CarouselButton ftn={moveCarouselLeft} icon={arrowLeft} />
       <div className={styles.frame}>
-        <div className={carouselClass}>{currentItems}</div>
+        <div className={carouselClass}>{createCarouselItems()}</div>
       </div>
       <CarouselButton ftn={moveCarouselRight} icon={arrowRight} />
     </div>

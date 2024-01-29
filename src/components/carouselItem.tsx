@@ -7,16 +7,15 @@ export interface CarouselItemInfo {
 }
 
 interface CarouselItemProps {
-  text: string;
-  icon?: string;
+  option: CarouselItemInfo;
 }
 
-export function CarouselItem({ text, icon }: CarouselItemProps) {
+export function CarouselItem({ option }: CarouselItemProps) {
   return (
     <div className={styles.carouselItemContainer}>
       <div className={styles.centered}>
-        {icon && <img src={icon} />}
-        {text}
+        {option.icon && <img src={option.icon} />}
+        {option.text}
       </div>
     </div>
   );
