@@ -9,6 +9,9 @@ import eggSlice from "./egg/eggSlice";
 import spreadsSlice from "./spreads/spreadsSlice";
 import servingSlice from "./serving/servingSlice";
 import toppingSlice from "./topping/toppingSlice";
+import nameSlice from "./name/nameSlice";
+import cutlerySlice from "./cutlery/cutlerySlice";
+import napkinsSlice from "./napkins/napkinsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +25,9 @@ export const store = configureStore({
     spread: spreadsSlice,
     serving: servingSlice,
     topping: toppingSlice,
+    name: nameSlice,
+    cutlery: cutlerySlice,
+    napkins: napkinsSlice,
   },
 });
 

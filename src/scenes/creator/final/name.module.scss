@@ -1,0 +1,16 @@
+@import "../../../../variables.module.scss";
+
+.nameContainer {
+  @include ingredientContainer;
+
+  .inputCell {
+    @include appBorder;
+    width: 330px;
+    height: 36px;
+    padding: 10px 15px;
+    font-family: $font-secondary;
+    font-size: 12px;
+    line-height: 16px;
+    outline: none;
+  }
+}

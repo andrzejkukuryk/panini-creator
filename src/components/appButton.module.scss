@@ -1,18 +1,39 @@
 @import "../../variables.module.scss"; 
 
-.appButton {
-    background: none;
-    border: solid 0.5px;
-    border-color: rgba(0, 0, 0, 0);
+@mixin btn {
     font-family: $font-secondary;
     text-transform: uppercase;
-    width: 77px;
-    height: 44px;
+    border: solid 1px;
+    padding: 14px 20px;
     position: relative;
+    cursor: pointer;
+}
+
+.appButton {
+    @include btn;
+    background: none;
+    border-color: rgba(0, 0, 0, 0);
     z-index: 2;
     transition: border-color .7s;
 }
 
 .appButton:hover {
     border-color: rgba(0, 0, 0, 1);
+}
+
+.blackButton {
+    @include btn;
+    background-color: #000;
+    border-color: rgba(255, 255,255,0);
+    color: #FFF;
+    width: 100%;
+    margin: 50px 0 6px;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255,255,0);
+    transition: all .7s;
+}
+
+.blackButton:hover {
+    border-color: rgba(255, 255,255,1);
+    text-decoration-color: rgba(255, 255,255,1);
 }
