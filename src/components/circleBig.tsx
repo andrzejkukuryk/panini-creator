@@ -7,8 +7,8 @@ export type PositionCircleBigInfo = "L" | "ML" | "C" | "MR" | "R";
 
 interface CircleBigProps {
   position: PositionCircleBigInfo;
-  startAnimation: boolean;
-  setStartAnimation: React.Dispatch<React.SetStateAction<boolean>>;
+  startAnimation?: boolean;
+  setStartAnimation?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function CircleBig({
@@ -28,7 +28,6 @@ export function CircleBig({
     [styles.moveMiddleRight]: position === "MR" && startAnimation,
     [styles.moveRight]: position === "R" && startAnimation,
   });
-
 
   return (
     <div className={containerClass}>

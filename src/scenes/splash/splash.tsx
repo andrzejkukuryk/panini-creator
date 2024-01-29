@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styles from "./splash.module.scss";
-import { CircleBig, PositionCircleBigInfo } from "./circleBig";
-import { CircleSmall, PositionCircleSmallInfo } from "./circleSmall";
+import { CircleBig, PositionCircleBigInfo } from "../../components/circleBig";
+import {
+  CircleSmall,
+  PositionCircleSmallInfo,
+} from "../../components/circleSmall";
 import classNames from "classnames";
 
 export function Splash() {

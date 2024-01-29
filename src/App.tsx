@@ -4,6 +4,7 @@ import { Splash } from "./scenes/splash/splash";
 import { Creator } from "./scenes/creator/creator";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { Success } from "./scenes/success/success";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div className={styles.appContainer}>
         <Splash />
         <Creator />
+        <Success />
       </div>
     </Provider>
   );

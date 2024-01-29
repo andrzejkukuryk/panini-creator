@@ -6,7 +6,7 @@ export type PositionCircleSmallInfo = "T" | "B";
 
 interface CircleSmallProps {
   position: PositionCircleSmallInfo;
-  startAnimation: boolean;
+  startAnimation?: boolean;
 }
 
 export function CircleSmall({ position, startAnimation }: CircleSmallProps) {

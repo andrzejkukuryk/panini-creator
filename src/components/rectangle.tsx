@@ -2,11 +2,11 @@ import React from "react";
 import styles from "./rectangle.module.scss";
 import classNames from "classnames";
 import { Text } from "./text";
-import { AppButton } from "../../components/appButton";
+import { AppButton } from "./appButton";
 
 interface RectangleProps {
-  startAnimation: boolean;
-  setStartAnimation: React.Dispatch<React.SetStateAction<boolean>>;
+  startAnimation?: boolean;
+  setStartAnimation?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function Reclangle({
@@ -14,7 +14,9 @@ export function Reclangle({
   setStartAnimation,
 }: RectangleProps) {
   const handleClickBegin = () => {
-    setStartAnimation(true);
+    if (setStartAnimation !== undefined) {
+      setStartAnimation(true);
+    }
   };
 
   const containerClass = classNames([styles.container], {
