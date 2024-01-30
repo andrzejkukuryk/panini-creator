@@ -3,22 +3,26 @@ import styles from "./rectangle.module.scss";
 import classNames from "classnames";
 import { Text } from "./text";
 import { AppButton } from "./appButton";
+import { useSelector } from "react-redux";
+import { startAnimationSelector } from "../store/appControl/selectors";
 
 interface RectangleProps {
   title: string;
   buttonText: string;
   buttonFunction: () => void;
-  startAnimation?: boolean;
 }
 
 export function Reclangle({
   title,
   buttonText,
   buttonFunction,
-  startAnimation,
 }: RectangleProps) {
+  const startAnimation = useSelector(startAnimationSelector);
+
+  const runAnimation = startAnimation && title === "Panini Creator";
+
   const containerClass = classNames([styles.container], {
-    [styles.startAnimation]: startAnimation,
+    [styles.startAnimation]: runAnimation,
   });
 
   return (

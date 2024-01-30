@@ -1,15 +1,21 @@
 import React from "react";
 import styles from "./circleSmall.module.scss";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+import { startAnimationSelector } from "../store/appControl/selectors";
 
 export type PositionCircleSmallInfo = "T" | "B";
 
 interface CircleSmallProps {
   position: PositionCircleSmallInfo;
-  startAnimation?: boolean;
+  title: string;
 }
 
-export function CircleSmall({ position, startAnimation }: CircleSmallProps) {
+export function CircleSmall({ position, title }: CircleSmallProps) {
+  const startAnimation = useSelector(startAnimationSelector);
+
+  const runAnimation = startAnimation && title === "Panini Creator";
+
   const containerClass = classNames([styles.container], {
     [styles.top]: position === "T",
     [styles.bottom]: position === "B",

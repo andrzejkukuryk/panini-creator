@@ -33,7 +33,11 @@ export function Success() {
         />
       ))}
       {circleSmallPositions.map((position) => (
-        <CircleSmall position={position} key={`pos_${position}`} />
+        <CircleSmall
+          position={position}
+          title="Panini Creator"
+          key={`pos_${position}`}
+        />
       ))}
     </div>
   );
