@@ -19,6 +19,10 @@ export function Splash() {
 
   const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
+  const handleClickBegin = () => {
+    setStartAnimation(true);
+  };
+
   const containerClass = classNames([styles.container], {
     [styles.fade]: startAnimation,
   });
@@ -27,6 +31,9 @@ export function Splash() {
     <div className={containerClass}>
       {circleBigPositions.map((position) => (
         <CircleBig
+          title="Panini Creator"
+          buttonText="begin"
+          buttonFunction={handleClickBegin}
           position={position}
           startAnimation={startAnimation}
           setStartAnimation={setStartAnimation}

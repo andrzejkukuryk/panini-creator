@@ -5,28 +5,26 @@ import { Text } from "./text";
 import { AppButton } from "./appButton";
 
 interface RectangleProps {
+  title: string;
+  buttonText: string;
+  buttonFunction: () => void;
   startAnimation?: boolean;
-  setStartAnimation?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function Reclangle({
+  title,
+  buttonText,
+  buttonFunction,
   startAnimation,
-  setStartAnimation,
 }: RectangleProps) {
-  const handleClickBegin = () => {
-    if (setStartAnimation !== undefined) {
-      setStartAnimation(true);
-    }
-  };
-
   const containerClass = classNames([styles.container], {
     [styles.startAnimation]: startAnimation,
   });
 
   return (
     <div className={containerClass}>
-      <Text message="Panini Creator" />
-      <AppButton handledFunction={handleClickBegin} text="begin" />
+      <Text message={title} />
+      <AppButton handledFunction={buttonFunction} text={buttonText} />
     </div>
   );
 }

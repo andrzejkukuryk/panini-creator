@@ -17,10 +17,20 @@ export function Success() {
 
   const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
+  const handleClickStartAgain = () => {
+    //TODO: return to begining
+  };
+
   return (
     <div className={styles.container}>
       {circleBigPositions.map((position) => (
-        <CircleBig position={position} key={`pos_${position}`} />
+        <CircleBig
+          position={position}
+          title="Panini ordered"
+          buttonText="start again"
+          buttonFunction={handleClickStartAgain}
+          key={`pos_${position}`}
+        />
       ))}
       {circleSmallPositions.map((position) => (
         <CircleSmall position={position} key={`pos_${position}`} />

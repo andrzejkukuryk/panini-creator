@@ -7,14 +7,18 @@ export type PositionCircleBigInfo = "L" | "ML" | "C" | "MR" | "R";
 
 interface CircleBigProps {
   position: PositionCircleBigInfo;
+  title: string;
+  buttonText: string;
+  buttonFunction: () => void;
   startAnimation?: boolean;
-  setStartAnimation?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function CircleBig({
   position,
+  title,
+  buttonText,
+  buttonFunction,
   startAnimation,
-  setStartAnimation,
 }: CircleBigProps) {
   const containerClass = classNames([styles.container], {
     [styles.left]: position === "L",
@@ -34,8 +38,10 @@ export function CircleBig({
       <div className={styles.circle}>
         {position === "C" && (
           <Reclangle
+            title={title}
+            buttonText={buttonText}
+            buttonFunction={buttonFunction}
             startAnimation={startAnimation}
-            setStartAnimation={setStartAnimation}
           />
         )}
       </div>
