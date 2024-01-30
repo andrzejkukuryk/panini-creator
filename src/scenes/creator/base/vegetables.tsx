@@ -14,7 +14,7 @@ export function Vegetables() {
   const vegetableVariants = useSelector(vegetableVariantsSelector);
   const vegetables = useSelector(vegetablesSelector);
 
-  const handleClick = (veg: number) => {
+  const handleClick = (veg: string) => {
     dispatch(addVegetable(veg));
   };
 
@@ -22,11 +22,11 @@ export function Vegetables() {
     <div className={styles.vegetablesContainer}>
       <Label text="vegetables" />
       <div className={styles.multiselectContainer}>
-        {vegetableVariants.map((vegetable, index) => (
+        {vegetableVariants.map((vegetable) => (
           <CheckboxFrame
             label={vegetable.toLowerCase()}
-            checked={vegetables.includes(index)}
-            handleClick={() => handleClick(index)}
+            checked={vegetables.includes(vegetable)}
+            handleClick={() => handleClick(vegetable)}
             key={`checkbox${vegetable}`}
           />
         ))}

@@ -2,18 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface BreadState {
-  bread: number;
+  bread: string;
 }
 
 const initialState: BreadState = {
-  bread: 1,
+  bread: "FULL GRAIN",
 };
 
 export const breadSlice = createSlice({
   name: "bread",
   initialState: initialState,
   reducers: {
-    updateBread: (state, action: PayloadAction<number>) => {
+    updateBread: (state, action: PayloadAction<string>) => {
       state.bread = action.payload;
     },
   },

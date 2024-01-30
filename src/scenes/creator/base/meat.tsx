@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./meat.module.scss";
 import { Label } from "../../../components/label";
-import { Dropdown, DropdownInfo } from "../../../components/dropdown";
+import { Dropdown } from "../../../components/dropdown";
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,10 +23,6 @@ export function Meat() {
   const meatVariants = useSelector(meatVariantsSelector);
   const addMeat = useSelector(addMeatSelector);
   const meats = useSelector(meatsSelector);
-  const meatInfo: DropdownInfo[] = meatVariants.map((variant, index) => ({
-    value: index,
-    label: variant,
-  }));
 
   const handleSwitch = () => {
     dispatch(updateAddMeat());
@@ -40,7 +36,7 @@ export function Meat() {
     }
   };
 
-  const handleChange = (index: number, value: number) => {
+  const handleChange = (index: number, value: string) => {
     dispatch(updateMeats({ index, value }));
   };
 
@@ -53,10 +49,13 @@ export function Meat() {
       {addMeat && (
         <div className={styles.dropdowns}>
           {meats.map((meat, index) => (
-            <div className={styles.buttonAndDropdown} key={`keyMeat${meat}`}>
+            <div
+              className={styles.buttonAndDropdown}
+              key={`keyMeat${meat}${index}`}
+            >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
               <Dropdown
-                options={meatInfo}
+                options={meatVariants}
                 value={meat}
                 index={index}
                 valueSetter={handleChange}

@@ -3,20 +3,19 @@ import styles from "./carouselItem.module.scss";
 
 export interface CarouselItemInfo {
   text: string;
-  index?: number;
   icon?: string;
 }
 
 interface CarouselItemProps {
-  info: CarouselItemInfo;
+  option: CarouselItemInfo;
 }
 
-export function CarouselItem({ info }: CarouselItemProps) {
+export function CarouselItem({ option }: CarouselItemProps) {
   return (
     <div className={styles.carouselItemContainer}>
       <div className={styles.centered}>
-        {info.icon && <img src={info.icon} />}
-        {info.text}
+        {option.icon && <img src={option.icon} />}
+        {option.text}
       </div>
     </div>
   );

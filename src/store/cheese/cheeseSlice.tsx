@@ -3,12 +3,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface CheeseState {
   addCheese: boolean;
-  cheeses: number[];
+  cheeses: string[];
 }
 
 const initialState: CheeseState = {
   addCheese: true,
-  cheeses: [0],
+  cheeses: ["EDAM"],
 };
 
 export const cheeseSlice = createSlice({
@@ -19,14 +19,14 @@ export const cheeseSlice = createSlice({
       state.addCheese = !state.addCheese;
     },
     addNextCheese: (state) => {
-      state.cheeses.push(0);
+      state.cheeses.push("EDAM");
     },
     subCheese: (state, action: PayloadAction<number>) => {
       state.cheeses.splice(action.payload, 1);
     },
     updateCheeses: (
       state,
-      action: PayloadAction<{ index: number; value: number }>
+      action: PayloadAction<{ index: number; value: string }>
     ) => {
       state.cheeses[action.payload.index] = action.payload.value;
     },

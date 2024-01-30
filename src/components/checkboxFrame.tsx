@@ -21,7 +21,7 @@ export function CheckboxFrame({
         className={styles.input}
         type="checkbox"
         checked={checked}
-        onClick={handleClick}
+        onChange={handleClick}
       ></input>
       {label}
     </label>

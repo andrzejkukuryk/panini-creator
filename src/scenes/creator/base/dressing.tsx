@@ -5,10 +5,6 @@ import { Label } from "../../../components/label";
 import { Switch } from "../../../components/switch";
 import { AddSubButton } from "../../../components/addSubButton";
 import { Carousel } from "../../../components/carousel";
-import {
-  CarouselItem,
-  CarouselItemInfo,
-} from "../../../components/carouselItem";
 import { useSelector, useDispatch } from "react-redux";
 import {
   dressingVariantsSelector,
@@ -29,17 +25,6 @@ export function Dressing() {
   const addDressing = useSelector(addDressingSelector);
   const dressings = useSelector(dressingsSelector);
 
-  const dressingInfo: CarouselItemInfo[] = dressingVariants.map(
-    (variant, index) => ({
-      text: variant,
-      index: index,
-    })
-  );
-
-  const items = dressingInfo.map((dressing, index) => (
-    <CarouselItem info={dressing} key={`dressingKey${index}`} />
-  ));
-
   const handleSwitch = () => {
     dispatch(updateAddDressing());
   };
@@ -52,7 +37,7 @@ export function Dressing() {
     }
   };
 
-  const handleChange = (index: number, value: number) => {
+  const handleChange = (index: number, value: string) => {
     dispatch(updateDressings({ index, value }));
   };
 
@@ -71,7 +56,7 @@ export function Dressing() {
             >
               <AddSubButton ftn={() => handleButton(index)} sub={index !== 0} />
               <Carousel
-                items={items}
+                options={dressingVariants}
                 index={index}
                 value={dressing}
                 valueSetter={handleChange}
