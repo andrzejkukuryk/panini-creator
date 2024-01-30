@@ -8,19 +8,19 @@ export type PositionCircleSmallInfo = "T" | "B";
 
 interface CircleSmallProps {
   position: PositionCircleSmallInfo;
-  title: string;
+  animated?: boolean;
 }
 
-export function CircleSmall({ position, title }: CircleSmallProps) {
+export function CircleSmall({ position, animated }: CircleSmallProps) {
   const startAnimation = useSelector(startAnimationSelector);
 
-  const runAnimation = startAnimation && title === "Panini Creator";
+  const runAnimation = startAnimation && animated;
 
   const containerClass = classNames([styles.container], {
     [styles.top]: position === "T",
     [styles.bottom]: position === "B",
-    [styles.moveUp]: position === "T" && startAnimation,
-    [styles.moveDown]: position === "B" && startAnimation,
+    [styles.moveUp]: position === "T" && runAnimation,
+    [styles.moveDown]: position === "B" && runAnimation,
   });
 
   return (

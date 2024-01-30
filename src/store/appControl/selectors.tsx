@@ -4,6 +4,6 @@ export const startAnimationSelector = (state: RootState) => {
   return state.appControls.startAnimation;
 };
 
-export const currentViewSelector = (state: RootState) => {
-  return state.appControls.currentView;
+export const currentSceneSelector = (state: RootState) => {
+  return state.appControls.currentScene;
 };

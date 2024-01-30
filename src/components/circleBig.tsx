@@ -10,6 +10,7 @@ export type PositionCircleBigInfo = "L" | "ML" | "C" | "MR" | "R";
 interface CircleBigProps {
   position: PositionCircleBigInfo;
   title: string;
+  animated?: boolean;
   buttonText: string;
   buttonFunction: () => void;
 }
@@ -17,12 +18,13 @@ interface CircleBigProps {
 export function CircleBig({
   position,
   title,
+  animated,
   buttonText,
   buttonFunction,
 }: CircleBigProps) {
   const startAnimation = useSelector(startAnimationSelector);
 
-  const runAnimation = startAnimation && title === "Panini Creator";
+  const runAnimation = startAnimation && animated;
 
   const containerClass = classNames([styles.container], {
     [styles.left]: position === "L",

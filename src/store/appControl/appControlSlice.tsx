@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type currentView = "splash" | "creator" | "success";
+export type currentScene = "splash" | "animation" | "creator" | "success";
 
 interface appControlState {
   startAnimation: boolean;
-  currentView: currentView;
+  currentScene: currentScene;
 }
 
 const initialState: appControlState = {
   startAnimation: false,
-  currentView: "splash",
+  currentScene: "splash",
 };
 
 export const appControlSlice = createSlice({
@@ -20,13 +20,13 @@ export const appControlSlice = createSlice({
     updateStartAnimation: (state, action: PayloadAction<boolean>) => {
       state.startAnimation = action.payload;
     },
-    updateCurrentView: (state, action: PayloadAction<currentView>) => {
-      state.currentView = action.payload;
+    updateCurrentScene: (state, action: PayloadAction<currentScene>) => {
+      state.currentScene = action.payload;
     },
   },
 });
 
-export const { updateStartAnimation, updateCurrentView } =
+export const { updateStartAnimation, updateCurrentScene } =
   appControlSlice.actions;
 
 export default appControlSlice.reducer;

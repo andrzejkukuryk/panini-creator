@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./rectangle.module.scss";
 import classNames from "classnames";
 import { Text } from "./text";
@@ -8,6 +8,7 @@ import { startAnimationSelector } from "../store/appControl/selectors";
 
 interface RectangleProps {
   title: string;
+
   buttonText: string;
   buttonFunction: () => void;
 }
@@ -19,7 +20,7 @@ export function Reclangle({
 }: RectangleProps) {
   const startAnimation = useSelector(startAnimationSelector);
 
-  const runAnimation = startAnimation && title === "Panini Creator";
+  const runAnimation = startAnimation && title === "Panini creator";
 
   const containerClass = classNames([styles.container], {
     [styles.startAnimation]: runAnimation,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./splash.module.scss";
 import { CircleBig, PositionCircleBigInfo } from "../../components/circleBig";
 import {
@@ -8,7 +8,10 @@ import {
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { startAnimationSelector } from "../../store/appControl/selectors";
-import { updateStartAnimation } from "../../store/appControl/appControlSlice";
+import {
+  updateCurrentScene,
+  updateStartAnimation,
+} from "../../store/appControl/appControlSlice";
 
 export function Splash() {
   const dispatch = useDispatch();
@@ -23,7 +26,9 @@ export function Splash() {
   const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
   const handleClickBegin = () => {
+    dispatch(updateCurrentScene("animation"));
     dispatch(updateStartAnimation(true));
+    setTimeout(() => dispatch(updateCurrentScene("creator")), 4000);
   };
 
   const startAnimation = useSelector(startAnimationSelector);
@@ -37,6 +42,7 @@ export function Splash() {
       {circleBigPositions.map((position) => (
         <CircleBig
           title="Panini Creator"
+          animated
           buttonText="begin"
           buttonFunction={handleClickBegin}
           position={position}
@@ -44,11 +50,7 @@ export function Splash() {
         />
       ))}
       {circleSmallPositions.map((position) => (
-        <CircleSmall
-          position={position}
-          title="Panini Creator"
-          key={`pos_${position}`}
-        />
+        <CircleSmall position={position} animated key={`pos_${position}`} />
       ))}
     </div>
   );

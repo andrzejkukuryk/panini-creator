@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./success.module.scss";
 import { CircleBig, PositionCircleBigInfo } from "../../components/circleBig";
 import {
   CircleSmall,
   PositionCircleSmallInfo,
 } from "../../components/circleSmall";
+import { useDispatch } from "react-redux";
+import { updateCurrentScene } from "../../store/appControl/appControlSlice";
 
 export function Success() {
+  const dispatch = useDispatch();
+
   const circleBigPositions: PositionCircleBigInfo[] = [
     "L",
     "ML",
@@ -18,7 +22,7 @@ export function Success() {
   const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
   const handleClickStartAgain = () => {
-    //TODO: return to begining
+    dispatch(updateCurrentScene("splash"));
   };
 
   return (
@@ -33,11 +37,7 @@ export function Success() {
         />
       ))}
       {circleSmallPositions.map((position) => (
-        <CircleSmall
-          position={position}
-          title="Panini Creator"
-          key={`pos_${position}`}
-        />
+        <CircleSmall position={position} key={`pos_${position}`} />
       ))}
     </div>
   );
