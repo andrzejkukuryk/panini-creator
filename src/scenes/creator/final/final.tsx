@@ -20,6 +20,7 @@ export function Final() {
   };
 
   const handleClickStartAgain = () => {
+    dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("splash"));
   };
 

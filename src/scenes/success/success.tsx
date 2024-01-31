@@ -6,7 +6,10 @@ import {
   PositionCircleSmallInfo,
 } from "../../components/circleSmall";
 import { useDispatch } from "react-redux";
-import { updateCurrentScene } from "../../store/appControl/appControlSlice";
+import {
+  updateCurrentScene,
+  updateStartAnimation,
+} from "../../store/appControl/appControlSlice";
 
 export function Success() {
   const dispatch = useDispatch();
@@ -22,6 +25,7 @@ export function Success() {
   const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
   const handleClickStartAgain = () => {
+    dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("splash"));
   };
 
