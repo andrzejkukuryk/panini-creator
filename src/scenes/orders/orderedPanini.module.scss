@@ -1,0 +1,5 @@
+@import "../../../variables.module.scss";
+
+.orderContainer {
+  @include sectionContainer;
+}

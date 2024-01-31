@@ -1,0 +1,8 @@
+@import "../../../variables.module.scss";
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: $creator-width;
+}
