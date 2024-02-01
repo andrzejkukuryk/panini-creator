@@ -11,8 +11,8 @@ function App() {
     <Provider store={store}>
       <div className={styles.appContainer}>
         <Splash />
-        <Creator />
-        {/* <Orders /> */}
+        {/* <Creator /> */}
+        <Orders />
       </div>
     </Provider>
   );

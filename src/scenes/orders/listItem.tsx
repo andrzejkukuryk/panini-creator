@@ -26,7 +26,6 @@ export function ListItem({ label, ingredients }: ListItemProps) {
         counter[ingredient] = 1;
       }
     });
-    console.log(counter);
     setCountedIngredients(counter);
   };
 
@@ -49,17 +48,17 @@ export function ListItem({ label, ingredients }: ListItemProps) {
 
   useEffect(() => createList(), [countedIngredients]);
 
-  const containerClass = classNames([styles.itemContainer], {
+  const showHide = classNames({
     [styles.hide]: ingredients.length === 0,
   });
 
   return (
-    <>
-      <div className={containerClass}>
+    <div className={showHide}>
+      <div className={styles.itemContainer}>
         <Label text={label} />
         <p className={styles.ingredientList}>{ingredientList}</p>
       </div>
       <Line />
-    </>
+    </div>
   );
 }

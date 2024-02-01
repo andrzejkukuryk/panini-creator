@@ -8,11 +8,11 @@ import { addAdditionally } from "../../../store/addToOrder/addToOrderSlice";
 
 export function Cutlery() {
   const dispatch = useDispatch();
-  const cutlery = "CUTLERY";
+  const TYPE_CUTLERY = "CUTLERY";
   const addToOrder = useSelector(addToOrderSelector);
 
   const handleClick = () => {
-    dispatch(addAdditionally(cutlery));
+    dispatch(addAdditionally(TYPE_CUTLERY));
   };
 
   return (
@@ -21,7 +21,7 @@ export function Cutlery() {
       <div className={styles.checkboxContainer}>
         <Checkbox
           label="add to order"
-          checked={addToOrder.includes(cutlery)}
+          checked={addToOrder.includes(TYPE_CUTLERY)}
           handleClick={handleClick}
         />
       </div>
