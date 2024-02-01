@@ -9,7 +9,7 @@ export function Orders() {
     name: "nazwa kanapki",
     date: 7409247,
     bread: ["wheat"],
-    meat: ["salami", "salami", "ham"],
+    meat: ["salami", "salami", "ham", "ham", "ham"],
     cheese: ["edam"],
     dressing: [],
     addToOrder: [],
