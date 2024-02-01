@@ -10,8 +10,7 @@ import spreadsSlice from "./spreads/spreadsSlice";
 import servingSlice from "./serving/servingSlice";
 import toppingSlice from "./topping/toppingSlice";
 import nameSlice from "./name/nameSlice";
-import cutlerySlice from "./cutlery/cutlerySlice";
-import napkinsSlice from "./napkins/napkinsSlice";
+import addToOrderSlice from "./addToOrder/addToOrderSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,8 +25,7 @@ export const store = configureStore({
     serving: servingSlice,
     topping: toppingSlice,
     name: nameSlice,
-    cutlery: cutlerySlice,
-    napkins: napkinsSlice,
+    addToOrder: addToOrderSlice,
   },
 });
 
