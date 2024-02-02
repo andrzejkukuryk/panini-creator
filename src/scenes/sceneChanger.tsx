@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import styles from "./sceneChanger.module.scss";
 import type { currentScene } from "../store/appControl/appControlSlice";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ interface SceneChangerProps {
 
 export function SceneChanger({ children }: SceneChangerProps) {
   const scene = useSelector(currentSceneSelector);
-
+  useEffect(() => console.log(children), [children]);
   const arrayOfChildren = React.Children.toArray(children);
 
   const selectedScene = (view: currentScene) => {
