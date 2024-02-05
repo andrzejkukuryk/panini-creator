@@ -16,12 +16,12 @@ export function Final() {
   const dispatch = useDispatch();
 
   const handleClickPlaceOrder = () => {
-    dispatch(updateCurrentScene("success"));
+    dispatch(updateCurrentScene("SUCCESS"));
   };
 
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
-    dispatch(updateCurrentScene("splash"));
+    dispatch(updateCurrentScene("SPLASH"));
   };
 
   return (

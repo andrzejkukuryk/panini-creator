@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import styles from "./sceneChanger.module.scss";
 import type { currentScene } from "../store/appControl/appControlSlice";
 import { useSelector } from "react-redux";
@@ -10,22 +10,25 @@ interface SceneChangerProps {
 
 export function SceneChanger({ children }: SceneChangerProps) {
   const scene = useSelector(currentSceneSelector);
-  useEffect(() => console.log(children), [children]);
+
   const arrayOfChildren = React.Children.toArray(children);
 
   const selectedScene = (view: currentScene) => {
     switch (view) {
-      case "splash": {
+      case "SPLASH": {
         return arrayOfChildren[0];
       }
-      case "animation": {
+      case "ANIMATION": {
         return [arrayOfChildren[0], arrayOfChildren[1]];
       }
-      case "creator": {
+      case "CREATOR": {
         return arrayOfChildren[1];
       }
-      case "success": {
+      case "SUCCESS": {
         return arrayOfChildren[2];
+      }
+      case "ORDER": {
+        return arrayOfChildren[3];
       }
       default:
         return arrayOfChildren[0];

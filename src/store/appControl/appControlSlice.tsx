@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export type currentScene = "splash" | "animation" | "creator" | "success";
+export type currentScene =
+  | "SPLASH"
+  | "ANIMATION"
+  | "CREATOR"
+  | "SUCCESS"
+  | "ORDER";
 
 interface appControlState {
   startAnimation: boolean;
@@ -10,7 +15,7 @@ interface appControlState {
 
 const initialState: appControlState = {
   startAnimation: false,
-  currentScene: "splash",
+  currentScene: "SPLASH",
 };
 
 export const appControlSlice = createSlice({

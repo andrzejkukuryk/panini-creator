@@ -13,22 +13,17 @@ import {
   updateStartAnimation,
 } from "../../store/appControl/appControlSlice";
 
+const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
+
+const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
+
 export function Splash() {
   const dispatch = useDispatch();
-  const circleBigPositions: PositionCircleBigInfo[] = [
-    "L",
-    "ML",
-    "C",
-    "MR",
-    "R",
-  ];
-
-  const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
   const handleClickBegin = () => {
-    dispatch(updateCurrentScene("animation"));
+    dispatch(updateCurrentScene("ANIMATION"));
     dispatch(updateStartAnimation(true));
-    setTimeout(() => dispatch(updateCurrentScene("creator")), 4000);
+    setTimeout(() => dispatch(updateCurrentScene("CREATOR")), 4000);
   };
 
   const startAnimation = useSelector(startAnimationSelector);

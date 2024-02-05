@@ -11,22 +11,16 @@ import {
   updateStartAnimation,
 } from "../../store/appControl/appControlSlice";
 
+const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
+
+const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
+
 export function Success() {
   const dispatch = useDispatch();
 
-  const circleBigPositions: PositionCircleBigInfo[] = [
-    "L",
-    "ML",
-    "C",
-    "MR",
-    "R",
-  ];
-
-  const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
-
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
-    dispatch(updateCurrentScene("splash"));
+    dispatch(updateCurrentScene("SPLASH"));
   };
 
   return (
