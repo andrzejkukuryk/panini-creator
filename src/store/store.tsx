@@ -11,6 +11,7 @@ import servingSlice from "./serving/servingSlice";
 import toppingSlice from "./topping/toppingSlice";
 import nameSlice from "./name/nameSlice";
 import addToOrderSlice from "./addToOrder/addToOrderSlice";
+import ordersSlice from "./orders/ordersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     topping: toppingSlice,
     name: nameSlice,
     addToOrder: addToOrderSlice,
+    orders: ordersSlice,
   },
 });
 

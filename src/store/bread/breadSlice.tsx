@@ -19,6 +19,9 @@ export const breadSlice = createSlice({
   },
 });
 
+export const selectorBreadSlice = (state: { bread: BreadState }) =>
+  state.bread.bread;
+
 export const { updateBread } = breadSlice.actions;
 
 export default breadSlice.reducer;
