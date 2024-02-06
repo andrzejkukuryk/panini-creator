@@ -6,8 +6,17 @@ import { Name } from "./name";
 import { Cutlery } from "./cutlery";
 import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
+import { useDispatch } from "react-redux";
+import { createOrder } from "../../../store/orders/ordersSlice";
 
 export function Final() {
+  const dispatch = useDispatch();
+
+  const handleClickOrder = () => [
+    //@ts-ignore
+    dispatch(createOrder()),
+  ];
+
   return (
     <section className={styles.finalContainer}>
       <SectionTitle text="finalize order" />
@@ -18,7 +27,7 @@ export function Final() {
       <Line />
       <Napkins />
       <Line />
-      <AppButton text="place order" handledFunction={() => {}} black />
+      <AppButton text="place order" handledFunction={handleClickOrder} black />
       <AppButton text="start again" handledFunction={() => {}} />
     </section>
   );

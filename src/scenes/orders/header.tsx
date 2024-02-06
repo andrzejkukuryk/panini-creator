@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./header.module.scss";
 import { Title } from "../../components/title";
 import { Dropdown } from "../../components/dropdown";
@@ -9,6 +9,8 @@ export function Header() {
   const orders = useSelector(ordersSelector);
 
   const options = orders.map((order) => order.name);
+
+  useEffect(() => console.log(orders), [orders]);
 
   return (
     <div className={styles.headerContainer}>

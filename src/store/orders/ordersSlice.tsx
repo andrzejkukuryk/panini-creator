@@ -1,31 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Order } from "../../models/order";
 import { breadSelector } from "../bread/selectors";
 import { selectorBreadSlice } from "../bread/breadSlice";
 
 interface OrdersState {
-  currentOrder: Order;
   orders: Order[];
 }
 
 const initialState: OrdersState = {
-  currentOrder: {
-    bread: [""],
-    cheese: [],
-    meat: [],
-    dressing: [],
-    vegetables: [],
-    egg: [],
-    spreads: [],
-    serving: [""],
-    topping: [],
-    name: "",
-    addToOrder: [],
-    date: 0,
+  orders: [],
+};
+
+export const ordersSlice = createSlice({
+  name: "orders",
+  initialState: initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(createOrder.fulfilled, (state, action) => {
+      state.orders.push(action.payload);
+    });
   },
-  orders: [
-    {
+});
+
+export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
+  "orders/createOrder",
+  (_, thunkAPI) => {
+    console.log(thunkAPI.getState());
+    const state = thunkAPI.getState() as RootState;
+    const currentBread = breadSelector(state);
+
+    return {
       bread: ["ihdsoih"],
       cheese: [],
       meat: ["kgfhdop", "fu7r98f"],
@@ -38,34 +44,10 @@ const initialState: OrdersState = {
       name: "pierwsza kanapka",
       addToOrder: [],
       date: 0,
-    },
-    {
-      bread: ["ghppodfpogr"],
-      cheese: ["fgihfdsoyg", "iufu898e"],
-      meat: ["ihoc", "ihoc"],
-      dressing: [],
-      vegetables: [],
-      egg: ["oiioiupf"],
-      spreads: [],
-      serving: ["WARM"],
-      topping: [],
-      name: "druga kanapka",
-      addToOrder: ["opuou"],
-      date: 0,
-    },
-  ],
-};
+    };
+  }
+);
 
-export const ordersSlice = createSlice({
-  name: "orders",
-  initialState: initialState,
-  reducers: {
-    updateCurrentOrder: (state) => {
-      console.log(" w slajsie orders: ", state.currentOrder.bread);
-    },
-  },
-});
-
-export const { updateCurrentOrder } = ordersSlice.actions;
+export const {} = ordersSlice.actions;
 
 export default ordersSlice.reducer;

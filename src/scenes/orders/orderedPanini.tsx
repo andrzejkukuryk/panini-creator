@@ -24,7 +24,7 @@ export function OrderedPanini({ order }: OrderedPaniniProps) {
 
   return (
     <section className={styles.orderContainer}>
-      <SectionTitle text={order.name} />
+      {/* <SectionTitle text={order.name} /> */}
       <Line />
       {createList()}
     </section>

@@ -4,11 +4,8 @@ import { Header } from "./header";
 import { OrderedPanini } from "./orderedPanini";
 import { Order } from "../../models/order";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentOrder } from "../../store/orders/ordersSlice";
-import {
-  currentOrderSelector,
-  ordersSelector,
-} from "../../store/orders/selectors";
+
+import { ordersSelector } from "../../store/orders/selectors";
 
 export function Orders() {
   const order: Order = {
@@ -27,7 +24,6 @@ export function Orders() {
   };
 
   const dispatch = useDispatch();
-  const currentOrder = useSelector(currentOrderSelector);
 
   const orders = useSelector(ordersSelector);
 
