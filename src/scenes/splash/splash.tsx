@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./splash.module.scss";
-import { CircleBig, PositionCircleBigInfo } from "./circleBig";
-import { CircleSmall, PositionCircleSmallInfo } from "./circleSmall";
+import { CircleBig, PositionCircleBigInfo } from "../../components/circleBig";
+import {
+  CircleSmall,
+  PositionCircleSmallInfo,
+} from "../../components/circleSmall";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { startAnimationSelector } from "../../store/appControl/selectors";
+import {
+  updateCurrentScene,
+  updateStartAnimation,
+} from "../../store/appControl/appControlSlice";
+
+const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
+
+const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
 export function Splash() {
-  const [startAnimation, setStartAnimation] = useState(false);
-  const circleBigPositions: PositionCircleBigInfo[] = [
-    "L",
-    "ML",
-    "C",
-    "MR",
-    "R",
-  ];
+  const dispatch = useDispatch();
 
-  const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
+  const handleClickBegin = () => {
+    dispatch(updateCurrentScene("ANIMATION"));
+    dispatch(updateStartAnimation(true));
+    setTimeout(() => dispatch(updateCurrentScene("CREATOR")), 4000);
+  };
+
+  const startAnimation = useSelector(startAnimationSelector);
 
   const containerClass = classNames([styles.container], {
     [styles.fade]: startAnimation,
@@ -24,18 +36,16 @@ export function Splash() {
     <div className={containerClass}>
       {circleBigPositions.map((position) => (
         <CircleBig
+          title="Panini Creator"
+          animated
+          buttonText="begin"
+          buttonFunction={handleClickBegin}
           position={position}
-          startAnimation={startAnimation}
-          setStartAnimation={setStartAnimation}
           key={`pos_${position}`}
         />
       ))}
       {circleSmallPositions.map((position) => (
-        <CircleSmall
-          position={position}
-          startAnimation={startAnimation}
-          key={`pos_${position}`}
-        />
+        <CircleSmall position={position} animated key={`pos_${position}`} />
       ))}
     </div>
   );

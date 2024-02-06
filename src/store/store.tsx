@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import appControlSlice from "./appControl/appControlSlice";
 import ingredientsReducer from "./ingredientsSlice";
 import cheeseSlice from "./cheese/cheeseSlice";
 import meatSlice from "./meat/meatSlice";
@@ -15,6 +16,7 @@ import napkinsSlice from "./napkins/napkinsSlice";
 
 export const store = configureStore({
   reducer: {
+    appControls: appControlSlice,
     ingredients: ingredientsReducer,
     bread: breadSlice,
     cheese: cheeseSlice,

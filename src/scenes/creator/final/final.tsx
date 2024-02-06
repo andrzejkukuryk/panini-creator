@@ -6,8 +6,24 @@ import { Name } from "./name";
 import { Cutlery } from "./cutlery";
 import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
+import { useDispatch } from "react-redux";
+import {
+  updateCurrentScene,
+  updateStartAnimation,
+} from "../../../store/appControl/appControlSlice";
 
 export function Final() {
+  const dispatch = useDispatch();
+
+  const handleClickPlaceOrder = () => {
+    dispatch(updateCurrentScene("SUCCESS"));
+  };
+
+  const handleClickStartAgain = () => {
+    dispatch(updateStartAnimation(false));
+    dispatch(updateCurrentScene("SPLASH"));
+  };
+
   return (
     <section className={styles.finalContainer}>
       <SectionTitle text="finalize order" />
@@ -18,8 +34,12 @@ export function Final() {
       <Line />
       <Napkins />
       <Line />
-      <AppButton text="place order" handledFunction={() => {}} black />
-      <AppButton text="start again" handledFunction={() => {}} />
+      <AppButton
+        text="place order"
+        handledFunction={handleClickPlaceOrder}
+        black
+      />
+      <AppButton text="start again" handledFunction={handleClickStartAgain} />
     </section>
   );
 }
