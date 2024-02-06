@@ -6,25 +6,27 @@ import { ListItem } from "./listItem";
 import { Order } from "../../models/order";
 
 interface OrderedPaniniProps {
-  order: Order;
+  order?: Order;
 }
 
 export function OrderedPanini({ order }: OrderedPaniniProps) {
   const createList = () => {
-    return Object.entries(order)
-      .filter((item) => typeof item[1] === "object")
-      .map((item) => (
-        <ListItem
-          label={item[0]}
-          ingredients={item[1]}
-          key={`order${item[0]}`}
-        />
-      ));
+    if (order) {
+      return Object.entries(order)
+        .filter((item) => typeof item[1] === "object")
+        .map((item) => (
+          <ListItem
+            label={item[0]}
+            ingredients={item[1]}
+            key={`order${item[0]}`}
+          />
+        ));
+    }
   };
 
   return (
     <section className={styles.orderContainer}>
-      {/* <SectionTitle text={order.name} /> */}
+      {order && <SectionTitle text={order.name} />}
       <Line />
       {createList()}
     </section>

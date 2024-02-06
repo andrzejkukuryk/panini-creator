@@ -5,7 +5,10 @@ import { OrderedPanini } from "./orderedPanini";
 import { Order } from "../../models/order";
 import { useDispatch, useSelector } from "react-redux";
 
-import { ordersSelector } from "../../store/orders/selectors";
+import {
+  orderIndexSelector,
+  ordersSelector,
+} from "../../store/orders/selectors";
 
 export function Orders() {
   const order: Order = {
@@ -26,11 +29,12 @@ export function Orders() {
   const dispatch = useDispatch();
 
   const orders = useSelector(ordersSelector);
+  const orderIndex = useSelector(orderIndexSelector);
 
   return (
     <div className={styles.ordersContainer}>
       <Header />
-      <OrderedPanini order={orders[1]} />
+      <OrderedPanini order={orders[orderIndex]} />
     </div>
   );
 }
