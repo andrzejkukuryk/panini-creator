@@ -3,7 +3,7 @@ import styles from "./name.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
 import { nameSelector } from "../../../store/name/selectors";
-import { updateName } from "../../../store/name/nameSlice";
+import { updateDefaultName, updateName } from "../../../store/name/nameSlice";
 import {
   addCheeseSelector,
   cheesesSelector,
@@ -65,8 +65,6 @@ export function Name() {
       }
     });
 
-    console.log(mainIngredients);
-
     const newName =
       mainIngredients.length === 2
         ? `${mainIngredients[0]} & ${mainIngredients[1]} SANDWICH`
@@ -74,18 +72,16 @@ export function Name() {
         ? `${mainIngredients[0]} SANDWICH`
         : "DRY BREAD FOR THE HORSE";
 
-    console.log(newName, newName.length);
     return newName;
   };
 
-  // useEffect(
-  //   () => createName(),
-  //   [meat, cheese, vegetables, dressing, egg, spread, topping]
-  // );
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateName(event.target.value));
+    dispatch(updateName(event.target.value.trim()));
   };
+
+  useEffect(() => {
+    dispatch(updateDefaultName(createName()));
+  }, [meat, cheese, egg, vegetables, dressing, spread, topping]);
 
   return (
     <div className={styles.nameContainer}>
@@ -94,7 +90,7 @@ export function Name() {
         type="text"
         className={styles.inputCell}
         onChange={handleChange}
-        value={paniniName}
+        // value={inputValue}
         placeholder={`E.G. ${createName()}`}
       ></input>
     </div>

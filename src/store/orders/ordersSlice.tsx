@@ -11,7 +11,7 @@ import { addEggSelector, eggsSelector } from "../egg/selectors";
 import { spreadSelector } from "../spreads/selectors";
 import { servingSelector } from "../serving/selectors";
 import { toppingSelector } from "../topping/selectors";
-import { nameSelector } from "../name/selectors";
+import { defaultNameSelector, nameSelector } from "../name/selectors";
 import { addToOrderSelector } from "../addToOrder/selectors";
 
 interface OrdersState {
@@ -73,6 +73,7 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
     const currentServing = servingSelector(state);
     const currentTopping = toppingSelector(state);
     const currentName = nameSelector(state);
+    const currentDefaultName = defaultNameSelector(state);
     const currentAdds = addToOrderSelector(state);
 
     return {
@@ -85,7 +86,7 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
       spreads: currentSpread,
       serving: [currentServing],
       topping: currentTopping,
-      name: currentName,
+      name: currentName.length > 0 ? currentName : currentDefaultName,
       addToOrder: currentAdds,
       date: 0,
     };
