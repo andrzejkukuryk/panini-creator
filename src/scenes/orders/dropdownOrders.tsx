@@ -3,10 +3,13 @@ import styles from "./dropdowndOrders.module.scss";
 import Select, { GroupBase, SingleValue, StylesConfig } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  currentOrderIdSelector,
+  currentOrderIndexSelector,
   ordersSelector,
 } from "../../store/orders/selectors";
-import { updateCurrentOrderId } from "../../store/orders/ordersSlice";
+import {
+  updateCurrentOrderId,
+  updateCurrentOrderIndex,
+} from "../../store/orders/ordersSlice";
 
 export interface DropdownInfo {
   value: number;
@@ -23,16 +26,19 @@ export function DropdownOrders({}) {
 
   const handleChange = (selectedOption: SingleValue<DropdownInfo>) => {
     if (selectedOption !== null) {
+      const currentOrder = orders.find(
+        (order) => order.id === selectedOption.value
+      );
+      const indexOfCurrentOrder = currentOrder
+        ? orders.indexOf(currentOrder)
+        : 0;
+      dispatch(updateCurrentOrderIndex(indexOfCurrentOrder));
+
       dispatch(updateCurrentOrderId(selectedOption.value));
     }
   };
 
-  const currentOrderId = useSelector(currentOrderIdSelector);
-  const currentOption = dropdownOptions.find(
-    (option) => option.value === currentOrderId
-  );
-
-  useEffect(() => console.log(currentOption), [currentOption]);
+  const currentOrderIndex = useSelector(currentOrderIndexSelector);
 
   const dropdownStyle: StylesConfig<
     DropdownInfo,
@@ -55,7 +61,7 @@ export function DropdownOrders({}) {
         <Select
           options={dropdownOptions}
           onChange={handleChange}
-          value={currentOption}
+          value={dropdownOptions[currentOrderIndex]}
           styles={dropdownStyle}
         />
       </div>
