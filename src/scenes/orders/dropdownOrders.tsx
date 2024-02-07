@@ -19,6 +19,7 @@ export interface DropdownInfo {
 export function DropdownOrders({}) {
   const dispatch = useDispatch();
   const orders = useSelector(ordersSelector);
+  const currentOrderIndex = useSelector(currentOrderIndexSelector);
 
   const dropdownOptions: DropdownInfo[] = orders.map((order) => {
     return { value: order.id, label: order.name };
@@ -38,7 +39,7 @@ export function DropdownOrders({}) {
     }
   };
 
-  const currentOrderIndex = useSelector(currentOrderIndexSelector);
+  
 
   const dropdownStyle: StylesConfig<
     DropdownInfo,
