@@ -3,10 +3,10 @@ import styles from "./orders.module.scss";
 import { Header } from "./header";
 import { OrderedPanini } from "./orderedPanini";
 import { Order } from "../../models/order";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
-  orderIndexSelector,
+  currentOrderIdSelector,
   ordersSelector,
 } from "../../store/orders/selectors";
 
@@ -24,17 +24,18 @@ export function Orders() {
     spreads: [],
     topping: ["sesame"],
     vegetables: ["tomato", "onion"],
+    id: 0,
   };
 
-  const dispatch = useDispatch();
-
   const orders = useSelector(ordersSelector);
-  const orderIndex = useSelector(orderIndexSelector);
+  const orderId = useSelector(currentOrderIdSelector);
+
+  const currentOrder = orders.find((order) => order.id === orderId);
 
   return (
     <div className={styles.ordersContainer}>
       <Header />
-      <OrderedPanini order={orders[orderIndex]} />
+      <OrderedPanini order={currentOrder} />
     </div>
   );
 }

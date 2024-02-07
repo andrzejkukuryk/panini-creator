@@ -16,7 +16,8 @@ import { addToOrderSelector } from "../addToOrder/selectors";
 
 interface OrdersState {
   orders: Order[];
-  currentOrderIndex: number;
+  // currentOrderIndex: number;
+  currentOrderId: number;
 }
 
 const initialState: OrdersState = {
@@ -37,15 +38,19 @@ const initialState: OrdersState = {
   //   },
   // ],
   orders: [],
-  currentOrderIndex: 0,
+  // currentOrderIndex: 0,
+  currentOrderId: 0,
 };
 
 export const ordersSlice = createSlice({
   name: "orders",
   initialState: initialState,
   reducers: {
-    updateCurrentOrderIndex: (state, action: PayloadAction<number>) => {
-      state.currentOrderIndex = action.payload;
+    // updateCurrentOrderIndex: (state, action: PayloadAction<number>) => {
+    //   state.currentOrderIndex = action.payload;
+    // },
+    updateCurrentOrderId: (state, action: PayloadAction<number>) => {
+      state.currentOrderId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -89,10 +94,11 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
       name: currentName.length > 0 ? currentName : currentDefaultName,
       addToOrder: currentAdds,
       date: 0,
+      id: new Date().getTime(),
     };
   }
 );
 
-export const { updateCurrentOrderIndex } = ordersSlice.actions;
+export const { updateCurrentOrderId } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

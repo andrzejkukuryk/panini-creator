@@ -4,6 +4,6 @@ export const ordersSelector = (state: RootState) => {
   return state.orders.orders;
 };
 
-export const orderIndexSelector = (state: RootState) => {
-  return state.orders.currentOrderIndex;
+export const currentOrderIdSelector = (state: RootState) => {
+  return state.orders.currentOrderId;
 };

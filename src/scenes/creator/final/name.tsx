@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styles from "./name.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
-import { nameSelector } from "../../../store/name/selectors";
 import { updateDefaultName, updateName } from "../../../store/name/nameSlice";
 import {
   addCheeseSelector,
@@ -20,8 +19,6 @@ import { toppingSelector } from "../../../store/topping/selectors";
 
 export function Name() {
   const dispatch = useDispatch();
-
-  const paniniName = useSelector(nameSelector);
 
   const addCheese = useSelector(addCheeseSelector);
   const currentCheese = useSelector(cheesesSelector);
@@ -90,7 +87,6 @@ export function Name() {
         type="text"
         className={styles.inputCell}
         onChange={handleChange}
-        // value={inputValue}
         placeholder={`E.G. ${createName()}`}
       ></input>
     </div>

@@ -1,6 +1,7 @@
 export interface Order {
   name: string;
   date: number;
+  id: number;
   bread: [string];
   cheese: string[];
   meat: string[];
