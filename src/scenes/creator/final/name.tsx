@@ -3,41 +3,22 @@ import styles from "./name.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
 import { updateDefaultName, updateName } from "../../../store/name/nameSlice";
-import {
-  addCheeseSelector,
-  cheesesSelector,
-} from "../../../store/cheese/selectors";
-import { addMeatSelector, meatsSelector } from "../../../store/meat/selectors";
-import {
-  addDressingSelector,
-  dressingsSelector,
-} from "../../../store/dressing/selectors";
+import { orderCheeseSelector } from "../../../store/cheese/selectors";
+import { orderMeatSelector } from "../../../store/meat/selectors";
+import { orderDressingSelector } from "../../../store/dressing/selectors";
 import { vegetablesSelector } from "../../../store/vegetables/selectors";
-import { addEggSelector, eggsSelector } from "../../../store/egg/selectors";
+import { orderEggsSelector } from "../../../store/egg/selectors";
 import { spreadSelector } from "../../../store/spreads/selectors";
 import { toppingSelector } from "../../../store/topping/selectors";
 
 export function Name() {
   const dispatch = useDispatch();
 
-  const addCheese = useSelector(addCheeseSelector);
-  const currentCheese = useSelector(cheesesSelector);
-  const cheese = addCheese ? currentCheese : [];
-
-  const addMeat = useSelector(addMeatSelector);
-  const currentMeat = useSelector(meatsSelector);
-  const meat = addMeat ? currentMeat : [];
-
-  const addDressing = useSelector(addDressingSelector);
-  const currentDressing = useSelector(dressingsSelector);
-  const dressing = addDressing ? currentDressing : [];
-
+  const cheese = useSelector(orderCheeseSelector);
+  const meat = useSelector(orderMeatSelector);
+  const dressing = useSelector(orderDressingSelector);
   const vegetables = useSelector(vegetablesSelector);
-
-  const addEgg = useSelector(addEggSelector);
-  const currentEgg = useSelector(eggsSelector);
-  const egg = addEgg ? currentEgg : [];
-
+  const egg = useSelector(orderEggsSelector);
   const spread = useSelector(spreadSelector);
   const topping = useSelector(toppingSelector);
 

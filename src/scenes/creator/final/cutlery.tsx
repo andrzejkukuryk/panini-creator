@@ -6,9 +6,11 @@ import { Checkbox } from "../../../components/checkbox";
 import { addToOrderSelector } from "../../../store/addToOrder/selectors";
 import { addAdditionally } from "../../../store/addToOrder/addToOrderSlice";
 
+const TYPE_CUTLERY = "CUTLERY";
+
 export function Cutlery() {
   const dispatch = useDispatch();
-  const TYPE_CUTLERY = "CUTLERY";
+
   const addToOrder = useSelector(addToOrderSelector);
 
   const handleClick = () => {

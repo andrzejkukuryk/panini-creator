@@ -8,14 +8,14 @@ import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
 import { useDispatch } from "react-redux";
 import { createOrder } from "../../../store/orders/ordersSlice";
+import { AppDispatch } from "../../../store/store";
 
 export function Final() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleClickOrder = () => [
-    //@ts-ignore
-    dispatch(createOrder()),
-  ];
+  const handleClickOrder = () => {
+    dispatch(createOrder());
+  };
 
   return (
     <section className={styles.finalContainer}>

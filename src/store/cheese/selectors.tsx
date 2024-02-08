@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export const cheeseVariantsSelector = (state: RootState) => {
@@ -11,3 +12,14 @@ export const addCheeseSelector = (state: RootState) => {
 export const cheesesSelector = (state: RootState) => {
   return state.cheese.cheeses;
 };
+
+export const orderCheeseSelector = createSelector(
+  [addCheeseSelector, cheesesSelector],
+  (addCheese, cheeses) => {
+    if (addCheese) {
+      return cheeses;
+    } else {
+      return [];
+    }
+  }
+);

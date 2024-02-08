@@ -21,22 +21,6 @@ interface OrdersState {
 }
 
 const initialState: OrdersState = {
-  // orders: [
-  //   {
-  //     bread: ["ihdsoih"],
-  //     cheese: [],
-  //     meat: ["kgfhdop", "fu7r98f"],
-  //     dressing: ["ifioisdhf"],
-  //     vegetables: ["fhifuy", "ufdsifyf", "fiuysdify"],
-  //     egg: [],
-  //     spreads: [],
-  //     serving: ["HOT"],
-  //     topping: [],
-  //     name: "zerowa kanapka",
-  //     addToOrder: [],
-  //     date: 0,
-  //   },
-  // ],
   orders: [],
   currentOrderIndex: 0,
   currentOrderId: 0,

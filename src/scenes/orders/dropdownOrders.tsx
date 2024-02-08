@@ -27,12 +27,10 @@ export function DropdownOrders({}) {
 
   const handleChange = (selectedOption: SingleValue<DropdownInfo>) => {
     if (selectedOption !== null) {
-      const currentOrder = orders.find(
+      const indexOfCurrentOrder = orders.findIndex(
         (order) => order.id === selectedOption.value
       );
-      const indexOfCurrentOrder = currentOrder
-        ? orders.indexOf(currentOrder)
-        : 0;
+
       dispatch(updateCurrentOrderIndex(indexOfCurrentOrder));
 
       dispatch(updateCurrentOrderId(selectedOption.value));
