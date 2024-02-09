@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./dropdowndOrders.module.scss";
 import Select, { GroupBase, SingleValue, StylesConfig } from "react-select";
 import { useDispatch, useSelector } from "react-redux";
