@@ -12,17 +12,22 @@ import {
   updateStartAnimation,
 } from "../../../store/appControl/appControlSlice";
 
+import { createOrder } from "../../../store/orders/ordersSlice";
+import { AppDispatch } from "../../../store/store";
+
 export function Final() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleClickPlaceOrder = () => {
+    dispatch(createOrder());
     dispatch(updateCurrentScene("SUCCESS"));
   };
 
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("SPLASH"));
-  };
+  }
+
 
   return (
     <section className={styles.finalContainer}>

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { Success } from "./scenes/success/success";
 import { SceneChanger } from "./scenes/sceneChanger";
+import { Orders } from "./scenes/orders/orders";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Splash />
         <Creator />
         <Success />
+        <Orders />
       </SceneChanger>
     </Provider>
   );

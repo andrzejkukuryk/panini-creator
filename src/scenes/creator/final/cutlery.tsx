@@ -2,16 +2,19 @@ import React from "react";
 import styles from "./cutlery.module.scss";
 import { Label } from "../../../components/label";
 import { useDispatch, useSelector } from "react-redux";
-import { cutlerySelector } from "../../../store/cutlery/selectors";
-import { updateAddCutlery } from "../../../store/cutlery/cutlerySlice";
 import { Checkbox } from "../../../components/checkbox";
+import { addToOrderSelector } from "../../../store/addToOrder/selectors";
+import { addAdditionally } from "../../../store/addToOrder/addToOrderSlice";
+
+const TYPE_CUTLERY = "CUTLERY";
 
 export function Cutlery() {
   const dispatch = useDispatch();
-  const cutlery = useSelector(cutlerySelector);
+
+  const addToOrder = useSelector(addToOrderSelector);
 
   const handleClick = () => {
-    dispatch(updateAddCutlery());
+    dispatch(addAdditionally(TYPE_CUTLERY));
   };
 
   return (
@@ -20,7 +23,7 @@ export function Cutlery() {
       <div className={styles.checkboxContainer}>
         <Checkbox
           label="add to order"
-          checked={cutlery}
+          checked={addToOrder.includes(TYPE_CUTLERY)}
           handleClick={handleClick}
         />
       </div>

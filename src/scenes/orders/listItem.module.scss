@@ -1,0 +1,14 @@
+@import "../../../variables.module.scss";
+
+.itemContainer {
+    @include ingredientContainer;
+}
+
+.ingredientList{
+    width: 330px;
+    text-align: left;
+}
+
+.hide {
+    display: none;
+}
