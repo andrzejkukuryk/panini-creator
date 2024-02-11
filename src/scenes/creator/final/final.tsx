@@ -6,7 +6,7 @@ import { Name } from "./name";
 import { Cutlery } from "./cutlery";
 import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   updateCurrentScene,
   updateStartAnimation,
@@ -14,9 +14,13 @@ import {
 
 import { createOrder } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
+import { ordersSelector } from "../../../store/orders/selectors";
+import { GoToOrdersButton } from "../../../components/goToOrdersButton";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
+  const orders = useSelector(ordersSelector);
+  const showOrdersButton = orders.length > 0;
 
   const handleClickPlaceOrder = () => {
     dispatch(createOrder());
@@ -26,8 +30,11 @@ export function Final() {
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("SPLASH"));
-  }
+  };
 
+  const handleClickViewOrders = () => {
+    dispatch(updateCurrentScene("ORDER"));
+  };
 
   return (
     <section className={styles.finalContainer}>
@@ -45,6 +52,7 @@ export function Final() {
         black
       />
       <AppButton text="start again" handledFunction={handleClickStartAgain} />
+      <GoToOrdersButton />
     </section>
   );
 }

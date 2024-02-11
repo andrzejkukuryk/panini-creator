@@ -13,6 +13,7 @@
     @include btn;
     background: none;
     border-color: rgba(0, 0, 0, 0);
+    margin-bottom: 6px;
     z-index: 2;
     transition: border-color .7s;
 }

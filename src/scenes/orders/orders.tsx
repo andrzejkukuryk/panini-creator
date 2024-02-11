@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./orders.module.scss";
 import { Header } from "./header";
 import { OrderedPanini } from "./orderedPanini";

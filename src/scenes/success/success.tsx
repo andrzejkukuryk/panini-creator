@@ -6,10 +6,7 @@ import {
   PositionCircleSmallInfo,
 } from "../../components/circleSmall";
 import { useDispatch } from "react-redux";
-import {
-  updateCurrentScene,
-  updateStartAnimation,
-} from "../../store/appControl/appControlSlice";
+import { updateCurrentScene } from "../../store/appControl/appControlSlice";
 
 const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
 
@@ -19,8 +16,7 @@ export function Success() {
   const dispatch = useDispatch();
 
   const handleClickStartAgain = () => {
-    dispatch(updateStartAnimation(false));
-    dispatch(updateCurrentScene("SPLASH"));
+    dispatch(updateCurrentScene("CREATOR"));
   };
 
   return (
@@ -29,7 +25,7 @@ export function Success() {
         <CircleBig
           position={position}
           title="Panini ordered"
-          buttonText="start again"
+          buttonText="new order"
           buttonFunction={handleClickStartAgain}
           key={`pos_${position}`}
         />
