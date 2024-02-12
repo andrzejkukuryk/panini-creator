@@ -21,9 +21,13 @@ export const addToOrderSlice = createSlice({
         state.addToOrder.push(action.payload);
       }
     },
+    initialAddToOrderState() {
+      return initialState;
+    },
   },
 });
 
-export const { addAdditionally } = addToOrderSlice.actions;
+export const { addAdditionally, initialAddToOrderState } =
+  addToOrderSlice.actions;
 
 export default addToOrderSlice.reducer;

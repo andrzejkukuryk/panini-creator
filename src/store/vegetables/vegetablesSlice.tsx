@@ -21,9 +21,12 @@ export const vegetablesSlice = createSlice({
         state.vegetables.push(action.payload);
       }
     },
+    initialVegetablesState() {
+      return initialState;
+    },
   },
 });
 
-export const { addVegetable } = vegetablesSlice.actions;
+export const { addVegetable, initialVegetablesState } = vegetablesSlice.actions;
 
 export default vegetablesSlice.reducer;

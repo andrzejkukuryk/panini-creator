@@ -19,9 +19,12 @@ export const toppingSlice = createSlice({
         state.topping.push(action.payload);
       }
     },
+    initialToppingState() {
+      return initialState;
+    },
   },
 });
 
-export const { addTopping } = toppingSlice.actions;
+export const { addTopping, initialToppingState } = toppingSlice.actions;
 
 export default toppingSlice.reducer;

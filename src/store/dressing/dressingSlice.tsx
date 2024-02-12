@@ -30,6 +30,9 @@ export const dressingSlice = createSlice({
     ) => {
       state.dressings[action.payload.index] = action.payload.value;
     },
+    initialDresingState() {
+      return initialState;
+    },
   },
 });
 
@@ -38,6 +41,7 @@ export const {
   addNextDressing,
   subDressing,
   updateDressings,
+  initialDresingState,
 } = dressingSlice.actions;
 
 export default dressingSlice.reducer;

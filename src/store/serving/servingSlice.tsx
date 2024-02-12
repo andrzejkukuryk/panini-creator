@@ -16,9 +16,12 @@ export const servingSlice = createSlice({
     updateServing: (state, action: PayloadAction<string>) => {
       state.serving = action.payload;
     },
+    initialServingState() {
+      return initialState;
+    },
   },
 });
 
-export const { updateServing } = servingSlice.actions;
+export const { updateServing, initialServingState } = servingSlice.actions;
 
 export default servingSlice.reducer;

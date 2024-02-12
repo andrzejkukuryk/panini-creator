@@ -21,9 +21,13 @@ export const nameSlice = createSlice({
     updateDefaultName: (state, action: PayloadAction<string>) => {
       state.defaultName = action.payload;
     },
+    initialNameState() {
+      return initialState;
+    },
   },
 });
 
-export const { updateName, updateDefaultName } = nameSlice.actions;
+export const { updateName, updateDefaultName, initialNameState } =
+  nameSlice.actions;
 
 export default nameSlice.reducer;

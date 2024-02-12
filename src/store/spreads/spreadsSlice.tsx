@@ -21,9 +21,12 @@ export const spreadsSlice = createSlice({
         state.spreads.push(action.payload);
       }
     },
+    initialSpreadsState() {
+      return initialState;
+    },
   },
 });
 
-export const { addSpread } = spreadsSlice.actions;
+export const { addSpread, initialSpreadsState } = spreadsSlice.actions;
 
 export default spreadsSlice.reducer;

@@ -30,10 +30,18 @@ export const cheeseSlice = createSlice({
     ) => {
       state.cheeses[action.payload.index] = action.payload.value;
     },
+    initialCheeseState() {
+      return initialState;
+    },
   },
 });
 
-export const { updateAddCheese, addNextCheese, subCheese, updateCheeses } =
-  cheeseSlice.actions;
+export const {
+  updateAddCheese,
+  addNextCheese,
+  subCheese,
+  updateCheeses,
+  initialCheeseState,
+} = cheeseSlice.actions;
 
 export default cheeseSlice.reducer;

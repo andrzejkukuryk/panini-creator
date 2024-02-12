@@ -16,12 +16,15 @@ export const breadSlice = createSlice({
     updateBread: (state, action: PayloadAction<string>) => {
       state.bread = action.payload;
     },
+    initialBreadState() {
+      return initialState;
+    },
   },
 });
 
 export const selectorBreadSlice = (state: { bread: BreadState }) =>
   state.bread.bread;
 
-export const { updateBread } = breadSlice.actions;
+export const { updateBread, initialBreadState } = breadSlice.actions;
 
 export default breadSlice.reducer;

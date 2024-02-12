@@ -30,10 +30,13 @@ export const eggSlice = createSlice({
     ) => {
       state.eggs[action.payload.index] = action.payload.value;
     },
+    initialEggState() {
+      return initialState;
+    },
   },
 });
 
-export const { updateAddEgg, addNextEgg, subEgg, updateEggs } =
+export const { updateAddEgg, addNextEgg, subEgg, updateEggs, initialEggState } =
   eggSlice.actions;
 
 export default eggSlice.reducer;

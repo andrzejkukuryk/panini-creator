@@ -30,10 +30,18 @@ export const meatSlice = createSlice({
     ) => {
       state.meats[action.payload.index] = action.payload.value;
     },
+    initialMeatState() {
+      return initialState;
+    },
   },
 });
 
-export const { updateAddMeat, addNextMeat, subMeat, updateMeats } =
-  meatSlice.actions;
+export const {
+  updateAddMeat,
+  addNextMeat,
+  subMeat,
+  updateMeats,
+  initialMeatState,
+} = meatSlice.actions;
 
 export default meatSlice.reducer;
