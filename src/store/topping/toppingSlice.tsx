@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface ToppingState {
   topping: string[];
@@ -19,12 +20,14 @@ export const toppingSlice = createSlice({
         state.topping.push(action.payload);
       }
     },
-    initialToppingState() {
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
       return initialState;
-    },
+    });
   },
 });
 
-export const { addTopping, initialToppingState } = toppingSlice.actions;
+export const { addTopping } = toppingSlice.actions;
 
 export default toppingSlice.reducer;

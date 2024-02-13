@@ -15,7 +15,5 @@ export function GoToOrdersButton() {
 
   return showOrdersButton ? (
     <AppButton text="view orders" handledFunction={handleClickViewOrders} />
-  ) : (
-    <></>
-  );
+  ) : null;
 }

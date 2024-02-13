@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface CheeseState {
   addCheese: boolean;
@@ -33,6 +34,11 @@ export const cheeseSlice = createSlice({
     initialCheeseState() {
       return initialState;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
+      return initialState;
+    });
   },
 });
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface BreadState {
   bread: string;
@@ -19,6 +20,11 @@ export const breadSlice = createSlice({
     initialBreadState() {
       return initialState;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
+      return initialState;
+    });
   },
 });
 

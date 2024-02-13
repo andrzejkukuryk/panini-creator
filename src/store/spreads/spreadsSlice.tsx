@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface SpreadsState {
   spreads: string[];
@@ -21,12 +22,14 @@ export const spreadsSlice = createSlice({
         state.spreads.push(action.payload);
       }
     },
-    initialSpreadsState() {
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
       return initialState;
-    },
+    });
   },
 });
 
-export const { addSpread, initialSpreadsState } = spreadsSlice.actions;
+export const { addSpread } = spreadsSlice.actions;
 
 export default spreadsSlice.reducer;

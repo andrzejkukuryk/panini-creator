@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface EggState {
   addEgg: boolean;
@@ -30,13 +31,15 @@ export const eggSlice = createSlice({
     ) => {
       state.eggs[action.payload.index] = action.payload.value;
     },
-    initialEggState() {
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
       return initialState;
-    },
+    });
   },
 });
 
-export const { updateAddEgg, addNextEgg, subEgg, updateEggs, initialEggState } =
+export const { updateAddEgg, addNextEgg, subEgg, updateEggs } =
   eggSlice.actions;
 
 export default eggSlice.reducer;

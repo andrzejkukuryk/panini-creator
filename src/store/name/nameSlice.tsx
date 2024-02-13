@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface NameState {
   name: string;
@@ -21,13 +22,14 @@ export const nameSlice = createSlice({
     updateDefaultName: (state, action: PayloadAction<string>) => {
       state.defaultName = action.payload;
     },
-    initialNameState() {
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
       return initialState;
-    },
+    });
   },
 });
 
-export const { updateName, updateDefaultName, initialNameState } =
-  nameSlice.actions;
+export const { updateName, updateDefaultName } = nameSlice.actions;
 
 export default nameSlice.reducer;
