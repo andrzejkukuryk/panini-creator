@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { startAnimationSelector } from "../store/appControl/selectors";
 import { GoToOrdersButton } from "./goToOrdersButton";
 import { NewOrderButton } from "./newOrderButton";
+import { BeginButton } from "./beginButton";
 
 interface RectangleProps {
   title: string;
@@ -33,8 +34,8 @@ export function Reclangle({
       <Text message={title} />
       <div className={styles.buttonsContainer}>
         <GoToOrdersButton />
-        {/* <AppButton handledFunction={buttonFunction} text={buttonText} /> */}
         <NewOrderButton />
+        <BeginButton />
       </div>
     </div>
   );

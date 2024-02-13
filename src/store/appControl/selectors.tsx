@@ -20,3 +20,25 @@ export const showOrdersButtonSelector = createSelector(
     }
   }
 );
+
+export const showBeginButtonSelector = createSelector(
+  [currentSceneSelector],
+  (scene) => {
+    if (scene === "SPLASH" || scene === "ANIMATION") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+);
+
+export const showNewOrderButtonSelector = createSelector(
+  [currentSceneSelector],
+  (scene) => {
+    if (scene === "ORDER" || scene === "SUCCESS") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+);
