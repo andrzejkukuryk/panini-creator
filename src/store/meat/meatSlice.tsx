@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface MeatState {
   addMeat: boolean;
@@ -30,6 +31,11 @@ export const meatSlice = createSlice({
     ) => {
       state.meats[action.payload.index] = action.payload.value;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
+      return initialState;
+    });
   },
 });
 

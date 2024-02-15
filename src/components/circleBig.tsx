@@ -11,17 +11,9 @@ interface CircleBigProps {
   position: PositionCircleBigInfo;
   title: string;
   animated?: boolean;
-  buttonText: string;
-  buttonFunction: () => void;
 }
 
-export function CircleBig({
-  position,
-  title,
-  animated,
-  buttonText,
-  buttonFunction,
-}: CircleBigProps) {
+export function CircleBig({ position, title, animated }: CircleBigProps) {
   const startAnimation = useSelector(startAnimationSelector);
 
   const runAnimation = startAnimation && animated;
@@ -42,13 +34,7 @@ export function CircleBig({
   return (
     <div className={containerClass}>
       <div className={styles.circle}>
-        {position === "C" && (
-          <Reclangle
-            title={title}
-            buttonText={buttonText}
-            buttonFunction={buttonFunction}
-          />
-        )}
+        {position === "C" && <Reclangle title={title} />}
       </div>
     </div>
   );

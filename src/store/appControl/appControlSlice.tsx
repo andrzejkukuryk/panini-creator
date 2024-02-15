@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+export const resetState = createAction("resetState");
 
 export type currentScene =
   | "SPLASH"
@@ -28,6 +30,9 @@ export const appControlSlice = createSlice({
     updateCurrentScene: (state, action: PayloadAction<currentScene>) => {
       state.currentScene = action.payload;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {});
   },
 });
 

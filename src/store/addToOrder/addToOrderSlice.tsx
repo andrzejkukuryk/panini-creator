@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface AddToOrderState {
   addToOrder: string[];
@@ -21,6 +22,11 @@ export const addToOrderSlice = createSlice({
         state.addToOrder.push(action.payload);
       }
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
+      return initialState;
+    });
   },
 });
 

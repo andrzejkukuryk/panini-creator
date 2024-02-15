@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { resetState } from "../appControl/appControlSlice";
 
 interface DressingState {
   addDressing: boolean;
@@ -30,6 +31,11 @@ export const dressingSlice = createSlice({
     ) => {
       state.dressings[action.payload.index] = action.payload.value;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(resetState, (_state, _action) => {
+      return initialState;
+    });
   },
 });
 
