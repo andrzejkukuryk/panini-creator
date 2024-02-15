@@ -11,15 +11,10 @@ import { BeginButton } from "./beginButton";
 
 interface RectangleProps {
   title: string;
-
-  buttonText: string;
-  buttonFunction: () => void;
 }
 
 export function Reclangle({
   title,
-  buttonText,
-  buttonFunction,
 }: RectangleProps) {
   const startAnimation = useSelector(startAnimationSelector);
 

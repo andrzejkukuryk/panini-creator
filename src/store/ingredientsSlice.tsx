@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+type ApiStatus = "idle" | "loading" | "completed" | "failed";
 
 interface IngredientsState {
   allIngredients: {
@@ -28,6 +30,7 @@ interface IngredientsState {
     napkins: boolean;
     cultery: boolean;
   };
+  status: ApiStatus;
 }
 
 const initialState: IngredientsState = {
@@ -67,6 +70,7 @@ const initialState: IngredientsState = {
     napkins: false,
     cultery: false,
   },
+  status: "idle",
 };
 
 export const ingredientsSlice = createSlice({
@@ -122,7 +126,30 @@ export const ingredientsSlice = createSlice({
       state.order.cultery = action.payload;
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchIngredients.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchIngredients.fulfilled, (state, action) => {
+        state.status = "completed";
+      })
+      .addCase(fetchIngredients.rejected, (state, action) => {
+        state.status = "failed";
+      });
+  },
 });
+
+export const fetchIngredients = createAsyncThunk(
+  "ingredients/fetchIngredients",
+  async () => {
+    const endpoint =
+      "https://x8ki-letl-twmt.n7.xano.io/api:AYUnNWF1/ingredients";
+    const jsonResponse = await fetch(endpoint, { method: "GET" });
+    const response = await jsonResponse.json();
+    console.log(response);
+  }
+);
 
 export const {
   updateBread,
