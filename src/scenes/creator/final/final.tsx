@@ -6,7 +6,7 @@ import { Name } from "./name";
 import { Cutlery } from "./cutlery";
 import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   updateCurrentScene,
   updateStartAnimation,
@@ -14,26 +14,21 @@ import {
 
 import { createOrder } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
-import { ordersSelector } from "../../../store/orders/selectors";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
+import { fetchIngredients } from "../../../store/ingredientsSlice";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
-  const orders = useSelector(ordersSelector);
-  const showOrdersButton = orders.length > 0;
 
   const handleClickPlaceOrder = () => {
     dispatch(createOrder());
     dispatch(updateCurrentScene("SUCCESS"));
+    dispatch(fetchIngredients());
   };
 
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("SPLASH"));
-  };
-
-  const handleClickViewOrders = () => {
-    dispatch(updateCurrentScene("ORDER"));
   };
 
   return (
