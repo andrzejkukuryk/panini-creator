@@ -1,7 +1,7 @@
 export interface Order {
   name: string;
-  date: number;
-  id: number;
+  // date: Date;
+  orderId: number;
   bread: [string];
   cheese: string[];
   meat: string[];

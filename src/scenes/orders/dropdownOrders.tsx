@@ -22,13 +22,13 @@ export function DropdownOrders({}) {
   const currentOrderIndex = useSelector(currentOrderIndexSelector);
 
   const dropdownOptions: DropdownInfo[] = orders.map((order) => {
-    return { value: order.id, label: order.name };
+    return { value: order.orderId, label: order.name };
   });
 
   const handleChange = (selectedOption: SingleValue<DropdownInfo>) => {
     if (selectedOption !== null) {
       const indexOfCurrentOrder = orders.findIndex(
-        (order) => order.id === selectedOption.value
+        (order) => order.orderId === selectedOption.value
       );
 
       dispatch(updateCurrentOrderIndex(indexOfCurrentOrder));

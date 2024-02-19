@@ -40,48 +40,84 @@ export const ordersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createOrder.fulfilled, (state, action) => {
       state.orders.push(action.payload);
-    });
+    }),
+      builder.addCase(fetchOrders.fulfilled, (state, action) => {
+        const ordersXano = action.payload;
+        ordersXano.forEach((order) => {
+          delete order["id"];
+          delete order["created_at"];
+        });
+        state.orders = ordersXano;
+      });
   },
 });
 
 export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
   "orders/createOrder",
-  (_, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    const currentBread = breadSelector(state);
-    const addCheese = addCheeseSelector(state);
-    const currentCheese = cheesesSelector(state);
-    const addMeat = addMeatSelector(state);
-    const currentMeat = meatsSelector(state);
-    const addDressing = addDressingSelector(state);
-    const currentDressing = dressingsSelector(state);
-    const currentVegetables = vegetablesSelector(state);
-    const addEgg = addEggSelector(state);
-    const currentEgg = eggsSelector(state);
-    const currentSpread = spreadSelector(state);
-    const currentServing = servingSelector(state);
-    const currentTopping = toppingSelector(state);
-    const currentName = nameSelector(state);
-    const currentDefaultName = defaultNameSelector(state);
-    const currentAdds = addToOrderSelector(state);
+  async (_, thunkAPI) => {
+    try {
+      const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
 
-    return {
-      bread: [currentBread],
-      cheese: addCheese ? currentCheese : [],
-      meat: addMeat ? currentMeat : [],
-      dressing: addDressing ? currentDressing : [],
-      vegetables: currentVegetables,
-      egg: addEgg ? currentEgg : [],
-      spreads: currentSpread,
-      serving: [currentServing],
-      topping: currentTopping,
-      name: currentName.length > 0 ? currentName : currentDefaultName,
-      addToOrder: currentAdds,
-      date: 0,
-      id: new Date().getTime(),
-    };
+      const state = thunkAPI.getState() as RootState;
+      const currentBread = breadSelector(state);
+      const addCheese = addCheeseSelector(state);
+      const currentCheese = cheesesSelector(state);
+      const addMeat = addMeatSelector(state);
+      const currentMeat = meatsSelector(state);
+      const addDressing = addDressingSelector(state);
+      const currentDressing = dressingsSelector(state);
+      const currentVegetables = vegetablesSelector(state);
+      const addEgg = addEggSelector(state);
+      const currentEgg = eggsSelector(state);
+      const currentSpread = spreadSelector(state);
+      const currentServing = servingSelector(state);
+      const currentTopping = toppingSelector(state);
+      const currentName = nameSelector(state);
+      const currentDefaultName = defaultNameSelector(state);
+      const currentAdds = addToOrderSelector(state);
+
+      const currentOrder = {
+        bread: [currentBread],
+        cheese: addCheese ? currentCheese : [],
+        meat: addMeat ? currentMeat : [],
+        dressing: addDressing ? currentDressing : [],
+        vegetables: currentVegetables,
+        egg: addEgg ? currentEgg : [],
+        spreads: currentSpread,
+        serving: [currentServing],
+        topping: currentTopping,
+        name: currentName.length > 0 ? currentName : currentDefaultName,
+        addToOrder: currentAdds,
+        // date: new Date(),
+        orderId: new Date().getTime(),
+      };
+      console.log(currentOrder);
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(currentOrder),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Something went wrong");
+      }
+
+      return response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
+
+export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
+  const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
+  const jsonResponse = await fetch(endpoint, { method: "GET" });
+  const response = await jsonResponse.json();
+  return response;
+});
 
 export const { updateCurrentOrderIndex, updateCurrentOrderId } =
   ordersSlice.actions;

@@ -13,6 +13,7 @@ import {
 } from "../../store/appControl/selectors";
 import { AppDispatch } from "../../store/store";
 import { fetchIngredients } from "../../store/ingredientsSlice";
+import { fetchOrders } from "../../store/orders/ordersSlice";
 
 const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
 
@@ -24,6 +25,7 @@ export function Splash() {
 
   const fetchData = () => {
     dispatch(fetchIngredients());
+    dispatch(fetchOrders());
   };
 
   useEffect(() => {
