@@ -114,7 +114,11 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
-  const jsonResponse = await fetch(endpoint, { method: "GET" });
+  const dateHourAgo = String(new Date().getTime() - 3600000);
+  const params = new URLSearchParams();
+  params.append("orders_id", dateHourAgo);
+  const endpointWithParams = `${endpoint}?${params.toString()}`;
+  const jsonResponse = await fetch(endpointWithParams, { method: "GET" });
   const response = await jsonResponse.json();
   return response;
 });

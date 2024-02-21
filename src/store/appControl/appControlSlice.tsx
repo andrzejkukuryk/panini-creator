@@ -31,9 +31,6 @@ export const appControlSlice = createSlice({
       state.currentScene = action.payload;
     },
   },
-  extraReducers(builder) {
-    builder.addCase(resetState, (_state, _action) => {});
-  },
 });
 
 export const { updateStartAnimation, updateCurrentScene } =

@@ -66,22 +66,7 @@ export const ingredientsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
-        state.allIngredients.breadVariants =
-          action.payload.allIngredients.breadVariants;
-        state.allIngredients.cheeseVariants =
-          action.payload.allIngredients.cheeseVariants;
-        state.allIngredients.dressingVariants =
-          action.payload.allIngredients.dressingVariants;
-        state.allIngredients.eggVariants =
-          action.payload.allIngredients.eggVariants;
-        state.allIngredients.meatVariants =
-          action.payload.allIngredients.meatVariants;
-        state.allIngredients.spreadVariant =
-          action.payload.allIngredients.spreadVariant;
-        state.allIngredients.toppingVariant =
-          action.payload.allIngredients.toppingVariant;
-        state.allIngredients.vegetableVariant =
-          action.payload.allIngredients.vegetableVariant;
+        state.allIngredients = action.payload.allIngredients;
         state.servingVariant = action.payload.servingVariant;
         state.status = "completed";
       })
@@ -98,6 +83,7 @@ export const fetchIngredients = createAsyncThunk(
       "https://x8ki-letl-twmt.n7.xano.io/api:AYUnNWF1/ingredients";
     const jsonResponse = await fetch(endpoint, { method: "GET" });
     const response = await jsonResponse.json();
+    console.log(response);
     return response[0];
   }
 );

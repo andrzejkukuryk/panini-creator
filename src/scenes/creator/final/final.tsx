@@ -15,7 +15,6 @@ import {
 import { createOrder } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
-import { fetchIngredients } from "../../../store/ingredientsSlice";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,7 +22,6 @@ export function Final() {
   const handleClickPlaceOrder = () => {
     dispatch(createOrder());
     dispatch(updateCurrentScene("SUCCESS"));
-    dispatch(fetchIngredients());
   };
 
   const handleClickStartAgain = () => {
