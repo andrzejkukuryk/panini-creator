@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { randomBread } from "../../store/bread/breadSlice";
 import { AppDispatch } from "../../store/store";
 import { randomCheese } from "../../store/cheese/cheeseSlice";
+import { randomMeat } from "../../store/meat/meatSlice";
 
 export function Header() {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,6 +14,7 @@ export function Header() {
   const handleClickRandom = () => {
     dispatch(randomBread());
     dispatch(randomCheese());
+    dispatch(randomMeat());
   };
 
   return (
