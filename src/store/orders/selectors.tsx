@@ -6,6 +6,10 @@ export const ordersSelector = (state: RootState) => {
   return state.orders.orders;
 };
 
+export const orderStatusSelector = (state: RootState) => {
+  return state.orders.orderStatus;
+};
+
 export const currentOrderIndexSelector = (state: RootState) => {
   return state.orders.currentOrderIndex;
 };

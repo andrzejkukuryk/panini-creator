@@ -13,17 +13,25 @@ import { servingSelector } from "../serving/selectors";
 import { toppingSelector } from "../topping/selectors";
 import { defaultNameSelector, nameSelector } from "../name/selectors";
 import { addToOrderSelector } from "../addToOrder/selectors";
+import { ApiStatus } from "../ingredientsSlice";
 
 interface OrdersState {
   orders: Order[];
   currentOrderIndex: number;
   currentOrderId: number;
+  orderStatus: ApiStatus;
+}
+
+interface OrderXano extends Order {
+  id?: number;
+  created_at?: number;
 }
 
 const initialState: OrdersState = {
   orders: [],
   currentOrderIndex: 0,
   currentOrderId: 0,
+  orderStatus: "idle",
 };
 
 export const ordersSlice = createSlice({
@@ -38,17 +46,30 @@ export const ordersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(createOrder.pending, (state) => {
+      state.orderStatus = "loading";
+    });
     builder.addCase(createOrder.fulfilled, (state, action) => {
-      state.orders.push(action.payload);
+      state.orderStatus = "completed";
     }),
-      builder.addCase(fetchOrders.fulfilled, (state, action) => {
-        const ordersXano = action.payload;
-        ordersXano.forEach((order) => {
-          delete order["id"];
-          delete order["created_at"];
-        });
-        state.orders = ordersXano;
+      builder.addCase(createOrder.rejected, (state) => {
+        state.orderStatus = "failed";
       });
+    builder.addCase(fetchOrders.pending, (state) => {
+      state.orderStatus = "loading";
+    });
+    builder.addCase(fetchOrders.fulfilled, (state, action) => {
+      const ordersXano: OrderXano[] = action.payload;
+      ordersXano.forEach((order) => {
+        delete order["id"];
+        delete order["created_at"];
+      });
+      state.orders = ordersXano;
+      state.orderStatus = "completed";
+    });
+    builder.addCase(fetchOrders.rejected, (state) => {
+      state.orderStatus = "failed";
+    });
   },
 });
 
@@ -88,10 +109,9 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
         topping: currentTopping,
         name: currentName.length > 0 ? currentName : currentDefaultName,
         addToOrder: currentAdds,
-        // date: new Date(),
         orderId: new Date().getTime(),
       };
-      console.log(currentOrder);
+
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
@@ -106,7 +126,7 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
       }
 
       return response.json();
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }

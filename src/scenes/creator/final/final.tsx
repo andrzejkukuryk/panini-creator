@@ -6,7 +6,7 @@ import { Name } from "./name";
 import { Cutlery } from "./cutlery";
 import { Napkins } from "./napkins";
 import { AppButton } from "../../../components/appButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   updateCurrentScene,
   updateStartAnimation,
@@ -15,13 +15,19 @@ import {
 import { createOrder } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
+import { orderStatusSelector } from "../../../store/orders/selectors";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
+  const orderStatus = useSelector(orderStatusSelector);
 
-  const handleClickPlaceOrder = () => {
-    dispatch(createOrder());
-    dispatch(updateCurrentScene("SUCCESS"));
+  const handleClickPlaceOrder = async () => {
+    await dispatch(createOrder());
+    if (orderStatus === "completed") {
+      dispatch(updateCurrentScene("SUCCESS"));
+    } else if (orderStatus === "failed") {
+      console.error("Something went wrong with an order upload.");
+    }
   };
 
   const handleClickStartAgain = () => {

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type ApiStatus = "idle" | "loading" | "completed" | "failed";
+export type ApiStatus = "idle" | "loading" | "completed" | "failed";
 
 interface IngredientsState {
   allIngredients: {
@@ -62,7 +62,7 @@ export const ingredientsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchIngredients.pending, (state, action) => {
+      .addCase(fetchIngredients.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
@@ -70,7 +70,7 @@ export const ingredientsSlice = createSlice({
         state.servingVariant = action.payload.servingVariant;
         state.status = "completed";
       })
-      .addCase(fetchIngredients.rejected, (state, action) => {
+      .addCase(fetchIngredients.rejected, (state) => {
         state.status = "failed";
       });
   },
@@ -83,7 +83,7 @@ export const fetchIngredients = createAsyncThunk(
       "https://x8ki-letl-twmt.n7.xano.io/api:AYUnNWF1/ingredients";
     const jsonResponse = await fetch(endpoint, { method: "GET" });
     const response = await jsonResponse.json();
-    console.log(response);
+
     return response[0];
   }
 );
