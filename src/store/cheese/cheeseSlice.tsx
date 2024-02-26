@@ -31,9 +31,6 @@ export const cheeseSlice = createSlice({
     ) => {
       state.cheeses[action.payload.index] = action.payload.value;
     },
-    initialCheeseState() {
-      return initialState;
-    },
   },
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
@@ -47,7 +44,7 @@ export const {
   addNextCheese,
   subCheese,
   updateCheeses,
-  initialCheeseState,
+
 } = cheeseSlice.actions;
 
 export default cheeseSlice.reducer;

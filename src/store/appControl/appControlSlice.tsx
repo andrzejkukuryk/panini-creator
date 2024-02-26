@@ -2,6 +2,7 @@ import { createAction, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const resetState = createAction("resetState");
+export const randomState = createAction("randomState");
 
 export type CurrentScene =
   | "SPLASH"

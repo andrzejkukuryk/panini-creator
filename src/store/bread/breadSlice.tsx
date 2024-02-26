@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { randomState, resetState } from "../appControl/appControlSlice";
+import { breadVariantsSelector } from "./selectors";
+import { RootState } from "../store";
 
 interface BreadState {
   bread: string;
@@ -17,20 +19,29 @@ export const breadSlice = createSlice({
     updateBread: (state, action: PayloadAction<string>) => {
       state.bread = action.payload;
     },
-    initialBreadState() {
-      return initialState;
-    },
   },
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
     });
+    builder.addCase(randomBread.fulfilled, (state, action) => {
+      state.bread = action.payload;
+    });
   },
 });
 
-export const selectorBreadSlice = (state: { bread: BreadState }) =>
-  state.bread.bread;
+export const randomBread = createAsyncThunk<string, void, { state: RootState }>(
+  "bread/randomBread",
+  (_, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const breadVariants = breadVariantsSelector(state);
+    const randomIndex = Math.floor(Math.random() * breadVariants.length);
 
-export const { updateBread, initialBreadState } = breadSlice.actions;
+    console.log(breadVariants[randomIndex]);
+    return breadVariants[randomIndex];
+  }
+);
+
+export const { updateBread } = breadSlice.actions;
 
 export default breadSlice.reducer;
