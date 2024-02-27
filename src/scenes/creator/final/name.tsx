@@ -54,7 +54,7 @@ export function Name() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateName(event.target.value.trim().toUpperCase()));
+    dispatch(updateName(event.target.value.trim()));
   };
 
   useEffect(() => {

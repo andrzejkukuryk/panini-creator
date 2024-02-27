@@ -18,6 +18,9 @@ export const dressingSlice = createSlice({
   reducers: {
     updateAddDressing: (state) => {
       state.addDressing = !state.addDressing;
+      if (state.addDressing && state.dressings.length === 0) {
+        state.dressings = ["HONEY MUSTARD"];
+      }
     },
     addNextDressing: (state) => {
       state.dressings.push("HONEY MUSTARD");

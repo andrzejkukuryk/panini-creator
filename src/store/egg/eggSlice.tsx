@@ -18,6 +18,9 @@ export const eggSlice = createSlice({
   reducers: {
     updateAddEgg: (state) => {
       state.addEgg = !state.addEgg;
+      if (state.addEgg && state.eggs.length === 0) {
+        state.eggs = ["FRIED EGG"];
+      }
     },
     addNextEgg: (state) => {
       state.eggs.push("FRIED EGG");

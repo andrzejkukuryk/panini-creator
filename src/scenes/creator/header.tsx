@@ -18,7 +18,6 @@ export function Header() {
 
   useEffect(() => {
     dispatch(createRandomOrder());
-    console.log(randomOrderState);
   }, []);
 
   return (

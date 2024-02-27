@@ -1,8 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { randomState, resetState } from "../appControl/appControlSlice";
-import { RootState } from "../store";
-import { cheeseVariantsSelector } from "./selectors";
 
 interface CheeseState {
   addCheese: boolean;
@@ -20,6 +18,9 @@ export const cheeseSlice = createSlice({
   reducers: {
     updateAddCheese: (state) => {
       state.addCheese = !state.addCheese;
+      if (state.addCheese && state.cheeses.length === 0) {
+        state.cheeses = ["EDAM"];
+      }
     },
     addNextCheese: (state) => {
       state.cheeses.push("EDAM");
@@ -44,7 +45,6 @@ export const cheeseSlice = createSlice({
     });
   },
 });
-
 
 export const { updateAddCheese, addNextCheese, subCheese, updateCheeses } =
   cheeseSlice.actions;

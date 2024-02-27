@@ -1,8 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { resetState, randomState } from "../appControl/appControlSlice";
-import { RootState } from "../store";
-import { meatVariantsSelector } from "./selectors";
 
 interface MeatState {
   addMeat: boolean;
@@ -20,6 +18,9 @@ export const meatSlice = createSlice({
   reducers: {
     updateAddMeat: (state) => {
       state.addMeat = !state.addMeat;
+      if (state.addMeat && state.meats.length === 0) {
+        state.meats = ["SALAMI"];
+      }
     },
     addNextMeat: (state) => {
       state.meats.push("SALAMI");
@@ -44,7 +45,6 @@ export const meatSlice = createSlice({
     });
   },
 });
-
 
 export const { updateAddMeat, addNextMeat, subMeat, updateMeats } =
   meatSlice.actions;
