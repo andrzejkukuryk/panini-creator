@@ -49,7 +49,7 @@ export const ordersSlice = createSlice({
     builder.addCase(createOrder.pending, (state) => {
       state.orderStatus = "loading";
     });
-    builder.addCase(createOrder.fulfilled, (state, action) => {
+    builder.addCase(createOrder.fulfilled, (state) => {
       state.orderStatus = "completed";
     }),
       builder.addCase(createOrder.rejected, (state) => {

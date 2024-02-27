@@ -12,7 +12,7 @@ import {
   updateStartAnimation,
 } from "../../../store/appControl/appControlSlice";
 
-import { createOrder } from "../../../store/orders/ordersSlice";
+import { createOrder, fetchOrders } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
 import { orderStatusSelector } from "../../../store/orders/selectors";
@@ -24,6 +24,7 @@ export function Final() {
   const handleClickPlaceOrder = async () => {
     await dispatch(createOrder());
     if (orderStatus === "completed") {
+      dispatch(fetchOrders());
       dispatch(updateCurrentScene("SUCCESS"));
     } else if (orderStatus === "failed") {
       console.error("Something went wrong with an order upload.");
