@@ -6,7 +6,7 @@ import { Checkbox } from "../../../components/checkbox";
 import { addToOrderSelector } from "../../../store/addToOrder/selectors";
 import { addAdditionally } from "../../../store/addToOrder/addToOrderSlice";
 
-const TYPE_NAPKINS = "NAPKINS";
+export const TYPE_NAPKINS = "NAPKINS";
 
 export function Napkins() {
   const dispatch = useDispatch();

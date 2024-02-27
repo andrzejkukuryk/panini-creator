@@ -24,23 +24,12 @@ export const breadSlice = createSlice({
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
     });
-    builder.addCase(randomBread.fulfilled, (state, action) => {
-      state.bread = action.payload;
+    builder.addCase(randomState, (state, action) => {
+      state.bread = action.payload.bread[0];
     });
   },
 });
 
-export const randomBread = createAsyncThunk<string, void, { state: RootState }>(
-  "bread/randomBread",
-  (_, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    const breadVariants = breadVariantsSelector(state);
-    const randomIndex = Math.floor(Math.random() * breadVariants.length);
-
-    console.log(breadVariants[randomIndex]);
-    return breadVariants[randomIndex];
-  }
-);
 
 export const { updateBread } = breadSlice.actions;
 

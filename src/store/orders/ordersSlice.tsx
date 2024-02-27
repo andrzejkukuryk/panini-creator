@@ -2,21 +2,43 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Order } from "../../models/order";
-import { breadSelector } from "../bread/selectors";
-import { addCheeseSelector, cheesesSelector } from "../cheese/selectors";
-import { addMeatSelector, meatsSelector } from "../meat/selectors";
-import { addDressingSelector, dressingsSelector } from "../dressing/selectors";
-import { vegetablesSelector } from "../vegetables/selectors";
-import { addEggSelector, eggsSelector } from "../egg/selectors";
-import { spreadSelector } from "../spreads/selectors";
-import { servingSelector } from "../serving/selectors";
-import { toppingSelector } from "../topping/selectors";
+import { breadSelector, breadVariantsSelector } from "../bread/selectors";
+import {
+  addCheeseSelector,
+  cheeseVariantsSelector,
+  cheesesSelector,
+} from "../cheese/selectors";
+import {
+  addMeatSelector,
+  meatVariantsSelector,
+  meatsSelector,
+} from "../meat/selectors";
+import {
+  addDressingSelector,
+  dressingVariantsSelector,
+  dressingsSelector,
+} from "../dressing/selectors";
+import {
+  vegetableVariantsSelector,
+  vegetablesSelector,
+} from "../vegetables/selectors";
+import {
+  addEggSelector,
+  eggVariantsSelector,
+  eggsSelector,
+} from "../egg/selectors";
+import { spreadSelector, spreadVariantsSelector } from "../spreads/selectors";
+import { servingSelector, servingVariantsSelector } from "../serving/selectors";
+import { toppingSelector, toppingVariantsSelector } from "../topping/selectors";
 import { defaultNameSelector, nameSelector } from "../name/selectors";
 import { addToOrderSelector } from "../addToOrder/selectors";
+import { TYPE_NAPKINS } from "../../scenes/creator/final/napkins";
+import { TYPE_CUTLERY } from "../../scenes/creator/final/cutlery";
 import { ApiStatus } from "../ingredientsSlice";
 
 interface OrdersState {
   orders: Order[];
+  randomOrder: Order;
   currentOrderIndex: number;
   currentOrderId: number;
   orderStatus: ApiStatus;
@@ -29,6 +51,20 @@ interface OrderXano extends Order {
 
 const initialState: OrdersState = {
   orders: [],
+  randomOrder: {
+    bread: ["FULL GRAIN"],
+    cheese: [],
+    meat: [],
+    dressing: [],
+    egg: [],
+    vegetables: [],
+    serving: ["WARM"],
+    name: "",
+    spreads: [],
+    topping: [],
+    addToOrder: [],
+    orderId: 0,
+  },
   currentOrderIndex: 0,
   currentOrderId: 0,
   orderStatus: "idle",
@@ -69,6 +105,12 @@ export const ordersSlice = createSlice({
     });
     builder.addCase(fetchOrders.rejected, (state) => {
       state.orderStatus = "failed";
+    });
+    builder.addCase(createRandomOrder.fulfilled, (state, action) => {
+      state.randomOrder = action.payload;
+    });
+    builder.addCase(createRandomOrder.fulfilled, (state, action) => {
+      state.randomOrder = action.payload;
     });
   },
 });
@@ -131,6 +173,80 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
     }
   }
 );
+
+export const createRandomOrder = createAsyncThunk<
+  Order,
+  void,
+  { state: RootState }
+>("orders/randomOrder", (_, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+  const breadVariants = breadVariantsSelector(state);
+  const cheeseVariants = cheeseVariantsSelector(state);
+  const meatVariants = meatVariantsSelector(state);
+  const dressingVariants = dressingVariantsSelector(state);
+  const vegetablesVariants = vegetableVariantsSelector(state);
+  const eggVariants = eggVariantsSelector(state);
+  const spreadVariants = spreadVariantsSelector(state);
+  const servingVariants = servingVariantsSelector(state);
+  const toppingVariants = toppingVariantsSelector(state);
+  const currentName = nameSelector(state);
+  const currentDefaultName = defaultNameSelector(state);
+
+  const randomizeValue = (inputArr: string[]): [string] => {
+    const randomIndex = (arr: string[]) =>
+      Math.floor(Math.random() * arr.length);
+
+    return [inputArr[randomIndex(inputArr)]];
+  };
+
+  const randomizeArray = (
+    inputArr: string[],
+    outputArr: string[]
+  ): string[] => {
+    const randomBoolean = () => {
+      if (Math.random() > 0.5) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    const randomIndex = (arr: string[]) =>
+      Math.floor(Math.random() * arr.length);
+    if (randomBoolean()) {
+      outputArr.push(inputArr[randomIndex(inputArr)]);
+      return randomizeArray(inputArr, outputArr);
+    } else {
+      return outputArr;
+    }
+  };
+
+  const randomBread = randomizeValue(breadVariants);
+  const randomCheese = randomizeArray(cheeseVariants, []);
+  const randomMeat = randomizeArray(meatVariants, []);
+  const randomDressing = randomizeArray(dressingVariants, []);
+  const randomVegetables = randomizeArray(vegetablesVariants, []);
+  const randomEgg = randomizeArray(eggVariants, []);
+  const randomSpreads = randomizeArray(spreadVariants, []);
+  const randomServing = randomizeValue(servingVariants);
+  const randomTopping = randomizeArray(toppingVariants, []);
+  const randomAdds = randomizeArray([TYPE_NAPKINS, TYPE_CUTLERY], []);
+
+  return {
+    bread: randomBread,
+    cheese: randomCheese,
+    meat: randomMeat,
+    dressing: randomDressing,
+    vegetables: randomVegetables,
+    egg: randomEgg,
+    spreads: randomSpreads,
+    serving: randomServing,
+    topping: randomTopping,
+    name: currentName.length > 0 ? currentName : currentDefaultName,
+    addToOrder: randomAdds,
+    orderId: new Date().getTime(),
+  };
+});
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
