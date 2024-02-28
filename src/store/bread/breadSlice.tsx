@@ -1,8 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { randomState, resetState } from "../appControl/appControlSlice";
-import { breadVariantsSelector } from "./selectors";
-import { RootState } from "../store";
 
 interface BreadState {
   bread: string;
@@ -29,7 +27,6 @@ export const breadSlice = createSlice({
     });
   },
 });
-
 
 export const { updateBread } = breadSlice.actions;
 

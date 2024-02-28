@@ -3,7 +3,6 @@ import styles from "./listItem.module.scss";
 import { Label } from "../../components/label";
 import classNames from "classnames";
 import { Line } from "../../components/line";
-import { match } from "assert";
 
 interface ListItemProps {
   label: string;

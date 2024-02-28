@@ -1,8 +1,9 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Order } from "../../models/order";
 
 export const resetState = createAction("resetState");
-export const randomState = createAction("randomState");
+export const randomState = createAction<Order>("randomState");
 
 export type CurrentScene =
   | "SPLASH"
