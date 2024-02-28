@@ -77,8 +77,6 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
   "orders/createOrder",
   async (_, thunkAPI) => {
     try {
-      const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
-
       const state = thunkAPI.getState() as RootState;
       const currentBread = breadSelector(state);
       const addCheese = addCheeseSelector(state);
@@ -111,6 +109,8 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
         addToOrder: currentAdds,
         orderId: new Date().getTime(),
       };
+
+      const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";
 
       const response = await fetch(endpoint, {
         method: "POST",
