@@ -2,6 +2,10 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { ordersSelector } from "../orders/selectors";
 
+export const statusSelector = (state: RootState) => {
+  return state.ingredients.status;
+};
+
 export const startAnimationSelector = (state: RootState) => {
   return state.appControls.startAnimation;
 };
@@ -22,9 +26,12 @@ export const showOrdersButtonSelector = createSelector(
 );
 
 export const showBeginButtonSelector = createSelector(
-  [currentSceneSelector],
-  (scene) => {
-    if (scene === "SPLASH" || scene === "ANIMATION") {
+  [currentSceneSelector, statusSelector],
+  (scene, status) => {
+    if (
+      (scene === "SPLASH" || scene === "ANIMATION") &&
+      status === "completed"
+    ) {
       return true;
     } else {
       return false;

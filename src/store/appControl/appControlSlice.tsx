@@ -3,19 +3,19 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const resetState = createAction("resetState");
 
-export type currentScene =
+export type CurrentScene =
   | "SPLASH"
   | "ANIMATION"
   | "CREATOR"
   | "SUCCESS"
   | "ORDER";
 
-interface appControlState {
+interface AppControlState {
   startAnimation: boolean;
-  currentScene: currentScene;
+  currentScene: CurrentScene;
 }
 
-const initialState: appControlState = {
+const initialState: AppControlState = {
   startAnimation: false,
   currentScene: "SPLASH",
 };
@@ -27,12 +27,9 @@ export const appControlSlice = createSlice({
     updateStartAnimation: (state, action: PayloadAction<boolean>) => {
       state.startAnimation = action.payload;
     },
-    updateCurrentScene: (state, action: PayloadAction<currentScene>) => {
+    updateCurrentScene: (state, action: PayloadAction<CurrentScene>) => {
       state.currentScene = action.payload;
     },
-  },
-  extraReducers(builder) {
-    builder.addCase(resetState, (_state, _action) => {});
   },
 });
 

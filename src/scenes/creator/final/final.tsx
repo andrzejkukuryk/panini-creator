@@ -12,28 +12,28 @@ import {
   updateStartAnimation,
 } from "../../../store/appControl/appControlSlice";
 
-import { createOrder } from "../../../store/orders/ordersSlice";
+import { createOrder, fetchOrders } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
-import { ordersSelector } from "../../../store/orders/selectors";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
+import { orderStatusSelector } from "../../../store/orders/selectors";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
-  const orders = useSelector(ordersSelector);
-  const showOrdersButton = orders.length > 0;
+  const orderStatus = useSelector(orderStatusSelector);
 
-  const handleClickPlaceOrder = () => {
-    dispatch(createOrder());
-    dispatch(updateCurrentScene("SUCCESS"));
+  const handleClickPlaceOrder = async () => {
+    await dispatch(createOrder());
+    if (orderStatus === "completed") {
+      dispatch(fetchOrders());
+      dispatch(updateCurrentScene("SUCCESS"));
+    } else if (orderStatus === "failed") {
+      console.error("Something went wrong with an order upload.");
+    }
   };
 
   const handleClickStartAgain = () => {
     dispatch(updateStartAnimation(false));
     dispatch(updateCurrentScene("SPLASH"));
-  };
-
-  const handleClickViewOrders = () => {
-    dispatch(updateCurrentScene("ORDER"));
   };
 
   return (

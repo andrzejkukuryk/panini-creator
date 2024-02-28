@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./splash.module.scss";
 import { CircleBig, PositionCircleBigInfo } from "../../components/circleBig";
 import {
@@ -6,14 +6,34 @@ import {
   PositionCircleSmallInfo,
 } from "../../components/circleSmall";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { startAnimationSelector } from "../../store/appControl/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  startAnimationSelector,
+  statusSelector,
+} from "../../store/appControl/selectors";
+import { AppDispatch } from "../../store/store";
+import { fetchIngredients } from "../../store/ingredientsSlice";
+import { fetchOrders } from "../../store/orders/ordersSlice";
 
 const circleBigPositions: PositionCircleBigInfo[] = ["L", "ML", "C", "MR", "R"];
 
 const circleSmallPositions: PositionCircleSmallInfo[] = ["T", "B"];
 
 export function Splash() {
+  const dispatch = useDispatch<AppDispatch>();
+  const status = useSelector(statusSelector);
+
+  const fetchData = () => {
+    dispatch(fetchIngredients());
+    dispatch(fetchOrders());
+  };
+
+  useEffect(() => {
+    if (status === "idle") {
+      fetchData();
+    }
+  }, []);
+
   const startAnimation = useSelector(startAnimationSelector);
 
   const containerClass = classNames([styles.container], {
