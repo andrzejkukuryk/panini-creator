@@ -221,16 +221,30 @@ export const createRandomOrder = createAsyncThunk<
     }
   };
 
+  const uniqueValuesArray = (inputArr: string[]): string[] => {
+    const uniqueArray: string[] = [];
+    inputArr.forEach((element) => {
+      if (!uniqueArray.includes(element)) {
+        uniqueArray.push(element);
+      }
+    });
+    return uniqueArray;
+  };
+
   const randomBread = randomizeValue(breadVariants);
   const randomCheese = randomizeArray(cheeseVariants, []);
   const randomMeat = randomizeArray(meatVariants, []);
   const randomDressing = randomizeArray(dressingVariants, []);
-  const randomVegetables = randomizeArray(vegetablesVariants, []);
+  const randomVegetables = uniqueValuesArray(
+    randomizeArray(vegetablesVariants, [])
+  );
   const randomEgg = randomizeArray(eggVariants, []);
-  const randomSpreads = randomizeArray(spreadVariants, []);
+  const randomSpreads = uniqueValuesArray(randomizeArray(spreadVariants, []));
   const randomServing = randomizeValue(servingVariants);
-  const randomTopping = randomizeArray(toppingVariants, []);
-  const randomAdds = randomizeArray([TYPE_NAPKINS, TYPE_CUTLERY], []);
+  const randomTopping = uniqueValuesArray(randomizeArray(toppingVariants, []));
+  const randomAdds = uniqueValuesArray(
+    randomizeArray([TYPE_NAPKINS, TYPE_CUTLERY], [])
+  );
 
   return {
     bread: randomBread,
