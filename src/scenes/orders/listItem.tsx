@@ -3,6 +3,7 @@ import styles from "./listItem.module.scss";
 import { Label } from "../../components/label";
 import classNames from "classnames";
 import { Line } from "../../components/line";
+import { match } from "assert";
 
 interface ListItemProps {
   label: string;
@@ -27,6 +28,11 @@ export function ListItem({ label, ingredients }: ListItemProps) {
       }
     });
     setCountedIngredients(counter);
+  };
+
+  const prepareLabel = () => {
+    const regex = /[A-Z]/g;
+    return label.replace(regex, (match) => " " + match);
   };
 
   useEffect(() => {
@@ -55,7 +61,7 @@ export function ListItem({ label, ingredients }: ListItemProps) {
   return (
     <div className={showHide}>
       <div className={styles.itemContainer}>
-        <Label text={label} />
+        <Label text={prepareLabel()} />
         <p className={styles.ingredientList}>{ingredientList}</p>
       </div>
       <Line />
