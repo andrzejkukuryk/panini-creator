@@ -2,39 +2,21 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Order } from "../../models/order";
-import { breadSelector, breadVariantsSelector } from "../bread/selectors";
-import {
-  addCheeseSelector,
-  cheeseVariantsSelector,
-  cheesesSelector,
-} from "../cheese/selectors";
-import {
-  addMeatSelector,
-  meatVariantsSelector,
-  meatsSelector,
-} from "../meat/selectors";
-import {
-  addDressingSelector,
-  dressingVariantsSelector,
-  dressingsSelector,
-} from "../dressing/selectors";
-import {
-  vegetableVariantsSelector,
-  vegetablesSelector,
-} from "../vegetables/selectors";
-import {
-  addEggSelector,
-  eggVariantsSelector,
-  eggsSelector,
-} from "../egg/selectors";
-import { spreadSelector, spreadVariantsSelector } from "../spreads/selectors";
-import { servingSelector, servingVariantsSelector } from "../serving/selectors";
-import { toppingSelector, toppingVariantsSelector } from "../topping/selectors";
+import { breadSelector } from "../bread/selectors";
+import { addCheeseSelector, cheesesSelector } from "../cheese/selectors";
+import { addMeatSelector, meatsSelector } from "../meat/selectors";
+import { addDressingSelector, dressingsSelector } from "../dressing/selectors";
+import { vegetablesSelector } from "../vegetables/selectors";
+import { addEggSelector, eggsSelector } from "../egg/selectors";
+import { spreadSelector } from "../spreads/selectors";
+import { servingSelector } from "../serving/selectors";
+import { toppingSelector } from "../topping/selectors";
 import { defaultNameSelector, nameSelector } from "../name/selectors";
 import { addToOrderSelector } from "../addToOrder/selectors";
 import { TYPE_NAPKINS } from "../../scenes/creator/final/napkins";
 import { TYPE_CUTLERY } from "../../scenes/creator/final/cutlery";
 import { ApiStatus } from "../ingredientsSlice";
+import { ingredientsVariants } from "../../utils/ingredientsVariants";
 
 interface OrdersState {
   orders: Order[];
@@ -180,17 +162,20 @@ export const createRandomOrder = createAsyncThunk<
   { state: RootState }
 >("orders/randomOrder", (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState;
-  const breadVariants = breadVariantsSelector(state);
-  const cheeseVariants = cheeseVariantsSelector(state);
-  const meatVariants = meatVariantsSelector(state);
-  const dressingVariants = dressingVariantsSelector(state);
-  const vegetablesVariants = vegetableVariantsSelector(state);
-  const eggVariants = eggVariantsSelector(state);
-  const spreadVariants = spreadVariantsSelector(state);
-  const servingVariants = servingVariantsSelector(state);
-  const toppingVariants = toppingVariantsSelector(state);
-  const currentName = nameSelector(state);
-  const currentDefaultName = defaultNameSelector(state);
+
+  const {
+    breadVariants,
+    cheeseVariants,
+    meatVariants,
+    dressingVariants,
+    vegetablesVariants,
+    eggVariants,
+    spreadVariants,
+    servingVariants,
+    toppingVariants,
+    currentName,
+    currentDefaultName,
+  } = ingredientsVariants(state);
 
   const randomizeValue = (inputArr: string[]): [string] => {
     const randomIndex = (arr: string[]) =>
