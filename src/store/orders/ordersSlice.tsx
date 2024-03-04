@@ -94,9 +94,6 @@ export const ordersSlice = createSlice({
     builder.addCase(createRandomOrder.fulfilled, (state, action) => {
       state.randomOrder = action.payload;
     });
-    builder.addCase(createRandomOrder.fulfilled, (state, action) => {
-      state.randomOrder = action.payload;
-    });
   },
 });
 
