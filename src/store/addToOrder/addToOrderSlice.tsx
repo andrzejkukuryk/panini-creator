@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { resetState, randomState } from "../appControl/appControlSlice";
 
 interface AddToOrderState {
   addToOrder: string[];
@@ -26,6 +26,9 @@ export const addToOrderSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
+    });
+    builder.addCase(randomState, (state, action) => {
+      state.addToOrder = action.payload.addToOrder;
     });
   },
 });

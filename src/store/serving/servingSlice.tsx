@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { resetState, randomState } from "../appControl/appControlSlice";
 
 interface ServingState {
   serving: string;
@@ -21,6 +21,9 @@ export const servingSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
+    });
+    builder.addCase(randomState, (state, action) => {
+      state.serving = action.payload.serving[0];
     });
   },
 });

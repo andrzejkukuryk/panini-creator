@@ -29,6 +29,11 @@ export function ListItem({ label, ingredients }: ListItemProps) {
     setCountedIngredients(counter);
   };
 
+  const prepareLabel = () => {
+    const regex = /[A-Z]/g;
+    return label.replace(regex, (match) => " " + match);
+  };
+
   useEffect(() => {
     countIngredients();
   }, [ingredients]);
@@ -55,7 +60,7 @@ export function ListItem({ label, ingredients }: ListItemProps) {
   return (
     <div className={showHide}>
       <div className={styles.itemContainer}>
-        <Label text={label} />
+        <Label text={prepareLabel()} />
         <p className={styles.ingredientList}>{ingredientList}</p>
       </div>
       <Line />

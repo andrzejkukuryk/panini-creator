@@ -13,10 +13,17 @@ import { servingSelector } from "../serving/selectors";
 import { toppingSelector } from "../topping/selectors";
 import { defaultNameSelector, nameSelector } from "../name/selectors";
 import { addToOrderSelector } from "../addToOrder/selectors";
+import { TYPE_NAPKINS } from "../../scenes/creator/final/napkins";
+import { TYPE_CUTLERY } from "../../scenes/creator/final/cutlery";
 import { ApiStatus } from "../ingredientsSlice";
+import { ingredientsVariants } from "../../utils/ingredientsVariants";
+import { uniqueValuesArray } from "../../utils/uniqueValuesArray";
+import { randomizeArray } from "../../utils/randomizeArray";
+import { randomizeValue } from "../../utils/randomizeValue";
 
 interface OrdersState {
   orders: Order[];
+  randomOrder: Order;
   currentOrderIndex: number;
   currentOrderId: number;
   orderStatus: ApiStatus;
@@ -29,6 +36,20 @@ interface OrderXano extends Order {
 
 const initialState: OrdersState = {
   orders: [],
+  randomOrder: {
+    bread: ["FULL GRAIN"],
+    cheese: [],
+    meat: [],
+    dressing: [],
+    egg: [],
+    vegetables: [],
+    serving: ["WARM"],
+    name: "",
+    spreads: [],
+    topping: [],
+    addToOrder: [],
+    orderId: 0,
+  },
   currentOrderIndex: 0,
   currentOrderId: 0,
   orderStatus: "idle",
@@ -69,6 +90,9 @@ export const ordersSlice = createSlice({
     });
     builder.addCase(fetchOrders.rejected, (state) => {
       state.orderStatus = "failed";
+    });
+    builder.addCase(createRandomOrder.fulfilled, (state, action) => {
+      state.randomOrder = action.payload;
     });
   },
 });
@@ -131,6 +155,59 @@ export const createOrder = createAsyncThunk<Order, void, { state: RootState }>(
     }
   }
 );
+
+export const createRandomOrder = createAsyncThunk<
+  Order,
+  void,
+  { state: RootState }
+>("orders/randomOrder", (_, thunkAPI) => {
+  const state = thunkAPI.getState() as RootState;
+
+  const {
+    breadVariants,
+    cheeseVariants,
+    meatVariants,
+    dressingVariants,
+    vegetablesVariants,
+    eggVariants,
+    spreadVariants,
+    servingVariants,
+    toppingVariants,
+    currentName,
+    currentDefaultName,
+  } = ingredientsVariants(state);
+
+
+  const randomBread = randomizeValue(breadVariants);
+  const randomCheese = randomizeArray(cheeseVariants, []);
+  const randomMeat = randomizeArray(meatVariants, []);
+  const randomDressing = randomizeArray(dressingVariants, []);
+  const randomVegetables = uniqueValuesArray(
+    randomizeArray(vegetablesVariants, [])
+  );
+  const randomEgg = randomizeArray(eggVariants, []);
+  const randomSpreads = uniqueValuesArray(randomizeArray(spreadVariants, []));
+  const randomServing = randomizeValue(servingVariants);
+  const randomTopping = uniqueValuesArray(randomizeArray(toppingVariants, []));
+  const randomAdds = uniqueValuesArray(
+    randomizeArray([TYPE_NAPKINS, TYPE_CUTLERY], [])
+  );
+
+  return {
+    bread: randomBread,
+    cheese: randomCheese,
+    meat: randomMeat,
+    dressing: randomDressing,
+    vegetables: randomVegetables,
+    egg: randomEgg,
+    spreads: randomSpreads,
+    serving: randomServing,
+    topping: randomTopping,
+    name: currentName.length > 0 ? currentName : currentDefaultName,
+    addToOrder: randomAdds,
+    orderId: new Date().getTime(),
+  };
+});
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   const endpoint = "https://x8ki-letl-twmt.n7.xano.io/api:wGOItlwE/orders";

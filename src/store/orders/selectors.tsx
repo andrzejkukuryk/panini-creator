@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { currentSceneSelector } from "../appControl/selectors";
+import { cheeseVariantsSelector } from "../cheese/selectors";
 
 export const ordersSelector = (state: RootState) => {
   return state.orders.orders;
@@ -20,4 +20,8 @@ export const currentOrderIdSelector = (state: RootState) => {
 
 export const currentOrderSelector = (state: RootState) => {
   return state.orders.orders[state.orders.currentOrderIndex];
+};
+
+export const randomOrderSelector = (state: RootState) => {
+  return state.orders.randomOrder;
 };

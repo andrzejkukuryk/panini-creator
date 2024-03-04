@@ -11,6 +11,19 @@
     font-family: $font-secondary;
     font-size: 12px;
     line-height: 16px;
+    text-transform: uppercase;
     outline: none;
+    margin: 19px 0 20px;
+  }
+
+  .lowBottomMargin{
+    margin: 19px 0 4px;
+  }
+  .errorMessage {
+    margin: 0 0 3px;
+    font-family: $font-secondary;
+    font-size: 10px;
+    line-height: 13px;
+
   }
 }

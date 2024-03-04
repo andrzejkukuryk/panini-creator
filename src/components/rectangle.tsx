@@ -1,8 +1,7 @@
-import React, { CSSProperties, useEffect } from "react";
+import React, { CSSProperties } from "react";
 import styles from "./rectangle.module.scss";
 import classNames from "classnames";
 import { Text } from "./text";
-import { AppButton } from "./appButton";
 import { useSelector } from "react-redux";
 import {
   startAnimationSelector,

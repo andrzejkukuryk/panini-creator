@@ -16,18 +16,23 @@ import { createOrder, fetchOrders } from "../../../store/orders/ordersSlice";
 import { AppDispatch } from "../../../store/store";
 import { GoToOrdersButton } from "../../../components/goToOrdersButton";
 import { orderStatusSelector } from "../../../store/orders/selectors";
+import { nameTooLongSelector } from "../../../store/name/selectors";
 
 export function Final() {
   const dispatch = useDispatch<AppDispatch>();
   const orderStatus = useSelector(orderStatusSelector);
+  const nameTooLong = useSelector(nameTooLongSelector);
+  const validationOk = !nameTooLong;
 
   const handleClickPlaceOrder = async () => {
-    await dispatch(createOrder());
-    if (orderStatus === "completed") {
-      dispatch(fetchOrders());
-      dispatch(updateCurrentScene("SUCCESS"));
-    } else if (orderStatus === "failed") {
-      console.error("Something went wrong with an order upload.");
+    if (validationOk) {
+      await dispatch(createOrder());
+      if (orderStatus === "completed") {
+        dispatch(fetchOrders());
+        dispatch(updateCurrentScene("SUCCESS"));
+      } else if (orderStatus === "failed") {
+        console.error("Something went wrong with an order upload.");
+      }
     }
   };
 

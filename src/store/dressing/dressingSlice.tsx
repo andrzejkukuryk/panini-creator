@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { resetState, randomState } from "../appControl/appControlSlice";
 
 interface DressingState {
   addDressing: boolean;
@@ -18,6 +18,9 @@ export const dressingSlice = createSlice({
   reducers: {
     updateAddDressing: (state) => {
       state.addDressing = !state.addDressing;
+      if (state.addDressing && state.dressings.length === 0) {
+        state.dressings = ["HONEY MUSTARD"];
+      }
     },
     addNextDressing: (state) => {
       state.dressings.push("HONEY MUSTARD");
@@ -35,6 +38,10 @@ export const dressingSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
+    });
+    builder.addCase(randomState, (state, action) => {
+      state.dressings = action.payload.dressing;
+      state.addDressing = action.payload.dressing.length > 0;
     });
   },
 });

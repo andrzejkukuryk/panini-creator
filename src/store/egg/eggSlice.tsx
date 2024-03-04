@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { resetState, randomState } from "../appControl/appControlSlice";
 
 interface EggState {
   addEgg: boolean;
@@ -18,6 +18,9 @@ export const eggSlice = createSlice({
   reducers: {
     updateAddEgg: (state) => {
       state.addEgg = !state.addEgg;
+      if (state.addEgg && state.eggs.length === 0) {
+        state.eggs = ["FRIED EGG"];
+      }
     },
     addNextEgg: (state) => {
       state.eggs.push("FRIED EGG");
@@ -35,6 +38,10 @@ export const eggSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
+    });
+    builder.addCase(randomState, (state, action) => {
+      state.eggs = action.payload.egg;
+      state.addEgg = action.payload.egg.length > 0;
     });
   },
 });

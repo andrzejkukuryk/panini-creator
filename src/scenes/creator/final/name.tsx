@@ -10,9 +10,13 @@ import { vegetablesSelector } from "../../../store/vegetables/selectors";
 import { orderEggsSelector } from "../../../store/egg/selectors";
 import { spreadSelector } from "../../../store/spreads/selectors";
 import { toppingSelector } from "../../../store/topping/selectors";
+import { nameTooLongSelector } from "../../../store/name/selectors";
+import classNames from "classnames";
 
 export function Name() {
   const dispatch = useDispatch();
+
+  const nameTooLong = useSelector(nameTooLongSelector);
 
   const cheese = useSelector(orderCheeseSelector);
   const meat = useSelector(orderMeatSelector);
@@ -61,15 +65,28 @@ export function Name() {
     dispatch(updateDefaultName(createName()));
   }, [meat, cheese, egg, vegetables, dressing, spread, topping]);
 
+  const inputCellClass = classNames(styles.inputCell, {
+    [styles.lowBottomMargin]: nameTooLong,
+  });
+
   return (
-    <div className={styles.nameContainer}>
-      <Label text="Panini name" />
-      <input
-        type="text"
-        className={styles.inputCell}
-        onChange={handleChange}
-        placeholder={`E.G. ${createName()}`}
-      ></input>
-    </div>
+    <>
+      <div className={styles.nameContainer}>
+        <Label text="Panini name" />
+        <div>
+          <input
+            type="text"
+            className={inputCellClass}
+            onChange={handleChange}
+            placeholder={`E.G. ${createName()}`}
+          ></input>
+          {nameTooLong && (
+            <p className={styles.errorMessage}>
+              Name is too long. Max. 40 characters.
+            </p>
+          )}
+        </div>
+      </div>
+    </>
   );
 }

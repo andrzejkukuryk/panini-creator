@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { resetState } from "../appControl/appControlSlice";
+import { resetState, randomState } from "../appControl/appControlSlice";
 
 interface MeatState {
   addMeat: boolean;
@@ -18,6 +18,9 @@ export const meatSlice = createSlice({
   reducers: {
     updateAddMeat: (state) => {
       state.addMeat = !state.addMeat;
+      if (state.addMeat && state.meats.length === 0) {
+        state.meats = ["SALAMI"];
+      }
     },
     addNextMeat: (state) => {
       state.meats.push("SALAMI");
@@ -35,6 +38,10 @@ export const meatSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(resetState, (_state, _action) => {
       return initialState;
+    });
+    builder.addCase(randomState, (state, action) => {
+      state.meats = action.payload.meat;
+      state.addMeat = action.payload.meat.length > 0;
     });
   },
 });

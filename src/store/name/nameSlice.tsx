@@ -5,11 +5,13 @@ import { resetState } from "../appControl/appControlSlice";
 interface NameState {
   name: string;
   defaultName: string;
+  nameTooLong: boolean;
 }
 
 const initialState: NameState = {
   name: "",
   defaultName: "",
+  nameTooLong: false,
 };
 
 export const nameSlice = createSlice({
@@ -17,10 +19,20 @@ export const nameSlice = createSlice({
   initialState: initialState,
   reducers: {
     updateName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+      if (action.payload.length <= 40) {
+        state.name = action.payload.toUpperCase();
+        state.nameTooLong = false;
+      } else {
+        state.nameTooLong = true;
+      }
     },
     updateDefaultName: (state, action: PayloadAction<string>) => {
-      state.defaultName = action.payload;
+      if (action.payload.length <= 40) {
+        state.defaultName = action.payload;
+        state.nameTooLong = false;
+      } else {
+        state.nameTooLong = true;
+      }
     },
   },
   extraReducers(builder) {
