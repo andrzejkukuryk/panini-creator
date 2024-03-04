@@ -17,6 +17,9 @@ import { TYPE_NAPKINS } from "../../scenes/creator/final/napkins";
 import { TYPE_CUTLERY } from "../../scenes/creator/final/cutlery";
 import { ApiStatus } from "../ingredientsSlice";
 import { ingredientsVariants } from "../../utils/ingredientsVariants";
+import { uniqueValuesArray } from "../../utils/uniqueValuesArray";
+import { randomizeArray } from "../../utils/randomizeArray";
+import { randomizeValue } from "../../utils/randomizeValue";
 
 interface OrdersState {
   orders: Order[];
@@ -177,44 +180,6 @@ export const createRandomOrder = createAsyncThunk<
     currentDefaultName,
   } = ingredientsVariants(state);
 
-  const randomizeValue = (inputArr: string[]): [string] => {
-    const randomIndex = (arr: string[]) =>
-      Math.floor(Math.random() * arr.length);
-
-    return [inputArr[randomIndex(inputArr)]];
-  };
-
-  const randomizeArray = (
-    inputArr: string[],
-    outputArr: string[]
-  ): string[] => {
-    const randomBoolean = () => {
-      if (Math.random() > 0.5) {
-        return false;
-      } else {
-        return true;
-      }
-    };
-
-    const randomIndex = (arr: string[]) =>
-      Math.floor(Math.random() * arr.length);
-    if (randomBoolean()) {
-      outputArr.push(inputArr[randomIndex(inputArr)]);
-      return randomizeArray(inputArr, outputArr);
-    } else {
-      return outputArr;
-    }
-  };
-
-  const uniqueValuesArray = (inputArr: string[]): string[] => {
-    const uniqueArray: string[] = [];
-    inputArr.forEach((element) => {
-      if (!uniqueArray.includes(element)) {
-        uniqueArray.push(element);
-      }
-    });
-    return uniqueArray;
-  };
 
   const randomBread = randomizeValue(breadVariants);
   const randomCheese = randomizeArray(cheeseVariants, []);
