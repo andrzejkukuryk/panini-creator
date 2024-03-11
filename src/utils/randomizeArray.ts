@@ -11,6 +11,9 @@ export const randomizeArray = (
   };
 
   const randomIndex = (arr: string[]) => Math.floor(Math.random() * arr.length);
+  if (inputArr.length === 0) {
+    return outputArr;
+  }
   if (randomBoolean()) {
     outputArr.push(inputArr[randomIndex(inputArr)]);
     return randomizeArray(inputArr, outputArr);

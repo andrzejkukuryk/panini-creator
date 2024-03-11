@@ -18,4 +18,9 @@ export default defineConfig({
     },
   },
   base: "/panini-creator/",
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./tests/setup.js",
+  },
 });
